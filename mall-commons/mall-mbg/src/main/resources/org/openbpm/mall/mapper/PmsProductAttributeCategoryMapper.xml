@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.PmsProductAttributeCategoryMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.PmsProductAttributeCategory">
+<mapper namespace="org.openmall.mall.mapper.PmsProductAttributeCategoryMapper">
+  <resultMap id="BaseResultMap" type="org.openmall.mall.model.PmsProductAttributeCategory">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="attribute_count" jdbcType="INTEGER" property="attributeCount" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List">
     id, name, attribute_count, param_count
   </sql>
-  <select id="selectByExample" parameterType="com.macro.mall.model.PmsProductAttributeCategoryExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.openmall.mall.model.PmsProductAttributeCategoryExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -83,7 +83,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from pms_product_attribute_category
     where id = #{id,jdbcType=BIGINT}
@@ -92,13 +92,13 @@
     delete from pms_product_attribute_category
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.PmsProductAttributeCategoryExample">
+  <delete id="deleteByExample" parameterType="org.openmall.mall.model.PmsProductAttributeCategoryExample">
     delete from pms_product_attribute_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.PmsProductAttributeCategory">
+  <insert id="insert" parameterType="org.openmall.mall.model.PmsProductAttributeCategory">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -107,7 +107,7 @@
     values (#{name,jdbcType=VARCHAR}, #{attributeCount,jdbcType=INTEGER}, #{paramCount,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.PmsProductAttributeCategory">
+  <insert id="insertSelective" parameterType="org.openmall.mall.model.PmsProductAttributeCategory">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -135,7 +135,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.PmsProductAttributeCategoryExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.openmall.mall.model.PmsProductAttributeCategoryExample" resultType="java.lang.Long">
     select count(*) from pms_product_attribute_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -171,7 +171,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.PmsProductAttributeCategory">
+  <update id="updateByPrimaryKeySelective" parameterType="org.openmall.mall.model.PmsProductAttributeCategory">
     update pms_product_attribute_category
     <set>
       <if test="name != null">
@@ -186,7 +186,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.PmsProductAttributeCategory">
+  <update id="updateByPrimaryKey" parameterType="org.openmall.mall.model.PmsProductAttributeCategory">
     update pms_product_attribute_category
     set name = #{name,jdbcType=VARCHAR},
       attribute_count = #{attributeCount,jdbcType=INTEGER},

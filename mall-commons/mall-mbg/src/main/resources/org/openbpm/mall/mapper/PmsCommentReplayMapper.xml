@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.PmsCommentReplayMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.PmsCommentReplay">
+<mapper namespace="org.openmall.mall.mapper.PmsCommentReplayMapper">
+  <resultMap id="BaseResultMap" type="org.openmall.mall.model.PmsCommentReplay">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="comment_id" jdbcType="BIGINT" property="commentId" />
     <result column="member_nick_name" jdbcType="VARCHAR" property="memberNickName" />
@@ -71,7 +71,7 @@
   <sql id="Base_Column_List">
     id, comment_id, member_nick_name, member_icon, content, create_time, type
   </sql>
-  <select id="selectByExample" parameterType="com.macro.mall.model.PmsCommentReplayExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.openmall.mall.model.PmsCommentReplayExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -86,7 +86,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from pms_comment_replay
     where id = #{id,jdbcType=BIGINT}
@@ -95,24 +95,24 @@
     delete from pms_comment_replay
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.PmsCommentReplayExample">
+  <delete id="deleteByExample" parameterType="org.openmall.mall.model.PmsCommentReplayExample">
     delete from pms_comment_replay
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.PmsCommentReplay">
+  <insert id="insert" parameterType="org.openmall.mall.model.PmsCommentReplay">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into pms_comment_replay (comment_id, member_nick_name, member_icon, 
+    insert into pms_comment_replay (comment_id, member_nick_name, member_icon,
       content, create_time, type
       )
-    values (#{commentId,jdbcType=BIGINT}, #{memberNickName,jdbcType=VARCHAR}, #{memberIcon,jdbcType=VARCHAR}, 
+    values (#{commentId,jdbcType=BIGINT}, #{memberNickName,jdbcType=VARCHAR}, #{memberIcon,jdbcType=VARCHAR},
       #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.PmsCommentReplay">
+  <insert id="insertSelective" parameterType="org.openmall.mall.model.PmsCommentReplay">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -158,7 +158,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.PmsCommentReplayExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.openmall.mall.model.PmsCommentReplayExample" resultType="java.lang.Long">
     select count(*) from pms_comment_replay
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -206,7 +206,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.PmsCommentReplay">
+  <update id="updateByPrimaryKeySelective" parameterType="org.openmall.mall.model.PmsCommentReplay">
     update pms_comment_replay
     <set>
       <if test="commentId != null">
@@ -230,7 +230,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.PmsCommentReplay">
+  <update id="updateByPrimaryKey" parameterType="org.openmall.mall.model.PmsCommentReplay">
     update pms_comment_replay
     set comment_id = #{commentId,jdbcType=BIGINT},
       member_nick_name = #{memberNickName,jdbcType=VARCHAR},

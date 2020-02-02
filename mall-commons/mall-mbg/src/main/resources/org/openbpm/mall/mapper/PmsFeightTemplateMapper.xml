@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.PmsFeightTemplateMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.PmsFeightTemplate">
+<mapper namespace="org.openmall.mall.mapper.PmsFeightTemplateMapper">
+  <resultMap id="BaseResultMap" type="org.openmall.mall.model.PmsFeightTemplate">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="charge_type" jdbcType="INTEGER" property="chargeType" />
@@ -72,7 +72,7 @@
   <sql id="Base_Column_List">
     id, name, charge_type, first_weight, first_fee, continue_weight, continme_fee, dest
   </sql>
-  <select id="selectByExample" parameterType="com.macro.mall.model.PmsFeightTemplateExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.openmall.mall.model.PmsFeightTemplateExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -87,7 +87,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from pms_feight_template
     where id = #{id,jdbcType=BIGINT}
@@ -96,24 +96,24 @@
     delete from pms_feight_template
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.PmsFeightTemplateExample">
+  <delete id="deleteByExample" parameterType="org.openmall.mall.model.PmsFeightTemplateExample">
     delete from pms_feight_template
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.PmsFeightTemplate">
+  <insert id="insert" parameterType="org.openmall.mall.model.PmsFeightTemplate">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into pms_feight_template (name, charge_type, first_weight, 
-      first_fee, continue_weight, continme_fee, 
+    insert into pms_feight_template (name, charge_type, first_weight,
+      first_fee, continue_weight, continme_fee,
       dest)
-    values (#{name,jdbcType=VARCHAR}, #{chargeType,jdbcType=INTEGER}, #{firstWeight,jdbcType=DECIMAL}, 
-      #{firstFee,jdbcType=DECIMAL}, #{continueWeight,jdbcType=DECIMAL}, #{continmeFee,jdbcType=DECIMAL}, 
+    values (#{name,jdbcType=VARCHAR}, #{chargeType,jdbcType=INTEGER}, #{firstWeight,jdbcType=DECIMAL},
+      #{firstFee,jdbcType=DECIMAL}, #{continueWeight,jdbcType=DECIMAL}, #{continmeFee,jdbcType=DECIMAL},
       #{dest,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.PmsFeightTemplate">
+  <insert id="insertSelective" parameterType="org.openmall.mall.model.PmsFeightTemplate">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -165,7 +165,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.PmsFeightTemplateExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.openmall.mall.model.PmsFeightTemplateExample" resultType="java.lang.Long">
     select count(*) from pms_feight_template
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -217,7 +217,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.PmsFeightTemplate">
+  <update id="updateByPrimaryKeySelective" parameterType="org.openmall.mall.model.PmsFeightTemplate">
     update pms_feight_template
     <set>
       <if test="name != null">
@@ -244,7 +244,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.PmsFeightTemplate">
+  <update id="updateByPrimaryKey" parameterType="org.openmall.mall.model.PmsFeightTemplate">
     update pms_feight_template
     set name = #{name,jdbcType=VARCHAR},
       charge_type = #{chargeType,jdbcType=INTEGER},

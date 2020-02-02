@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.SmsCouponHistoryMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.SmsCouponHistory">
+<mapper namespace="org.openmall.mall.mapper.SmsCouponHistoryMapper">
+  <resultMap id="BaseResultMap" type="org.openmall.mall.model.SmsCouponHistory">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="coupon_id" jdbcType="BIGINT" property="couponId" />
     <result column="member_id" jdbcType="BIGINT" property="memberId" />
@@ -73,10 +73,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, coupon_id, member_id, coupon_code, member_nickname, get_type, create_time, use_status, 
+    id, coupon_id, member_id, coupon_code, member_nickname, get_type, create_time, use_status,
     use_time, order_id, order_sn
   </sql>
-  <select id="selectByExample" parameterType="com.macro.mall.model.SmsCouponHistoryExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.openmall.mall.model.SmsCouponHistoryExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -91,7 +91,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from sms_coupon_history
     where id = #{id,jdbcType=BIGINT}
@@ -100,26 +100,26 @@
     delete from sms_coupon_history
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.SmsCouponHistoryExample">
+  <delete id="deleteByExample" parameterType="org.openmall.mall.model.SmsCouponHistoryExample">
     delete from sms_coupon_history
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.SmsCouponHistory">
+  <insert id="insert" parameterType="org.openmall.mall.model.SmsCouponHistory">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into sms_coupon_history (coupon_id, member_id, coupon_code, 
-      member_nickname, get_type, create_time, 
-      use_status, use_time, order_id, 
+    insert into sms_coupon_history (coupon_id, member_id, coupon_code,
+      member_nickname, get_type, create_time,
+      use_status, use_time, order_id,
       order_sn)
-    values (#{couponId,jdbcType=BIGINT}, #{memberId,jdbcType=BIGINT}, #{couponCode,jdbcType=VARCHAR}, 
-      #{memberNickname,jdbcType=VARCHAR}, #{getType,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{useStatus,jdbcType=INTEGER}, #{useTime,jdbcType=TIMESTAMP}, #{orderId,jdbcType=BIGINT}, 
+    values (#{couponId,jdbcType=BIGINT}, #{memberId,jdbcType=BIGINT}, #{couponCode,jdbcType=VARCHAR},
+      #{memberNickname,jdbcType=VARCHAR}, #{getType,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+      #{useStatus,jdbcType=INTEGER}, #{useTime,jdbcType=TIMESTAMP}, #{orderId,jdbcType=BIGINT},
       #{orderSn,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.SmsCouponHistory">
+  <insert id="insertSelective" parameterType="org.openmall.mall.model.SmsCouponHistory">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -189,7 +189,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.SmsCouponHistoryExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.openmall.mall.model.SmsCouponHistoryExample" resultType="java.lang.Long">
     select count(*) from sms_coupon_history
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -253,7 +253,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.SmsCouponHistory">
+  <update id="updateByPrimaryKeySelective" parameterType="org.openmall.mall.model.SmsCouponHistory">
     update sms_coupon_history
     <set>
       <if test="couponId != null">
@@ -289,7 +289,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.SmsCouponHistory">
+  <update id="updateByPrimaryKey" parameterType="org.openmall.mall.model.SmsCouponHistory">
     update sms_coupon_history
     set coupon_id = #{couponId,jdbcType=BIGINT},
       member_id = #{memberId,jdbcType=BIGINT},

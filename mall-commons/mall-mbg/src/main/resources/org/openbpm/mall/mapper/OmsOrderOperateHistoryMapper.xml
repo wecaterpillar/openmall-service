@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.OmsOrderOperateHistoryMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.OmsOrderOperateHistory">
+<mapper namespace="org.openmall.mall.mapper.OmsOrderOperateHistoryMapper">
+  <resultMap id="BaseResultMap" type="org.openmall.mall.model.OmsOrderOperateHistory">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="order_id" jdbcType="BIGINT" property="orderId" />
     <result column="operate_man" jdbcType="VARCHAR" property="operateMan" />
@@ -70,7 +70,7 @@
   <sql id="Base_Column_List">
     id, order_id, operate_man, create_time, order_status, note
   </sql>
-  <select id="selectByExample" parameterType="com.macro.mall.model.OmsOrderOperateHistoryExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.openmall.mall.model.OmsOrderOperateHistoryExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -85,7 +85,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from oms_order_operate_history
     where id = #{id,jdbcType=BIGINT}
@@ -94,22 +94,22 @@
     delete from oms_order_operate_history
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.OmsOrderOperateHistoryExample">
+  <delete id="deleteByExample" parameterType="org.openmall.mall.model.OmsOrderOperateHistoryExample">
     delete from oms_order_operate_history
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.OmsOrderOperateHistory">
+  <insert id="insert" parameterType="org.openmall.mall.model.OmsOrderOperateHistory">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into oms_order_operate_history (order_id, operate_man, create_time, 
+    insert into oms_order_operate_history (order_id, operate_man, create_time,
       order_status, note)
-    values (#{orderId,jdbcType=BIGINT}, #{operateMan,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+    values (#{orderId,jdbcType=BIGINT}, #{operateMan,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
       #{orderStatus,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.OmsOrderOperateHistory">
+  <insert id="insertSelective" parameterType="org.openmall.mall.model.OmsOrderOperateHistory">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -149,7 +149,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.OmsOrderOperateHistoryExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.openmall.mall.model.OmsOrderOperateHistoryExample" resultType="java.lang.Long">
     select count(*) from oms_order_operate_history
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -193,7 +193,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.OmsOrderOperateHistory">
+  <update id="updateByPrimaryKeySelective" parameterType="org.openmall.mall.model.OmsOrderOperateHistory">
     update oms_order_operate_history
     <set>
       <if test="orderId != null">
@@ -214,7 +214,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.OmsOrderOperateHistory">
+  <update id="updateByPrimaryKey" parameterType="org.openmall.mall.model.OmsOrderOperateHistory">
     update oms_order_operate_history
     set order_id = #{orderId,jdbcType=BIGINT},
       operate_man = #{operateMan,jdbcType=VARCHAR},

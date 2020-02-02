@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.OmsOrderReturnApplyMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.OmsOrderReturnApply">
+<mapper namespace="org.openmall.mall.mapper.OmsOrderReturnApplyMapper">
+  <resultMap id="BaseResultMap" type="org.openmall.mall.model.OmsOrderReturnApply">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="order_id" jdbcType="BIGINT" property="orderId" />
     <result column="company_address_id" jdbcType="BIGINT" property="companyAddressId" />
@@ -89,12 +89,12 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, order_id, company_address_id, product_id, order_sn, create_time, member_username, 
-    return_amount, return_name, return_phone, status, handle_time, product_pic, product_name, 
-    product_brand, product_attr, product_count, product_price, product_real_price, reason, 
+    id, order_id, company_address_id, product_id, order_sn, create_time, member_username,
+    return_amount, return_name, return_phone, status, handle_time, product_pic, product_name,
+    product_brand, product_attr, product_count, product_price, product_real_price, reason,
     description, proof_pics, handle_note, handle_man, receive_man, receive_time, receive_note
   </sql>
-  <select id="selectByExample" parameterType="com.macro.mall.model.OmsOrderReturnApplyExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.openmall.mall.model.OmsOrderReturnApplyExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -109,7 +109,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from oms_order_return_apply
     where id = #{id,jdbcType=BIGINT}
@@ -118,36 +118,36 @@
     delete from oms_order_return_apply
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.OmsOrderReturnApplyExample">
+  <delete id="deleteByExample" parameterType="org.openmall.mall.model.OmsOrderReturnApplyExample">
     delete from oms_order_return_apply
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.OmsOrderReturnApply">
+  <insert id="insert" parameterType="org.openmall.mall.model.OmsOrderReturnApply">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into oms_order_return_apply (order_id, company_address_id, product_id, 
-      order_sn, create_time, member_username, 
-      return_amount, return_name, return_phone, 
-      status, handle_time, product_pic, 
-      product_name, product_brand, product_attr, 
-      product_count, product_price, product_real_price, 
-      reason, description, proof_pics, 
-      handle_note, handle_man, receive_man, 
+    insert into oms_order_return_apply (order_id, company_address_id, product_id,
+      order_sn, create_time, member_username,
+      return_amount, return_name, return_phone,
+      status, handle_time, product_pic,
+      product_name, product_brand, product_attr,
+      product_count, product_price, product_real_price,
+      reason, description, proof_pics,
+      handle_note, handle_man, receive_man,
       receive_time, receive_note)
-    values (#{orderId,jdbcType=BIGINT}, #{companyAddressId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, 
-      #{orderSn,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{memberUsername,jdbcType=VARCHAR}, 
-      #{returnAmount,jdbcType=DECIMAL}, #{returnName,jdbcType=VARCHAR}, #{returnPhone,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{handleTime,jdbcType=TIMESTAMP}, #{productPic,jdbcType=VARCHAR}, 
-      #{productName,jdbcType=VARCHAR}, #{productBrand,jdbcType=VARCHAR}, #{productAttr,jdbcType=VARCHAR}, 
-      #{productCount,jdbcType=INTEGER}, #{productPrice,jdbcType=DECIMAL}, #{productRealPrice,jdbcType=DECIMAL}, 
-      #{reason,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{proofPics,jdbcType=VARCHAR}, 
-      #{handleNote,jdbcType=VARCHAR}, #{handleMan,jdbcType=VARCHAR}, #{receiveMan,jdbcType=VARCHAR}, 
+    values (#{orderId,jdbcType=BIGINT}, #{companyAddressId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT},
+      #{orderSn,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{memberUsername,jdbcType=VARCHAR},
+      #{returnAmount,jdbcType=DECIMAL}, #{returnName,jdbcType=VARCHAR}, #{returnPhone,jdbcType=VARCHAR},
+      #{status,jdbcType=INTEGER}, #{handleTime,jdbcType=TIMESTAMP}, #{productPic,jdbcType=VARCHAR},
+      #{productName,jdbcType=VARCHAR}, #{productBrand,jdbcType=VARCHAR}, #{productAttr,jdbcType=VARCHAR},
+      #{productCount,jdbcType=INTEGER}, #{productPrice,jdbcType=DECIMAL}, #{productRealPrice,jdbcType=DECIMAL},
+      #{reason,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{proofPics,jdbcType=VARCHAR},
+      #{handleNote,jdbcType=VARCHAR}, #{handleMan,jdbcType=VARCHAR}, #{receiveMan,jdbcType=VARCHAR},
       #{receiveTime,jdbcType=TIMESTAMP}, #{receiveNote,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.OmsOrderReturnApply">
+  <insert id="insertSelective" parameterType="org.openmall.mall.model.OmsOrderReturnApply">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -313,7 +313,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.OmsOrderReturnApplyExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.openmall.mall.model.OmsOrderReturnApplyExample" resultType="java.lang.Long">
     select count(*) from oms_order_return_apply
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -441,7 +441,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.OmsOrderReturnApply">
+  <update id="updateByPrimaryKeySelective" parameterType="org.openmall.mall.model.OmsOrderReturnApply">
     update oms_order_return_apply
     <set>
       <if test="orderId != null">
@@ -525,7 +525,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.OmsOrderReturnApply">
+  <update id="updateByPrimaryKey" parameterType="org.openmall.mall.model.OmsOrderReturnApply">
     update oms_order_return_apply
     set order_id = #{orderId,jdbcType=BIGINT},
       company_address_id = #{companyAddressId,jdbcType=BIGINT},

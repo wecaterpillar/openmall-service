@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.PmsProductCategoryMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.PmsProductCategory">
+<mapper namespace="org.openmall.mall.mapper.PmsProductCategoryMapper">
+  <resultMap id="BaseResultMap" type="org.openmall.mall.model.PmsProductCategory">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="parent_id" jdbcType="BIGINT" property="parentId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -14,7 +14,7 @@
     <result column="icon" jdbcType="VARCHAR" property="icon" />
     <result column="keywords" jdbcType="VARCHAR" property="keywords" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.macro.mall.model.PmsProductCategory">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.openmall.mall.model.PmsProductCategory">
     <result column="description" jdbcType="LONGVARCHAR" property="description" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -76,13 +76,13 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, parent_id, name, level, product_count, product_unit, nav_status, show_status, 
+    id, parent_id, name, level, product_count, product_unit, nav_status, show_status,
     sort, icon, keywords
   </sql>
   <sql id="Blob_Column_List">
     description
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.macro.mall.model.PmsProductCategoryExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="org.openmall.mall.model.PmsProductCategoryExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -98,7 +98,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.macro.mall.model.PmsProductCategoryExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.openmall.mall.model.PmsProductCategoryExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -113,7 +113,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
-    select 
+    select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -124,26 +124,26 @@
     delete from pms_product_category
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.PmsProductCategoryExample">
+  <delete id="deleteByExample" parameterType="org.openmall.mall.model.PmsProductCategoryExample">
     delete from pms_product_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.PmsProductCategory">
+  <insert id="insert" parameterType="org.openmall.mall.model.PmsProductCategory">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into pms_product_category (parent_id, name, level, 
-      product_count, product_unit, nav_status, 
-      show_status, sort, icon, 
+    insert into pms_product_category (parent_id, name, level,
+      product_count, product_unit, nav_status,
+      show_status, sort, icon,
       keywords, description)
-    values (#{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, 
-      #{productCount,jdbcType=INTEGER}, #{productUnit,jdbcType=VARCHAR}, #{navStatus,jdbcType=INTEGER}, 
-      #{showStatus,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, 
+    values (#{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER},
+      #{productCount,jdbcType=INTEGER}, #{productUnit,jdbcType=VARCHAR}, #{navStatus,jdbcType=INTEGER},
+      #{showStatus,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR},
       #{keywords,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.PmsProductCategory">
+  <insert id="insertSelective" parameterType="org.openmall.mall.model.PmsProductCategory">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -219,7 +219,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.PmsProductCategoryExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.openmall.mall.model.PmsProductCategoryExample" resultType="java.lang.Long">
     select count(*) from pms_product_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -304,7 +304,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.PmsProductCategory">
+  <update id="updateByPrimaryKeySelective" parameterType="org.openmall.mall.model.PmsProductCategory">
     update pms_product_category
     <set>
       <if test="parentId != null">
@@ -343,7 +343,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.macro.mall.model.PmsProductCategory">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.openmall.mall.model.PmsProductCategory">
     update pms_product_category
     set parent_id = #{parentId,jdbcType=BIGINT},
       name = #{name,jdbcType=VARCHAR},
@@ -358,7 +358,7 @@
       description = #{description,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.PmsProductCategory">
+  <update id="updateByPrimaryKey" parameterType="org.openmall.mall.model.PmsProductCategory">
     update pms_product_category
     set parent_id = #{parentId,jdbcType=BIGINT},
       name = #{name,jdbcType=VARCHAR},

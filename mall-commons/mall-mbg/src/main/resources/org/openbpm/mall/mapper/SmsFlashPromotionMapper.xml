@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.SmsFlashPromotionMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.SmsFlashPromotion">
+<mapper namespace="org.openmall.mall.mapper.SmsFlashPromotionMapper">
+  <resultMap id="BaseResultMap" type="org.openmall.mall.model.SmsFlashPromotion">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="start_date" jdbcType="DATE" property="startDate" />
@@ -70,7 +70,7 @@
   <sql id="Base_Column_List">
     id, title, start_date, end_date, status, create_time
   </sql>
-  <select id="selectByExample" parameterType="com.macro.mall.model.SmsFlashPromotionExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.openmall.mall.model.SmsFlashPromotionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -85,7 +85,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from sms_flash_promotion
     where id = #{id,jdbcType=BIGINT}
@@ -94,22 +94,22 @@
     delete from sms_flash_promotion
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.SmsFlashPromotionExample">
+  <delete id="deleteByExample" parameterType="org.openmall.mall.model.SmsFlashPromotionExample">
     delete from sms_flash_promotion
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.SmsFlashPromotion">
+  <insert id="insert" parameterType="org.openmall.mall.model.SmsFlashPromotion">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into sms_flash_promotion (title, start_date, end_date, 
+    insert into sms_flash_promotion (title, start_date, end_date,
       status, create_time)
-    values (#{title,jdbcType=VARCHAR}, #{startDate,jdbcType=DATE}, #{endDate,jdbcType=DATE}, 
+    values (#{title,jdbcType=VARCHAR}, #{startDate,jdbcType=DATE}, #{endDate,jdbcType=DATE},
       #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.SmsFlashPromotion">
+  <insert id="insertSelective" parameterType="org.openmall.mall.model.SmsFlashPromotion">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -149,7 +149,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.SmsFlashPromotionExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.openmall.mall.model.SmsFlashPromotionExample" resultType="java.lang.Long">
     select count(*) from sms_flash_promotion
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -193,7 +193,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.SmsFlashPromotion">
+  <update id="updateByPrimaryKeySelective" parameterType="org.openmall.mall.model.SmsFlashPromotion">
     update sms_flash_promotion
     <set>
       <if test="title != null">
@@ -214,7 +214,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.SmsFlashPromotion">
+  <update id="updateByPrimaryKey" parameterType="org.openmall.mall.model.SmsFlashPromotion">
     update sms_flash_promotion
     set title = #{title,jdbcType=VARCHAR},
       start_date = #{startDate,jdbcType=DATE},

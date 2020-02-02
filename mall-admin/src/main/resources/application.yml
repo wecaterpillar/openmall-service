@@ -5,7 +5,7 @@ spring:
 mybatis:
   mapper-locations:
     - classpath:dao/*.xml
-    - classpath*:com/**/mapper/*.xml
+    - classpath*:org/openmall/**/mapper/*.xml
 
 jwt:
   tokenHeader: Authorization #JWT存储的请求头
@@ -46,6 +46,6 @@ aliyun:
 logging:
   level:
     root: info #日志配置DEBUG,INFO,WARN,ERROR
-    com.macro.mall: debug
+    org.openmall.mall: debug
 #  file: demo_log.log #配置日志生成路径
 #  path: /var/logs #配置日志文件名称

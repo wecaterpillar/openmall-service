@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.CmsMemberReportMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.CmsMemberReport">
+<mapper namespace="org.openmall.mall.mapper.CmsMemberReportMapper">
+  <resultMap id="BaseResultMap" type="org.openmall.mall.model.CmsMemberReport">
     <result column="id" jdbcType="BIGINT" property="id" />
     <result column="report_type" jdbcType="INTEGER" property="reportType" />
     <result column="report_member_name" jdbcType="VARCHAR" property="reportMemberName" />
@@ -70,10 +70,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, report_type, report_member_name, create_time, report_object, report_status, handle_status, 
+    id, report_type, report_member_name, create_time, report_object, report_status, handle_status,
     note
   </sql>
-  <select id="selectByExample" parameterType="com.macro.mall.model.CmsMemberReportExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.openmall.mall.model.CmsMemberReportExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -87,24 +87,24 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.CmsMemberReportExample">
+  <delete id="deleteByExample" parameterType="org.openmall.mall.model.CmsMemberReportExample">
     delete from cms_member_report
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.CmsMemberReport">
+  <insert id="insert" parameterType="org.openmall.mall.model.CmsMemberReport">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into cms_member_report (report_type, report_member_name, create_time, 
-      report_object, report_status, handle_status, 
+    insert into cms_member_report (report_type, report_member_name, create_time,
+      report_object, report_status, handle_status,
       note)
-    values (#{reportType,jdbcType=INTEGER}, #{reportMemberName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{reportObject,jdbcType=VARCHAR}, #{reportStatus,jdbcType=INTEGER}, #{handleStatus,jdbcType=INTEGER}, 
+    values (#{reportType,jdbcType=INTEGER}, #{reportMemberName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{reportObject,jdbcType=VARCHAR}, #{reportStatus,jdbcType=INTEGER}, #{handleStatus,jdbcType=INTEGER},
       #{note,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.CmsMemberReport">
+  <insert id="insertSelective" parameterType="org.openmall.mall.model.CmsMemberReport">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -156,7 +156,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.CmsMemberReportExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.openmall.mall.model.CmsMemberReportExample" resultType="java.lang.Long">
     select count(*) from cms_member_report
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

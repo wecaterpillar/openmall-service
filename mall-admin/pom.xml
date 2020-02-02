@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.macro.mall</groupId>
+    <groupId>org.openmall.mall</groupId>
     <artifactId>mall-admin</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -11,18 +11,18 @@
     <description>mall-admin project for mall</description>
 
     <parent>
-        <groupId>com.macro.mall</groupId>
+        <groupId>org.openmall.mall</groupId>
         <artifactId>mall</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
     <dependencies>
         <dependency>
-            <groupId>com.macro.mall</groupId>
+            <groupId>org.openmall.mall</groupId>
             <artifactId>mall-mbg</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.macro.mall</groupId>
+            <groupId>org.openmall.mall</groupId>
             <artifactId>mall-security</artifactId>
         </dependency>
         <dependency>

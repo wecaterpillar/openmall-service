@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.UmsMemberTaskMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.UmsMemberTask">
+<mapper namespace="org.openmall.mall.mapper.UmsMemberTaskMapper">
+  <resultMap id="BaseResultMap" type="org.openmall.mall.model.UmsMemberTask">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="growth" jdbcType="INTEGER" property="growth" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List">
     id, name, growth, intergration, type
   </sql>
-  <select id="selectByExample" parameterType="com.macro.mall.model.UmsMemberTaskExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.openmall.mall.model.UmsMemberTaskExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -84,7 +84,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from ums_member_task
     where id = #{id,jdbcType=BIGINT}
@@ -93,22 +93,22 @@
     delete from ums_member_task
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.UmsMemberTaskExample">
+  <delete id="deleteByExample" parameterType="org.openmall.mall.model.UmsMemberTaskExample">
     delete from ums_member_task
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.UmsMemberTask">
+  <insert id="insert" parameterType="org.openmall.mall.model.UmsMemberTask">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into ums_member_task (name, growth, intergration, 
+    insert into ums_member_task (name, growth, intergration,
       type)
-    values (#{name,jdbcType=VARCHAR}, #{growth,jdbcType=INTEGER}, #{intergration,jdbcType=INTEGER}, 
+    values (#{name,jdbcType=VARCHAR}, #{growth,jdbcType=INTEGER}, #{intergration,jdbcType=INTEGER},
       #{type,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.UmsMemberTask">
+  <insert id="insertSelective" parameterType="org.openmall.mall.model.UmsMemberTask">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -142,7 +142,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.UmsMemberTaskExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.openmall.mall.model.UmsMemberTaskExample" resultType="java.lang.Long">
     select count(*) from ums_member_task
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -182,7 +182,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.UmsMemberTask">
+  <update id="updateByPrimaryKeySelective" parameterType="org.openmall.mall.model.UmsMemberTask">
     update ums_member_task
     <set>
       <if test="name != null">
@@ -200,7 +200,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.UmsMemberTask">
+  <update id="updateByPrimaryKey" parameterType="org.openmall.mall.model.UmsMemberTask">
     update ums_member_task
     set name = #{name,jdbcType=VARCHAR},
       growth = #{growth,jdbcType=INTEGER},

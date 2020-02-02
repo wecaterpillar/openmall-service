@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.SmsFlashPromotionProductRelationMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.SmsFlashPromotionProductRelation">
+<mapper namespace="org.openmall.mall.mapper.SmsFlashPromotionProductRelationMapper">
+  <resultMap id="BaseResultMap" type="org.openmall.mall.model.SmsFlashPromotionProductRelation">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="flash_promotion_id" jdbcType="BIGINT" property="flashPromotionId" />
     <result column="flash_promotion_session_id" jdbcType="BIGINT" property="flashPromotionSessionId" />
@@ -70,10 +70,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, flash_promotion_id, flash_promotion_session_id, product_id, flash_promotion_price, 
+    id, flash_promotion_id, flash_promotion_session_id, product_id, flash_promotion_price,
     flash_promotion_count, flash_promotion_limit, sort
   </sql>
-  <select id="selectByExample" parameterType="com.macro.mall.model.SmsFlashPromotionProductRelationExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.openmall.mall.model.SmsFlashPromotionProductRelationExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -88,7 +88,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from sms_flash_promotion_product_relation
     where id = #{id,jdbcType=BIGINT}
@@ -97,24 +97,24 @@
     delete from sms_flash_promotion_product_relation
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.SmsFlashPromotionProductRelationExample">
+  <delete id="deleteByExample" parameterType="org.openmall.mall.model.SmsFlashPromotionProductRelationExample">
     delete from sms_flash_promotion_product_relation
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.SmsFlashPromotionProductRelation">
+  <insert id="insert" parameterType="org.openmall.mall.model.SmsFlashPromotionProductRelation">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into sms_flash_promotion_product_relation (flash_promotion_id, flash_promotion_session_id, 
-      product_id, flash_promotion_price, flash_promotion_count, 
+    insert into sms_flash_promotion_product_relation (flash_promotion_id, flash_promotion_session_id,
+      product_id, flash_promotion_price, flash_promotion_count,
       flash_promotion_limit, sort)
-    values (#{flashPromotionId,jdbcType=BIGINT}, #{flashPromotionSessionId,jdbcType=BIGINT}, 
-      #{productId,jdbcType=BIGINT}, #{flashPromotionPrice,jdbcType=DECIMAL}, #{flashPromotionCount,jdbcType=INTEGER}, 
+    values (#{flashPromotionId,jdbcType=BIGINT}, #{flashPromotionSessionId,jdbcType=BIGINT},
+      #{productId,jdbcType=BIGINT}, #{flashPromotionPrice,jdbcType=DECIMAL}, #{flashPromotionCount,jdbcType=INTEGER},
       #{flashPromotionLimit,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.SmsFlashPromotionProductRelation">
+  <insert id="insertSelective" parameterType="org.openmall.mall.model.SmsFlashPromotionProductRelation">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -166,7 +166,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.SmsFlashPromotionProductRelationExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.openmall.mall.model.SmsFlashPromotionProductRelationExample" resultType="java.lang.Long">
     select count(*) from sms_flash_promotion_product_relation
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -218,7 +218,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.SmsFlashPromotionProductRelation">
+  <update id="updateByPrimaryKeySelective" parameterType="org.openmall.mall.model.SmsFlashPromotionProductRelation">
     update sms_flash_promotion_product_relation
     <set>
       <if test="flashPromotionId != null">
@@ -245,7 +245,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.SmsFlashPromotionProductRelation">
+  <update id="updateByPrimaryKey" parameterType="org.openmall.mall.model.SmsFlashPromotionProductRelation">
     update sms_flash_promotion_product_relation
     set flash_promotion_id = #{flashPromotionId,jdbcType=BIGINT},
       flash_promotion_session_id = #{flashPromotionSessionId,jdbcType=BIGINT},

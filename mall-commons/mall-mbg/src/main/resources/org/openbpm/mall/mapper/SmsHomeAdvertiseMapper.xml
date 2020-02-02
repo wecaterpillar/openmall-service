@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.SmsHomeAdvertiseMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.SmsHomeAdvertise">
+<mapper namespace="org.openmall.mall.mapper.SmsHomeAdvertiseMapper">
+  <resultMap id="BaseResultMap" type="org.openmall.mall.model.SmsHomeAdvertise">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="type" jdbcType="INTEGER" property="type" />
@@ -74,10 +74,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, type, pic, start_time, end_time, status, click_count, order_count, url, 
+    id, name, type, pic, start_time, end_time, status, click_count, order_count, url,
     note, sort
   </sql>
-  <select id="selectByExample" parameterType="com.macro.mall.model.SmsHomeAdvertiseExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.openmall.mall.model.SmsHomeAdvertiseExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -92,7 +92,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from sms_home_advertise
     where id = #{id,jdbcType=BIGINT}
@@ -101,26 +101,26 @@
     delete from sms_home_advertise
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.SmsHomeAdvertiseExample">
+  <delete id="deleteByExample" parameterType="org.openmall.mall.model.SmsHomeAdvertiseExample">
     delete from sms_home_advertise
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.SmsHomeAdvertise">
+  <insert id="insert" parameterType="org.openmall.mall.model.SmsHomeAdvertise">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into sms_home_advertise (name, type, pic, 
-      start_time, end_time, status, 
-      click_count, order_count, url, 
+    insert into sms_home_advertise (name, type, pic,
+      start_time, end_time, status,
+      click_count, order_count, url,
       note, sort)
-    values (#{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{pic,jdbcType=VARCHAR}, 
-      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
-      #{clickCount,jdbcType=INTEGER}, #{orderCount,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, 
+    values (#{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{pic,jdbcType=VARCHAR},
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER},
+      #{clickCount,jdbcType=INTEGER}, #{orderCount,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR},
       #{note,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.SmsHomeAdvertise">
+  <insert id="insertSelective" parameterType="org.openmall.mall.model.SmsHomeAdvertise">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -196,7 +196,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.SmsHomeAdvertiseExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.openmall.mall.model.SmsHomeAdvertiseExample" resultType="java.lang.Long">
     select count(*) from sms_home_advertise
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -264,7 +264,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.SmsHomeAdvertise">
+  <update id="updateByPrimaryKeySelective" parameterType="org.openmall.mall.model.SmsHomeAdvertise">
     update sms_home_advertise
     <set>
       <if test="name != null">
@@ -303,7 +303,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.SmsHomeAdvertise">
+  <update id="updateByPrimaryKey" parameterType="org.openmall.mall.model.SmsHomeAdvertise">
     update sms_home_advertise
     set name = #{name,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},

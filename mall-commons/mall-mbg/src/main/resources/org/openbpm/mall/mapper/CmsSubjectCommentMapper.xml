@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.CmsSubjectCommentMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.CmsSubjectComment">
+<mapper namespace="org.openmall.mall.mapper.CmsSubjectCommentMapper">
+  <resultMap id="BaseResultMap" type="org.openmall.mall.model.CmsSubjectComment">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="subject_id" jdbcType="BIGINT" property="subjectId" />
     <result column="member_nick_name" jdbcType="VARCHAR" property="memberNickName" />
@@ -71,7 +71,7 @@
   <sql id="Base_Column_List">
     id, subject_id, member_nick_name, member_icon, content, create_time, show_status
   </sql>
-  <select id="selectByExample" parameterType="com.macro.mall.model.CmsSubjectCommentExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.openmall.mall.model.CmsSubjectCommentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -86,7 +86,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from cms_subject_comment
     where id = #{id,jdbcType=BIGINT}
@@ -95,24 +95,24 @@
     delete from cms_subject_comment
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.CmsSubjectCommentExample">
+  <delete id="deleteByExample" parameterType="org.openmall.mall.model.CmsSubjectCommentExample">
     delete from cms_subject_comment
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.CmsSubjectComment">
+  <insert id="insert" parameterType="org.openmall.mall.model.CmsSubjectComment">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into cms_subject_comment (subject_id, member_nick_name, member_icon, 
+    insert into cms_subject_comment (subject_id, member_nick_name, member_icon,
       content, create_time, show_status
       )
-    values (#{subjectId,jdbcType=BIGINT}, #{memberNickName,jdbcType=VARCHAR}, #{memberIcon,jdbcType=VARCHAR}, 
+    values (#{subjectId,jdbcType=BIGINT}, #{memberNickName,jdbcType=VARCHAR}, #{memberIcon,jdbcType=VARCHAR},
       #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{showStatus,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.CmsSubjectComment">
+  <insert id="insertSelective" parameterType="org.openmall.mall.model.CmsSubjectComment">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -158,7 +158,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.CmsSubjectCommentExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.openmall.mall.model.CmsSubjectCommentExample" resultType="java.lang.Long">
     select count(*) from cms_subject_comment
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -206,7 +206,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.CmsSubjectComment">
+  <update id="updateByPrimaryKeySelective" parameterType="org.openmall.mall.model.CmsSubjectComment">
     update cms_subject_comment
     <set>
       <if test="subjectId != null">
@@ -230,7 +230,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.CmsSubjectComment">
+  <update id="updateByPrimaryKey" parameterType="org.openmall.mall.model.CmsSubjectComment">
     update cms_subject_comment
     set subject_id = #{subjectId,jdbcType=BIGINT},
       member_nick_name = #{memberNickName,jdbcType=VARCHAR},

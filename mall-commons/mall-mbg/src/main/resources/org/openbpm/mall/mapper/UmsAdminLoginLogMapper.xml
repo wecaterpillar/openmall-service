@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.UmsAdminLoginLogMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.UmsAdminLoginLog">
+<mapper namespace="org.openmall.mall.mapper.UmsAdminLoginLogMapper">
+  <resultMap id="BaseResultMap" type="org.openmall.mall.model.UmsAdminLoginLog">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="admin_id" jdbcType="BIGINT" property="adminId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -70,7 +70,7 @@
   <sql id="Base_Column_List">
     id, admin_id, create_time, ip, address, user_agent
   </sql>
-  <select id="selectByExample" parameterType="com.macro.mall.model.UmsAdminLoginLogExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.openmall.mall.model.UmsAdminLoginLogExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -85,7 +85,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from ums_admin_login_log
     where id = #{id,jdbcType=BIGINT}
@@ -94,22 +94,22 @@
     delete from ums_admin_login_log
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.UmsAdminLoginLogExample">
+  <delete id="deleteByExample" parameterType="org.openmall.mall.model.UmsAdminLoginLogExample">
     delete from ums_admin_login_log
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.UmsAdminLoginLog">
+  <insert id="insert" parameterType="org.openmall.mall.model.UmsAdminLoginLog">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into ums_admin_login_log (admin_id, create_time, ip, 
+    insert into ums_admin_login_log (admin_id, create_time, ip,
       address, user_agent)
-    values (#{adminId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR}, 
+    values (#{adminId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR},
       #{address,jdbcType=VARCHAR}, #{userAgent,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.UmsAdminLoginLog">
+  <insert id="insertSelective" parameterType="org.openmall.mall.model.UmsAdminLoginLog">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -149,7 +149,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.UmsAdminLoginLogExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.openmall.mall.model.UmsAdminLoginLogExample" resultType="java.lang.Long">
     select count(*) from ums_admin_login_log
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -193,7 +193,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.UmsAdminLoginLog">
+  <update id="updateByPrimaryKeySelective" parameterType="org.openmall.mall.model.UmsAdminLoginLog">
     update ums_admin_login_log
     <set>
       <if test="adminId != null">
@@ -214,7 +214,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.UmsAdminLoginLog">
+  <update id="updateByPrimaryKey" parameterType="org.openmall.mall.model.UmsAdminLoginLog">
     update ums_admin_login_log
     set admin_id = #{adminId,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},

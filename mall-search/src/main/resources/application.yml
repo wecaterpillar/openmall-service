@@ -13,7 +13,7 @@ mybatis:
 logging:
   level:
     root: info
-    com.macro.mall: debug
+    org.openmall.mall: debug
 
 
 

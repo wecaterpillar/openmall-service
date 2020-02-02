@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.macro.mall</groupId>
+    <groupId>org.openmall.mall</groupId>
     <artifactId>mall</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -79,19 +79,19 @@
         <dependencies>
             <!--mall通用模块-->
             <dependency>
-                <groupId>com.macro.mall</groupId>
+                <groupId>org.openmall.mall</groupId>
                 <artifactId>mall-common</artifactId>
                 <version>${mall-common.version}</version>
             </dependency>
             <!--mall中MBG生成模块-->
             <dependency>
-                <groupId>com.macro.mall</groupId>
+                <groupId>org.openmall.mall</groupId>
                 <artifactId>mall-mbg</artifactId>
                 <version>${mall-mbg.version}</version>
             </dependency>
             <!--mall安全模块-->
             <dependency>
-                <groupId>com.macro.mall</groupId>
+                <groupId>org.openmall.mall</groupId>
                 <artifactId>mall-security</artifactId>
                 <version>${mall-security.version}</version>
             </dependency>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.PmsProductMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.PmsProduct">
+<mapper namespace="org.openmall.mall.mapper.PmsProductMapper">
+  <resultMap id="BaseResultMap" type="org.openmall.mall.model.PmsProduct">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="brand_id" jdbcType="BIGINT" property="brandId" />
     <result column="product_category_id" jdbcType="BIGINT" property="productCategoryId" />
@@ -41,7 +41,7 @@
     <result column="brand_name" jdbcType="VARCHAR" property="brandName" />
     <result column="product_category_name" jdbcType="VARCHAR" property="productCategoryName" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.macro.mall.model.PmsProduct">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.openmall.mall.model.PmsProduct">
     <result column="description" jdbcType="LONGVARCHAR" property="description" />
     <result column="detail_desc" jdbcType="LONGVARCHAR" property="detailDesc" />
     <result column="detail_html" jdbcType="LONGVARCHAR" property="detailHtml" />
@@ -106,17 +106,17 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, brand_id, product_category_id, feight_template_id, product_attribute_category_id, 
-    name, pic, product_sn, delete_status, publish_status, new_status, recommand_status, 
-    verify_status, sort, sale, price, promotion_price, gift_growth, gift_point, use_point_limit, 
-    sub_title, original_price, stock, low_stock, unit, weight, preview_status, service_ids, 
-    keywords, note, album_pics, detail_title, promotion_start_time, promotion_end_time, 
+    id, brand_id, product_category_id, feight_template_id, product_attribute_category_id,
+    name, pic, product_sn, delete_status, publish_status, new_status, recommand_status,
+    verify_status, sort, sale, price, promotion_price, gift_growth, gift_point, use_point_limit,
+    sub_title, original_price, stock, low_stock, unit, weight, preview_status, service_ids,
+    keywords, note, album_pics, detail_title, promotion_start_time, promotion_end_time,
     promotion_per_limit, promotion_type, brand_name, product_category_name
   </sql>
   <sql id="Blob_Column_List">
     description, detail_desc, detail_html, detail_mobile_html
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.macro.mall.model.PmsProductExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="org.openmall.mall.model.PmsProductExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -132,7 +132,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.macro.mall.model.PmsProductExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.openmall.mall.model.PmsProductExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -147,7 +147,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
-    select 
+    select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -158,46 +158,46 @@
     delete from pms_product
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.PmsProductExample">
+  <delete id="deleteByExample" parameterType="org.openmall.mall.model.PmsProductExample">
     delete from pms_product
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.PmsProduct">
+  <insert id="insert" parameterType="org.openmall.mall.model.PmsProduct">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into pms_product (brand_id, product_category_id, feight_template_id, 
-      product_attribute_category_id, name, pic, 
-      product_sn, delete_status, publish_status, 
-      new_status, recommand_status, verify_status, 
-      sort, sale, price, 
-      promotion_price, gift_growth, gift_point, 
-      use_point_limit, sub_title, original_price, 
-      stock, low_stock, unit, 
-      weight, preview_status, service_ids, 
-      keywords, note, album_pics, 
-      detail_title, promotion_start_time, promotion_end_time, 
-      promotion_per_limit, promotion_type, brand_name, 
-      product_category_name, description, detail_desc, 
+    insert into pms_product (brand_id, product_category_id, feight_template_id,
+      product_attribute_category_id, name, pic,
+      product_sn, delete_status, publish_status,
+      new_status, recommand_status, verify_status,
+      sort, sale, price,
+      promotion_price, gift_growth, gift_point,
+      use_point_limit, sub_title, original_price,
+      stock, low_stock, unit,
+      weight, preview_status, service_ids,
+      keywords, note, album_pics,
+      detail_title, promotion_start_time, promotion_end_time,
+      promotion_per_limit, promotion_type, brand_name,
+      product_category_name, description, detail_desc,
       detail_html, detail_mobile_html)
-    values (#{brandId,jdbcType=BIGINT}, #{productCategoryId,jdbcType=BIGINT}, #{feightTemplateId,jdbcType=BIGINT}, 
-      #{productAttributeCategoryId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, 
-      #{productSn,jdbcType=VARCHAR}, #{deleteStatus,jdbcType=INTEGER}, #{publishStatus,jdbcType=INTEGER}, 
-      #{newStatus,jdbcType=INTEGER}, #{recommandStatus,jdbcType=INTEGER}, #{verifyStatus,jdbcType=INTEGER}, 
-      #{sort,jdbcType=INTEGER}, #{sale,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
-      #{promotionPrice,jdbcType=DECIMAL}, #{giftGrowth,jdbcType=INTEGER}, #{giftPoint,jdbcType=INTEGER}, 
-      #{usePointLimit,jdbcType=INTEGER}, #{subTitle,jdbcType=VARCHAR}, #{originalPrice,jdbcType=DECIMAL}, 
-      #{stock,jdbcType=INTEGER}, #{lowStock,jdbcType=INTEGER}, #{unit,jdbcType=VARCHAR}, 
-      #{weight,jdbcType=DECIMAL}, #{previewStatus,jdbcType=INTEGER}, #{serviceIds,jdbcType=VARCHAR}, 
-      #{keywords,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{albumPics,jdbcType=VARCHAR}, 
-      #{detailTitle,jdbcType=VARCHAR}, #{promotionStartTime,jdbcType=TIMESTAMP}, #{promotionEndTime,jdbcType=TIMESTAMP}, 
-      #{promotionPerLimit,jdbcType=INTEGER}, #{promotionType,jdbcType=INTEGER}, #{brandName,jdbcType=VARCHAR}, 
-      #{productCategoryName,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR}, #{detailDesc,jdbcType=LONGVARCHAR}, 
+    values (#{brandId,jdbcType=BIGINT}, #{productCategoryId,jdbcType=BIGINT}, #{feightTemplateId,jdbcType=BIGINT},
+      #{productAttributeCategoryId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR},
+      #{productSn,jdbcType=VARCHAR}, #{deleteStatus,jdbcType=INTEGER}, #{publishStatus,jdbcType=INTEGER},
+      #{newStatus,jdbcType=INTEGER}, #{recommandStatus,jdbcType=INTEGER}, #{verifyStatus,jdbcType=INTEGER},
+      #{sort,jdbcType=INTEGER}, #{sale,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL},
+      #{promotionPrice,jdbcType=DECIMAL}, #{giftGrowth,jdbcType=INTEGER}, #{giftPoint,jdbcType=INTEGER},
+      #{usePointLimit,jdbcType=INTEGER}, #{subTitle,jdbcType=VARCHAR}, #{originalPrice,jdbcType=DECIMAL},
+      #{stock,jdbcType=INTEGER}, #{lowStock,jdbcType=INTEGER}, #{unit,jdbcType=VARCHAR},
+      #{weight,jdbcType=DECIMAL}, #{previewStatus,jdbcType=INTEGER}, #{serviceIds,jdbcType=VARCHAR},
+      #{keywords,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{albumPics,jdbcType=VARCHAR},
+      #{detailTitle,jdbcType=VARCHAR}, #{promotionStartTime,jdbcType=TIMESTAMP}, #{promotionEndTime,jdbcType=TIMESTAMP},
+      #{promotionPerLimit,jdbcType=INTEGER}, #{promotionType,jdbcType=INTEGER}, #{brandName,jdbcType=VARCHAR},
+      #{productCategoryName,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR}, #{detailDesc,jdbcType=LONGVARCHAR},
       #{detailHtml,jdbcType=LONGVARCHAR}, #{detailMobileHtml,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.PmsProduct">
+  <insert id="insertSelective" parameterType="org.openmall.mall.model.PmsProduct">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -453,7 +453,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.PmsProductExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.openmall.mall.model.PmsProductExample" resultType="java.lang.Long">
     select count(*) from pms_product
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -685,7 +685,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.PmsProduct">
+  <update id="updateByPrimaryKeySelective" parameterType="org.openmall.mall.model.PmsProduct">
     update pms_product
     <set>
       <if test="brandId != null">
@@ -814,7 +814,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.macro.mall.model.PmsProduct">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.openmall.mall.model.PmsProduct">
     update pms_product
     set brand_id = #{brandId,jdbcType=BIGINT},
       product_category_id = #{productCategoryId,jdbcType=BIGINT},
@@ -859,7 +859,7 @@
       detail_mobile_html = #{detailMobileHtml,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.PmsProduct">
+  <update id="updateByPrimaryKey" parameterType="org.openmall.mall.model.PmsProduct">
     update pms_product
     set brand_id = #{brandId,jdbcType=BIGINT},
       product_category_id = #{productCategoryId,jdbcType=BIGINT},

@@ -1,11 +1,11 @@
-package com.macro.mall;
+package org.openmall.mall;
 
 
 import cn.hutool.json.JSONUtil;
-import com.macro.mall.dao.PmsMemberPriceDao;
-import com.macro.mall.dao.PmsProductDao;
-import com.macro.mall.dto.PmsProductResult;
-import com.macro.mall.model.PmsMemberPrice;
+import org.openmall.mall.dao.PmsMemberPriceDao;
+import org.openmall.mall.dao.PmsProductDao;
+import org.openmall.mall.dto.PmsProductResult;
+import org.openmall.mall.model.PmsMemberPrice;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.PmsCommentMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.PmsComment">
+<mapper namespace="org.openmall.mall.mapper.PmsCommentMapper">
+  <resultMap id="BaseResultMap" type="org.openmall.mall.model.PmsComment">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="product_id" jdbcType="BIGINT" property="productId" />
     <result column="member_nick_name" jdbcType="VARCHAR" property="memberNickName" />
@@ -17,7 +17,7 @@
     <result column="member_icon" jdbcType="VARCHAR" property="memberIcon" />
     <result column="replay_count" jdbcType="INTEGER" property="replayCount" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.macro.mall.model.PmsComment">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.openmall.mall.model.PmsComment">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -79,13 +79,13 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, product_id, member_nick_name, product_name, star, member_ip, create_time, show_status, 
+    id, product_id, member_nick_name, product_name, star, member_ip, create_time, show_status,
     product_attribute, collect_couont, read_count, pics, member_icon, replay_count
   </sql>
   <sql id="Blob_Column_List">
     content
   </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.macro.mall.model.PmsCommentExample" resultMap="ResultMapWithBLOBs">
+  <select id="selectByExampleWithBLOBs" parameterType="org.openmall.mall.model.PmsCommentExample" resultMap="ResultMapWithBLOBs">
     select
     <if test="distinct">
       distinct
@@ -101,7 +101,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.macro.mall.model.PmsCommentExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.openmall.mall.model.PmsCommentExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -116,7 +116,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
-    select 
+    select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
@@ -127,28 +127,28 @@
     delete from pms_comment
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.PmsCommentExample">
+  <delete id="deleteByExample" parameterType="org.openmall.mall.model.PmsCommentExample">
     delete from pms_comment
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.PmsComment">
+  <insert id="insert" parameterType="org.openmall.mall.model.PmsComment">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into pms_comment (product_id, member_nick_name, product_name, 
-      star, member_ip, create_time, 
-      show_status, product_attribute, collect_couont, 
-      read_count, pics, member_icon, 
+    insert into pms_comment (product_id, member_nick_name, product_name,
+      star, member_ip, create_time,
+      show_status, product_attribute, collect_couont,
+      read_count, pics, member_icon,
       replay_count, content)
-    values (#{productId,jdbcType=BIGINT}, #{memberNickName,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
-      #{star,jdbcType=INTEGER}, #{memberIp,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{showStatus,jdbcType=INTEGER}, #{productAttribute,jdbcType=VARCHAR}, #{collectCouont,jdbcType=INTEGER}, 
-      #{readCount,jdbcType=INTEGER}, #{pics,jdbcType=VARCHAR}, #{memberIcon,jdbcType=VARCHAR}, 
+    values (#{productId,jdbcType=BIGINT}, #{memberNickName,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR},
+      #{star,jdbcType=INTEGER}, #{memberIp,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{showStatus,jdbcType=INTEGER}, #{productAttribute,jdbcType=VARCHAR}, #{collectCouont,jdbcType=INTEGER},
+      #{readCount,jdbcType=INTEGER}, #{pics,jdbcType=VARCHAR}, #{memberIcon,jdbcType=VARCHAR},
       #{replayCount,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.PmsComment">
+  <insert id="insertSelective" parameterType="org.openmall.mall.model.PmsComment">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -242,7 +242,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.PmsCommentExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.openmall.mall.model.PmsCommentExample" resultType="java.lang.Long">
     select count(*) from pms_comment
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -342,7 +342,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.PmsComment">
+  <update id="updateByPrimaryKeySelective" parameterType="org.openmall.mall.model.PmsComment">
     update pms_comment
     <set>
       <if test="productId != null">
@@ -390,7 +390,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.macro.mall.model.PmsComment">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.openmall.mall.model.PmsComment">
     update pms_comment
     set product_id = #{productId,jdbcType=BIGINT},
       member_nick_name = #{memberNickName,jdbcType=VARCHAR},
@@ -408,7 +408,7 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.PmsComment">
+  <update id="updateByPrimaryKey" parameterType="org.openmall.mall.model.PmsComment">
     update pms_comment
     set product_id = #{productId,jdbcType=BIGINT},
       member_nick_name = #{memberNickName,jdbcType=VARCHAR},

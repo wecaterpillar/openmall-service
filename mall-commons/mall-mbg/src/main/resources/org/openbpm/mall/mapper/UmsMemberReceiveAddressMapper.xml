@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.UmsMemberReceiveAddressMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.UmsMemberReceiveAddress">
+<mapper namespace="org.openmall.mall.mapper.UmsMemberReceiveAddressMapper">
+  <resultMap id="BaseResultMap" type="org.openmall.mall.model.UmsMemberReceiveAddress">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="member_id" jdbcType="BIGINT" property="memberId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -72,10 +72,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, member_id, name, phone_number, default_status, post_code, province, city, region, 
+    id, member_id, name, phone_number, default_status, post_code, province, city, region,
     detail_address
   </sql>
-  <select id="selectByExample" parameterType="com.macro.mall.model.UmsMemberReceiveAddressExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.openmall.mall.model.UmsMemberReceiveAddressExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -90,7 +90,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from ums_member_receive_address
     where id = #{id,jdbcType=BIGINT}
@@ -99,26 +99,26 @@
     delete from ums_member_receive_address
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.UmsMemberReceiveAddressExample">
+  <delete id="deleteByExample" parameterType="org.openmall.mall.model.UmsMemberReceiveAddressExample">
     delete from ums_member_receive_address
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.UmsMemberReceiveAddress">
+  <insert id="insert" parameterType="org.openmall.mall.model.UmsMemberReceiveAddress">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into ums_member_receive_address (member_id, name, phone_number, 
-      default_status, post_code, province, 
+    insert into ums_member_receive_address (member_id, name, phone_number,
+      default_status, post_code, province,
       city, region, detail_address
       )
-    values (#{memberId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
-      #{defaultStatus,jdbcType=INTEGER}, #{postCode,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+    values (#{memberId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR},
+      #{defaultStatus,jdbcType=INTEGER}, #{postCode,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR},
       #{city,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, #{detailAddress,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.UmsMemberReceiveAddress">
+  <insert id="insertSelective" parameterType="org.openmall.mall.model.UmsMemberReceiveAddress">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -182,7 +182,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.UmsMemberReceiveAddressExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.openmall.mall.model.UmsMemberReceiveAddressExample" resultType="java.lang.Long">
     select count(*) from ums_member_receive_address
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -242,7 +242,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.UmsMemberReceiveAddress">
+  <update id="updateByPrimaryKeySelective" parameterType="org.openmall.mall.model.UmsMemberReceiveAddress">
     update ums_member_receive_address
     <set>
       <if test="memberId != null">
@@ -275,7 +275,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.UmsMemberReceiveAddress">
+  <update id="updateByPrimaryKey" parameterType="org.openmall.mall.model.UmsMemberReceiveAddress">
     update ums_member_receive_address
     set member_id = #{memberId,jdbcType=BIGINT},
       name = #{name,jdbcType=VARCHAR},

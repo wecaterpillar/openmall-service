@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.UmsAdminMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.UmsAdmin">
+<mapper namespace="org.openmall.mall.mapper.UmsAdminMapper">
+  <resultMap id="BaseResultMap" type="org.openmall.mall.model.UmsAdmin">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -74,7 +74,7 @@
   <sql id="Base_Column_List">
     id, username, password, icon, email, nick_name, note, create_time, login_time, status
   </sql>
-  <select id="selectByExample" parameterType="com.macro.mall.model.UmsAdminExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.openmall.mall.model.UmsAdminExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -89,7 +89,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from ums_admin
     where id = #{id,jdbcType=BIGINT}
@@ -98,26 +98,26 @@
     delete from ums_admin
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.UmsAdminExample">
+  <delete id="deleteByExample" parameterType="org.openmall.mall.model.UmsAdminExample">
     delete from ums_admin
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.UmsAdmin">
+  <insert id="insert" parameterType="org.openmall.mall.model.UmsAdmin">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into ums_admin (username, password, icon, 
-      email, nick_name, note, 
+    insert into ums_admin (username, password, icon,
+      email, nick_name, note,
       create_time, login_time, status
       )
-    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR},
+      #{email,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR},
       #{createTime,jdbcType=TIMESTAMP}, #{loginTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.UmsAdmin">
+  <insert id="insertSelective" parameterType="org.openmall.mall.model.UmsAdmin">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -181,7 +181,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.UmsAdminExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.openmall.mall.model.UmsAdminExample" resultType="java.lang.Long">
     select count(*) from ums_admin
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -241,7 +241,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.UmsAdmin">
+  <update id="updateByPrimaryKeySelective" parameterType="org.openmall.mall.model.UmsAdmin">
     update ums_admin
     <set>
       <if test="username != null">
@@ -274,7 +274,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.UmsAdmin">
+  <update id="updateByPrimaryKey" parameterType="org.openmall.mall.model.UmsAdmin">
     update ums_admin
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},

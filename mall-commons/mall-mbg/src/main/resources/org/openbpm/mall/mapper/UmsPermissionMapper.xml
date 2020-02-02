@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.UmsPermissionMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.UmsPermission">
+<mapper namespace="org.openmall.mall.mapper.UmsPermissionMapper">
+  <resultMap id="BaseResultMap" type="org.openmall.mall.model.UmsPermission">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="pid" jdbcType="BIGINT" property="pid" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -74,7 +74,7 @@
   <sql id="Base_Column_List">
     id, pid, name, value, icon, type, uri, status, create_time, sort
   </sql>
-  <select id="selectByExample" parameterType="com.macro.mall.model.UmsPermissionExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.openmall.mall.model.UmsPermissionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -89,7 +89,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from ums_permission
     where id = #{id,jdbcType=BIGINT}
@@ -98,24 +98,24 @@
     delete from ums_permission
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.UmsPermissionExample">
+  <delete id="deleteByExample" parameterType="org.openmall.mall.model.UmsPermissionExample">
     delete from ums_permission
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.UmsPermission">
+  <insert id="insert" parameterType="org.openmall.mall.model.UmsPermission">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into ums_permission (pid, name, value, 
-      icon, type, uri, status, 
+    insert into ums_permission (pid, name, value,
+      icon, type, uri, status,
       create_time, sort)
-    values (#{pid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, 
-      #{icon,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{uri,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+    values (#{pid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR},
+      #{icon,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{uri,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
       #{createTime,jdbcType=TIMESTAMP}, #{sort,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.UmsPermission">
+  <insert id="insertSelective" parameterType="org.openmall.mall.model.UmsPermission">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -179,7 +179,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.UmsPermissionExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.openmall.mall.model.UmsPermissionExample" resultType="java.lang.Long">
     select count(*) from ums_permission
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -239,7 +239,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.UmsPermission">
+  <update id="updateByPrimaryKeySelective" parameterType="org.openmall.mall.model.UmsPermission">
     update ums_permission
     <set>
       <if test="pid != null">
@@ -272,7 +272,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.UmsPermission">
+  <update id="updateByPrimaryKey" parameterType="org.openmall.mall.model.UmsPermission">
     update ums_permission
     set pid = #{pid,jdbcType=BIGINT},
       name = #{name,jdbcType=VARCHAR},

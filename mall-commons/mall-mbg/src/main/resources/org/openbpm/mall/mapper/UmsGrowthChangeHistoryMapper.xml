@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.UmsGrowthChangeHistoryMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.UmsGrowthChangeHistory">
+<mapper namespace="org.openmall.mall.mapper.UmsGrowthChangeHistoryMapper">
+  <resultMap id="BaseResultMap" type="org.openmall.mall.model.UmsGrowthChangeHistory">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="member_id" jdbcType="BIGINT" property="memberId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -70,10 +70,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, member_id, create_time, change_type, change_count, operate_man, operate_note, 
+    id, member_id, create_time, change_type, change_count, operate_man, operate_note,
     source_type
   </sql>
-  <select id="selectByExample" parameterType="com.macro.mall.model.UmsGrowthChangeHistoryExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.openmall.mall.model.UmsGrowthChangeHistoryExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -88,7 +88,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from ums_growth_change_history
     where id = #{id,jdbcType=BIGINT}
@@ -97,24 +97,24 @@
     delete from ums_growth_change_history
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.UmsGrowthChangeHistoryExample">
+  <delete id="deleteByExample" parameterType="org.openmall.mall.model.UmsGrowthChangeHistoryExample">
     delete from ums_growth_change_history
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.UmsGrowthChangeHistory">
+  <insert id="insert" parameterType="org.openmall.mall.model.UmsGrowthChangeHistory">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into ums_growth_change_history (member_id, create_time, change_type, 
-      change_count, operate_man, operate_note, 
+    insert into ums_growth_change_history (member_id, create_time, change_type,
+      change_count, operate_man, operate_note,
       source_type)
-    values (#{memberId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{changeType,jdbcType=INTEGER}, 
-      #{changeCount,jdbcType=INTEGER}, #{operateMan,jdbcType=VARCHAR}, #{operateNote,jdbcType=VARCHAR}, 
+    values (#{memberId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{changeType,jdbcType=INTEGER},
+      #{changeCount,jdbcType=INTEGER}, #{operateMan,jdbcType=VARCHAR}, #{operateNote,jdbcType=VARCHAR},
       #{sourceType,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.UmsGrowthChangeHistory">
+  <insert id="insertSelective" parameterType="org.openmall.mall.model.UmsGrowthChangeHistory">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -166,7 +166,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.UmsGrowthChangeHistoryExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.openmall.mall.model.UmsGrowthChangeHistoryExample" resultType="java.lang.Long">
     select count(*) from ums_growth_change_history
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -218,7 +218,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.UmsGrowthChangeHistory">
+  <update id="updateByPrimaryKeySelective" parameterType="org.openmall.mall.model.UmsGrowthChangeHistory">
     update ums_growth_change_history
     <set>
       <if test="memberId != null">
@@ -245,7 +245,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.UmsGrowthChangeHistory">
+  <update id="updateByPrimaryKey" parameterType="org.openmall.mall.model.UmsGrowthChangeHistory">
     update ums_growth_change_history
     set member_id = #{memberId,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},

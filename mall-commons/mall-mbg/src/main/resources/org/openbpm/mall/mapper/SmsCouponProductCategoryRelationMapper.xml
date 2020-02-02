@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.mapper.SmsCouponProductCategoryRelationMapper">
-  <resultMap id="BaseResultMap" type="com.macro.mall.model.SmsCouponProductCategoryRelation">
+<mapper namespace="org.openmall.mall.mapper.SmsCouponProductCategoryRelationMapper">
+  <resultMap id="BaseResultMap" type="org.openmall.mall.model.SmsCouponProductCategoryRelation">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="coupon_id" jdbcType="BIGINT" property="couponId" />
     <result column="product_category_id" jdbcType="BIGINT" property="productCategoryId" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List">
     id, coupon_id, product_category_id, product_category_name, parent_category_name
   </sql>
-  <select id="selectByExample" parameterType="com.macro.mall.model.SmsCouponProductCategoryRelationExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="org.openmall.mall.model.SmsCouponProductCategoryRelationExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -84,7 +84,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from sms_coupon_product_category_relation
     where id = #{id,jdbcType=BIGINT}
@@ -93,22 +93,22 @@
     delete from sms_coupon_product_category_relation
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.macro.mall.model.SmsCouponProductCategoryRelationExample">
+  <delete id="deleteByExample" parameterType="org.openmall.mall.model.SmsCouponProductCategoryRelationExample">
     delete from sms_coupon_product_category_relation
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.macro.mall.model.SmsCouponProductCategoryRelation">
+  <insert id="insert" parameterType="org.openmall.mall.model.SmsCouponProductCategoryRelation">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into sms_coupon_product_category_relation (coupon_id, product_category_id, product_category_name, 
+    insert into sms_coupon_product_category_relation (coupon_id, product_category_id, product_category_name,
       parent_category_name)
-    values (#{couponId,jdbcType=BIGINT}, #{productCategoryId,jdbcType=BIGINT}, #{productCategoryName,jdbcType=VARCHAR}, 
+    values (#{couponId,jdbcType=BIGINT}, #{productCategoryId,jdbcType=BIGINT}, #{productCategoryName,jdbcType=VARCHAR},
       #{parentCategoryName,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.macro.mall.model.SmsCouponProductCategoryRelation">
+  <insert id="insertSelective" parameterType="org.openmall.mall.model.SmsCouponProductCategoryRelation">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -142,7 +142,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.macro.mall.model.SmsCouponProductCategoryRelationExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="org.openmall.mall.model.SmsCouponProductCategoryRelationExample" resultType="java.lang.Long">
     select count(*) from sms_coupon_product_category_relation
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -182,7 +182,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.macro.mall.model.SmsCouponProductCategoryRelation">
+  <update id="updateByPrimaryKeySelective" parameterType="org.openmall.mall.model.SmsCouponProductCategoryRelation">
     update sms_coupon_product_category_relation
     <set>
       <if test="couponId != null">
@@ -200,7 +200,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.macro.mall.model.SmsCouponProductCategoryRelation">
+  <update id="updateByPrimaryKey" parameterType="org.openmall.mall.model.SmsCouponProductCategoryRelation">
     update sms_coupon_product_category_relation
     set coupon_id = #{couponId,jdbcType=BIGINT},
       product_category_id = #{productCategoryId,jdbcType=BIGINT},
