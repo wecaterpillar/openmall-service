@@ -1,0 +1,9 @@
+**/.idea/
+**/.mvn/
+
+**/target
+**/bin
+
+# system ignore
+.DS_Store
+Thumbs.db
