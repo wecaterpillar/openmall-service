@@ -25,10 +25,34 @@
             <groupId>org.openmall.mall</groupId>
             <artifactId>mall-security</artifactId>
         </dependency>
+
+        <!-- 电商中台服务 -->
         <dependency>
-            <groupId>com.aliyun.oss</groupId>
-            <artifactId>aliyun-sdk-oss</artifactId>
+            <groupId>org.openmall.mall</groupId>
+            <artifactId>sys-rest</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.openmall.mall</groupId>
+            <artifactId>cms-rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openmall.mall</groupId>
+            <artifactId>pms-rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openmall.mall</groupId>
+            <artifactId>oms-rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openmall.mall</groupId>
+            <artifactId>ums-rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openmall.mall</groupId>
+            <artifactId>sms-rest</artifactId>
+        </dependency>
+
+
         <dependency>
             <groupId>net.logstash.logback</groupId>
             <artifactId>logstash-logback-encoder</artifactId>

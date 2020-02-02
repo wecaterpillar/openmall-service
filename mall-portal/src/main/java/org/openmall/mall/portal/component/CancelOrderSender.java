@@ -1,6 +1,6 @@
 package org.openmall.mall.portal.component;
 
-import org.openmall.mall.portal.domain.QueueEnum;
+import org.openmall.mall.portal.oms.domain.QueueEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.AmqpException;

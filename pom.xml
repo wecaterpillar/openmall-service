@@ -20,7 +20,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.7.RELEASE</version>
+        <version>2.1.12.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -46,6 +46,7 @@
         <mall-common.version>1.1-SNAPSHOT</mall-common.version>
         <mall-mbg.version>1.1-SNAPSHOT</mall-mbg.version>
         <mall-security.version>1.1-SNAPSHOT</mall-security.version>
+        <mall-business.version>1.1-SNAPSHOT</mall-business.version>
     </properties>
 
     <dependencies>
@@ -96,6 +97,39 @@
                 <artifactId>mall-security</artifactId>
                 <version>${mall-security.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.openmall.mall</groupId>
+                <artifactId>sys-rest</artifactId>
+                <version>${mall-business.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openmall.mall</groupId>
+                <artifactId>cms-rest</artifactId>
+                <version>${mall-business.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openmall.mall</groupId>
+                <artifactId>pms-rest</artifactId>
+                <version>${mall-business.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openmall.mall</groupId>
+                <artifactId>oms-rest</artifactId>
+                <version>${mall-business.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openmall.mall</groupId>
+                <artifactId>ums-rest</artifactId>
+                <version>${mall-business.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openmall.mall</groupId>
+                <artifactId>sms-rest</artifactId>
+                <version>${mall-business.version}</version>
+            </dependency>
+
+
             <!--MyBatis分页插件starter-->
             <dependency>
                 <groupId>com.github.pagehelper</groupId>

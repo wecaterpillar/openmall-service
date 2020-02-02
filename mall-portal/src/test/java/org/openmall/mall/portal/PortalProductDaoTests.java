@@ -1,7 +1,7 @@
 package org.openmall.mall.portal;
 
-import org.openmall.mall.portal.dao.PortalProductDao;
-import org.openmall.mall.portal.domain.PromotionProduct;
+import org.openmall.mall.portal.home.dao.PortalProductDao;
+import org.openmall.mall.portal.home.domain.PromotionProduct;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

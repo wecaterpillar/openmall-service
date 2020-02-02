@@ -1,6 +1,6 @@
 package org.openmall.mall.portal.config;
 
-import org.openmall.mall.portal.domain.QueueEnum;
+import org.openmall.mall.portal.oms.domain.QueueEnum;
 import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

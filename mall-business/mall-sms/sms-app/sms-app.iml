@@ -100,6 +100,7 @@
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.1.12.RELEASE" level="project" />
     <orderEntry type="module" module-name="sms-rest" />
     <orderEntry type="module" module-name="sms-core" />
+    <orderEntry type="module" module-name="pms-api" />
     <orderEntry type="module" module-name="sms-api" />
   </component>
 </module>

@@ -39,7 +39,7 @@ import java.util.Map;
 public class WebLogAspect {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebLogAspect.class);
 
-    @Pointcut("execution(public * org.openmall.mall.controller.*.*(..))")
+    @Pointcut("execution(public * org.openmall.mall.*.controller.*.*(..))")
     public void webLog() {
     }
 

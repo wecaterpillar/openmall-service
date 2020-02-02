@@ -1,6 +1,6 @@
 package org.openmall.mall.portal.config;
 
-import org.openmall.mall.portal.service.UmsMemberService;
+import org.openmall.mall.portal.ums.service.UmsMemberService;
 import org.openmall.mall.security.config.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

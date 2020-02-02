@@ -29,7 +29,7 @@ public class Swagger2Config {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("org.openmall.mall.portal.controller"))
+                .apis(RequestHandlerSelectors.basePackage("org.openmall.mall.portal"))
                 .paths(PathSelectors.any())
                 .build()
                 .securitySchemes(securitySchemes())

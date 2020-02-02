@@ -1,7 +1,7 @@
 package org.openmall.mall.portal.component;
 
 import org.openmall.mall.common.api.CommonResult;
-import org.openmall.mall.portal.service.OmsPortalOrderService;
+import org.openmall.mall.portal.oms.service.OmsPortalOrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
