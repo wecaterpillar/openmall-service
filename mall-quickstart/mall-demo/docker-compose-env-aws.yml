@@ -1,0 +1,83 @@
+version: '3'
+services:
+  mall-mysql:
+    image: mysql/mysql-server:5.7
+    container_name: mall-mysql
+    command:
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --explicit_defaults_for_timestamp=true
+      --lower_case_table_names=0
+      --max_allowed_packet=128M
+      --sql-mode="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO"
+    restart: always
+    environment:
+      - TZ=Asia/Shanghai
+      - MYSQL_ROOT_PASSWORD=root_mall
+      - MYSQL_ROOT_HOST=127.0.0.1
+      - MYSQL_DATABASE=openmall
+      - MYSQL_USER=mall
+      - MYSQL_PASSWORD=mall123
+    ports:
+      - 8106:3306
+    volumes:
+      - /home/ubuntu/mall-data/mysql/data/db:/var/lib/mysql #数据文件挂载
+      - /home/ubuntu/mall-data/mysql/data/conf:/etc/mysql/conf.d #配置文件挂载
+      - /home/ubuntu/mall-data/mysql/log:/var/log/mysql #日志文件挂载
+  mall-redis:
+    image: redis:5
+    container_name: mall-redis
+    restart: always
+    ports:
+      - 8179:6379
+    volumes:
+      - /home/ubuntu/mall-data/redis/data:/data #数据文件挂载
+  mall-nginx:
+    image: nginx:1.10
+    container_name: mall-nginx
+    volumes:
+      - /home/ubuntu/mall-data/nginx/nginx.conf:/etc/nginx/nginx.conf #配置文件挂载
+      - /home/ubuntu/mall-data/nginx/html:/usr/share/nginx/html #静态资源根目录挂载
+      - /home/ubuntu/mall-data/nginx/log:/var/log/nginx #日志文件挂载
+    ports:
+      - 8188:80
+  mall-rabbitmq:
+    image: rabbitmq:3.7.15-management
+    container_name: rabbitmq
+    volumes:
+      - /home/ubuntu/mall-data/rabbitmq/data:/var/lib/rabbitmq #数据文件挂载
+      - /home/ubuntu/mall-data/rabbitmq/log:/var/log/rabbitmq #日志文件挂载
+    ports:
+      - 8172:5672
+      - 8171:15672
+  mall-elasticsearch:
+    image: elasticsearch:6.4.0
+    container_name: mall-elasticsearch
+    environment:
+      - "cluster.name=elasticsearch" #设置集群名称为elasticsearch
+      - "discovery.type=single-node" #以单一节点模式启动
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m" #设置使用jvm内存大小
+    volumes:
+      - /home/ubuntu/mall-data/elasticsearch/plugins:/usr/share/elasticsearch/plugins #插件文件挂载
+      - /home/ubuntu/mall-data/elasticsearch/data:/usr/share/elasticsearch/data #数据文件挂载
+    ports:
+      - 8192:9200
+      - 8193:9300
+  mall-kibana:
+    image: kibana:6.4.0
+    container_name: mall-kibana
+    links:
+      - mall-elasticsearch:es #可以用es这个域名访问elasticsearch服务
+    depends_on:
+      - mall-elasticsearch #kibana在elasticsearch启动之后再启动
+    environment:
+      - "elasticsearch.hosts=http://es:9200" #设置访问elasticsearch的地址
+    ports:
+      - 8156:5601
+  mall-mongo:
+    image: mongo:3.2
+    container_name: mall-mongo
+    volumes:
+      - /home/ubuntu/mall-data/mongo/db:/data/db #数据文件挂载
+    ports:
+      - 8117:27017
