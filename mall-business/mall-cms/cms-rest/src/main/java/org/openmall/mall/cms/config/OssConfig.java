@@ -1,4 +1,4 @@
-package org.openmall.mall.config;
+package org.openmall.mall.cms.config;
 
 import com.aliyun.oss.OSSClient;
 import org.springframework.beans.factory.annotation.Value;
