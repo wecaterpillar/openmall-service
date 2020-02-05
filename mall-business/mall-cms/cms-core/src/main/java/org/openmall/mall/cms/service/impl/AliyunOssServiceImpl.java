@@ -24,9 +24,9 @@ import java.util.Date;
  * Created by macro on 2018/5/17.
  */
 @Service
-public class OssServiceImpl implements OssService {
+public class AliyunOssServiceImpl implements OssService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(OssServiceImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AliyunOssServiceImpl.class);
 	@Value("${aliyun.oss.policy.expire}")
 	private int ALIYUN_OSS_EXPIRE;
 	@Value("${aliyun.oss.maxSize}")

@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class OssConfig {
+
     @Value("${aliyun.oss.endpoint}")
     private String ALIYUN_OSS_ENDPOINT;
     @Value("${aliyun.oss.accessKeyId}")

@@ -4,7 +4,7 @@ package org.openmall.mall.cms.controller;
 import org.openmall.mall.common.api.CommonResult;
 import org.openmall.mall.cms.dto.OssCallbackResult;
 import org.openmall.mall.cms.dto.OssPolicyResult;
-import org.openmall.mall.cms.service.impl.OssServiceImpl;
+import org.openmall.mall.cms.service.impl.AliyunOssServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/aliyun/oss")
 public class OssController {
     @Autowired
-    private OssServiceImpl ossService;
+    private AliyunOssServiceImpl ossService;
 
     @ApiOperation(value = "oss上传签名生成")
     @RequestMapping(value = "/policy", method = RequestMethod.GET)
