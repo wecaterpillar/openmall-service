@@ -61,7 +61,7 @@
         LIMIT #{offset}, #{limit};
     </select>
 
-    <select id="getRecommendSubjectList" resultMap="org.openmall.mall.pms.mapper.CmsSubjectMapper.BaseResultMap">
+    <select id="getRecommendSubjectList" resultMap="org.openmall.mall.cms.mapper.CmsSubjectMapper.BaseResultMap">
         SELECT s.*
         FROM
             sms_home_recommend_subject hs

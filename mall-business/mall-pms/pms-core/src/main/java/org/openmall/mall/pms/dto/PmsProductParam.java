@@ -1,6 +1,8 @@
 package org.openmall.mall.pms.dto;
 
 import io.swagger.annotations.ApiModelProperty;
+import org.openmall.mall.cms.model.CmsPrefrenceAreaProductRelation;
+import org.openmall.mall.cms.model.CmsSubjectProductRelation;
 import org.openmall.mall.pms.model.*;
 
 import java.util.List;

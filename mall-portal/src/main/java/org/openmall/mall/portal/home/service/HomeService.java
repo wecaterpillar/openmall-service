@@ -1,6 +1,6 @@
 package org.openmall.mall.portal.home.service;
 
-import org.openmall.mall.pms.model.CmsSubject;
+import org.openmall.mall.cms.model.CmsSubject;
 import org.openmall.mall.pms.model.PmsProduct;
 import org.openmall.mall.pms.model.PmsProductCategory;
 import org.openmall.mall.portal.home.domain.HomeContentResult;

@@ -1,6 +1,12 @@
 package org.openmall.mall.pms.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import org.openmall.mall.cms.dao.CmsPrefrenceAreaProductRelationDao;
+import org.openmall.mall.cms.dao.CmsSubjectProductRelationDao;
+import org.openmall.mall.cms.mapper.CmsPrefrenceAreaProductRelationMapper;
+import org.openmall.mall.cms.mapper.CmsSubjectProductRelationMapper;
+import org.openmall.mall.cms.model.CmsPrefrenceAreaProductRelationExample;
+import org.openmall.mall.cms.model.CmsSubjectProductRelationExample;
 import org.openmall.mall.pms.dao.*;
 import org.openmall.mall.pms.dto.PmsProductParam;
 import org.openmall.mall.pms.dto.PmsProductQueryParam;

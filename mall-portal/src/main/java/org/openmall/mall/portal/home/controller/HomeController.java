@@ -1,7 +1,7 @@
 package org.openmall.mall.portal.home.controller;
 
 import org.openmall.mall.common.api.CommonResult;
-import org.openmall.mall.pms.model.CmsSubject;
+import org.openmall.mall.cms.model.CmsSubject;
 import org.openmall.mall.pms.model.PmsProduct;
 import org.openmall.mall.pms.model.PmsProductCategory;
 import org.openmall.mall.portal.home.domain.HomeContentResult;

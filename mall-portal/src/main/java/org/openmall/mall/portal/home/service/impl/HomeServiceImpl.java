@@ -1,7 +1,9 @@
 package org.openmall.mall.portal.home.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import org.openmall.mall.pms.mapper.CmsSubjectMapper;
+import org.openmall.mall.cms.model.CmsSubject;
+import org.openmall.mall.cms.model.CmsSubjectExample;
+import org.openmall.mall.cms.mapper.CmsSubjectMapper;
 import org.openmall.mall.pms.mapper.PmsProductCategoryMapper;
 import org.openmall.mall.pms.mapper.PmsProductMapper;
 import org.openmall.mall.pms.model.*;
