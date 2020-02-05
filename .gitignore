@@ -1,5 +1,7 @@
 **/.idea/
 **/.mvn/
+*.iml
+**/*.iml
 
 **/target
 **/bin
