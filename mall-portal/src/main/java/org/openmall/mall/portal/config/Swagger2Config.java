@@ -30,6 +30,7 @@ public class Swagger2Config {
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("org.openmall.mall.portal"))
+                //.apis(RequestHandlerSelectors.basePackage("org.openmall.mall"))
                 .paths(PathSelectors.any())
                 .build()
                 .securitySchemes(securitySchemes())

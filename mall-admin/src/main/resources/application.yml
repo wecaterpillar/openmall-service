@@ -28,6 +28,18 @@ spring:
       cluster-nodes: ${es_nodes:es:9300}
 
 mybatis-plus:
+  configuration:
+    cache-enabled: false
+    map-underscore-to-camel-case: true
+    global-config:
+      db-config:
+        column-underline: true
+        db-type: mysql
+        field-strategy: not_empty
+        id-type: id_worker
+        logic-delete-value: 0
+        logic-not-delete-value: 1
+      refresh: true
   mapper-locations:
     - classpath*:dao/*.xml
     - classpath*:org/openmall/**/mapper/*.xml

@@ -30,32 +30,22 @@ spring:
       cluster-nodes: ${es_nodes:es:9300}
 
 mybatis-plus:
+  configuration:
+    cache-enabled: false
+    map-underscore-to-camel-case: true
+    global-config:
+      db-config:
+        column-underline: true
+        db-type: mysql
+        field-strategy: not_empty
+        id-type: id_worker
+        logic-delete-value: 0
+        logic-not-delete-value: 1
+      refresh: true
   mapper-locations:
     - classpath*:dao/*.xml
     - classpath*:org/openmall/**/mapper/*.xml
-
-jwt:
-  tokenHeader: Authorization #JWT存储的请求头
-  secret: mall-admin-secret #JWT加解密使用的密钥
-  expiration: 604800 #JWT的超期限时间(60*60*24)
-  tokenHead: Bearer  #JWT负载中拿到开头
-
-secure:
-  ignored:
-    urls: #安全路径白名单
-      - /swagger-ui.html
-      - /swagger-resources/**
-      - /swagger/**
-      - /**/v2/api-docs
-      - /**/*.js
-      - /**/*.css
-      - /**/*.png
-      - /**/*.ico
-      - /webjars/springfox-swagger-ui/**
-      - /actuator/**
-      - /druid/**
-      - /admin/login
-      - /admin/register
+  typeAliasesPackage: org.openmall.mall.pms.domain
 
 aliyun:
   oss:
