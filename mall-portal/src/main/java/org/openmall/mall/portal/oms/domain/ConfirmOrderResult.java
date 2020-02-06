@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * 确认单信息封装
  */
+@lombok.Data
 public class ConfirmOrderResult {
     //包含优惠信息的购物车信息
     private List<CartPromotionItem> cartPromotionItemList;

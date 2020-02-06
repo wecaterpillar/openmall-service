@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * 包含订单商品信息的订单详情
  */
+@lombok.Data
 public class OmsOrderDetail extends OmsOrder {
     private List<OmsOrderItem> orderItemList;
 

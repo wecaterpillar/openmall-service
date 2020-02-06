@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 会员积分更改记录-成长Growth
+ * 会员成长值变更记录
  */
 @lombok.Data
 public class UmsGrowthChangeHistory implements Serializable {
@@ -18,7 +18,7 @@ public class UmsGrowthChangeHistory implements Serializable {
     @ApiModelProperty(value = "改变类型：0->增加；1->减少")
     private Integer changeType;
 
-    @ApiModelProperty(value = "积分改变数量")
+    @ApiModelProperty(value = "成长值改变数量")
     private Integer changeCount;
 
     @ApiModelProperty(value = "操作人员")

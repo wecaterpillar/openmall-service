@@ -1069,7 +1069,7 @@ INSERT INTO `pms_product_attribute_value` VALUES ('227', '29', '48', '1960ml');
 DROP TABLE IF EXISTS `pms_product_category`;
 CREATE TABLE `pms_product_category` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `parent_id` bigint(20) DEFAULT NULL COMMENT '上机分类的编号：0表示一级分类',
+  `parent_id` bigint(20) DEFAULT NULL COMMENT '上级分类的编号：0表示一级分类',
   `name` varchar(64) DEFAULT NULL,
   `level` int(1) DEFAULT NULL COMMENT '分类级别：0->1级；1->2级',
   `product_count` int(11) DEFAULT NULL,

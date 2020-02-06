@@ -23,12 +23,6 @@ public class PmsBrand implements Serializable {
 
     private Integer showStatus;
 
-    @ApiModelProperty(value = "产品数量")
-    private Integer productCount;
-
-    @ApiModelProperty(value = "产品评论数量")
-    private Integer productCommentCount;
-
     @ApiModelProperty(value = "品牌logo")
     private String logo;
 
@@ -37,6 +31,13 @@ public class PmsBrand implements Serializable {
 
     @ApiModelProperty(value = "品牌故事")
     private String brandStory;
+
+
+    @ApiModelProperty(value = "产品数量")
+    private Integer productCount;
+
+    @ApiModelProperty(value = "产品评论数量")
+    private Integer productCommentCount;
 
     private static final long serialVersionUID = 1L;
 

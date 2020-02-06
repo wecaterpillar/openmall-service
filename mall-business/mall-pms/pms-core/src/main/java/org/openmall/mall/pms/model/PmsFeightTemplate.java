@@ -22,8 +22,10 @@ public class PmsFeightTemplate implements Serializable {
     @ApiModelProperty(value = "首费（元）")
     private BigDecimal firstFee;
 
+    @ApiModelProperty(value = "续重kg")
     private BigDecimal continueWeight;
 
+    @ApiModelProperty(value = "续费元")
     private BigDecimal continmeFee;
 
     @ApiModelProperty(value = "目的地（省、市）")

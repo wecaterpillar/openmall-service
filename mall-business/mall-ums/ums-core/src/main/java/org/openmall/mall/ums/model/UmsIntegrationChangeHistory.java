@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 会员积分变更记录-消费Integration
+ * 会员积分变更记录
  */
 @lombok.Data
 public class UmsIntegrationChangeHistory implements Serializable {

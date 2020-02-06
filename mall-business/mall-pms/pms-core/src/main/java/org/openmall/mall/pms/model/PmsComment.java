@@ -33,17 +33,22 @@ public class PmsComment implements Serializable {
 
     private Integer collectCouont;
 
-    private Integer readCount;
+    @ApiModelProperty(value = "评论用户头像")
+    private String memberIcon;
+
+
+
+    private String content;
 
     @ApiModelProperty(value = "上传图片地址，以逗号隔开")
     private String pics;
 
-    @ApiModelProperty(value = "评论用户头像")
-    private String memberIcon;
+
+
+    private Integer readCount;
 
     private Integer replayCount;
 
-    private String content;
 
     private static final long serialVersionUID = 1L;
 

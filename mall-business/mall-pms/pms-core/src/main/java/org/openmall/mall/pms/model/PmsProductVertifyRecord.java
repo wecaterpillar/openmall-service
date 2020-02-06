@@ -13,6 +13,7 @@ import java.util.Date;
 public class PmsProductVertifyRecord implements Serializable {
     private Long id;
 
+    @ApiModelProperty(value = "商品id")
     private Long productId;
 
     private Date createTime;

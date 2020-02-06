@@ -3,6 +3,7 @@ package org.openmall.mall.portal.oms.domain;
 /**
  * 生成订单时传入的参数
  */
+@lombok.Data
 public class OrderParam {
     //收货地址id
     private Long memberReceiveAddressId;

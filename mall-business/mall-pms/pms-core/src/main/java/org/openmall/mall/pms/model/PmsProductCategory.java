@@ -14,7 +14,7 @@ public class PmsProductCategory implements Serializable {
     @Id
     private Long id;
 
-    @ApiModelProperty(value = "上机分类的编号：0表示一级分类")
+    @ApiModelProperty(value = "上级分类的编号：0表示一级分类")
     private Long parentId;
 
     @ApiModelProperty(value = "名称")

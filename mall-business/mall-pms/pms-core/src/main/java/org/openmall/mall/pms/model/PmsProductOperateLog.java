@@ -9,6 +9,8 @@ import java.util.Date;
  * 商品操作记录
  *
  * 用于记录商品操作记录
+ *
+ * 记录商品的价格、销售价、赠送积分、使用积分限额等变化信息
  */
 @lombok.Data
 public class PmsProductOperateLog implements Serializable {
