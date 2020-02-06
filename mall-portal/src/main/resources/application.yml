@@ -29,6 +29,11 @@ spring:
       port: ${mongo-port:27017}
       database: ${mongo-db:mall-port}
 
+    elasticsearch:
+      repositories:
+        enabled: true
+      cluster-nodes: ${es_nodes:es:9300}
+
 
   redis:
     host: ${redis-host:redis}  # Redis服务器地址

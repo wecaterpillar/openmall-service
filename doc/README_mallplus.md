@@ -3,70 +3,36 @@
 
 ## 前言
 
-`openmall`项目致力于打造一个完整的电商系统，采用现阶段流行技术实现。
+`mallplus`项目致力于打造一个完整的电商系统，采用现阶段流行技术实现。
 
 ## 项目介绍
 
-`openmall`项目是一套电商系统，包括前台商城系统及后台管理系统，小程序，h5，基于SpringBoot+MyBatis实现。
+`mallplus`项目是一套电商系统，包括前台商城系统及后台管理系统，小程序，h5，基于SpringBoot+MyBatis实现。
 前台商城系统包含首页门户、商品推荐、商品搜索、商品展示、购物车、订单流程、会员中心、客户服务、帮助中心等模块。
 后台管理系统包含商品管理、订单管理、会员管理、促销管理、运营管理、内容管理、统计报表、财务管理、权限管理、代码生成设置等模块。
 
 ### 项目演示
 
-> 后台管理系统 mall-admin-web
+> 后台管理系统
 
 http://localhost:8090
-admin/admin 
-
-> 用户H5商店 mall-vue
-
-http://localhost:9999
+admin/admin  (admin/macro123)
 
 ### 组织结构
 
 ``` lua
 mall
-└── mall-commons -- mall通用模块
-├     ├── mall-common -- 公用jar包
-├     ├── mall-mbg -- 原有mgb包
-├     ├── mall-security -- 公用安全包
-├── mall-business -- 电商业务模块
-├     ├── mall-sys -- 系统框架
-├     ├── mall-cms -- 内容中心
-├     ├── mall-pms -- 商品中心
-├     ├── mall-oms -- 订单中心
-├     ├── mall-ums -- 会员中心
-├     ├── mall-sms -- 营销中心
+├── mallplus-mbg -- MyBatisGenerator生成的数据库操作代码
+├── mallplus-admin -- 后台商城管理系统接口
 ├── mall-search -- 基于Elasticsearch的商品搜索系统
-├── mall-admin -- 后台商城管理系统接口
-├── mall-portal -- 前台商城系统接口
-
-├── mall-admin-web -- 管理前端项目  
-├── mall-vue   -- h5前端项目 
-├── mall-uniapp   -- 小程序前端项目
+├── mallplus-portal -- 前台商城系统接口
+└── mall-demo -- 框架搭建时的测试代码
+├── 前端项目`mallplus-admin-web`  
+├── h5前端项目`vue-js-master`地址 请加群下载  
+├── pc前端项目`Mall-Vue-master`地址 请加群下载  
+├── 小前端项目`wechatapp`地址 请加群下载
 ```
 
-### 搭建步骤
-
-> 本地环境搭建
-- 搭建基础环境
-    - 数据库mysql
-    - 数据库mongodb
-    - 缓存redis
-    - 队列rabbitmq
-    - 搜索elasticsearch
-- 数据初始化
-    - 执行脚本openmall.sql
-- 启动后台服务
-    - 启动mall-admin
-    - 启动mall-search
-    - 启动mall-portal
-- 启动前台应用
-    - 后台管理web
-    - 用户商店h5
-
-更多搭建可参见 mall学习教程
-http://www.macrozheng.com/#/deploy/mall_deploy_docker_compose
 
 ### 技术选型
 
@@ -74,6 +40,7 @@ http://www.macrozheng.com/#/deploy/mall_deploy_docker_compose
 
 技术 | 说明 | 官网
 ----|----|----
+
 Spring Boot | 容器+MVC框架 | [https://spring.io/projects/spring-boot](https://spring.io/projects/spring-boot)
 Spring Security | 认证和授权框架 | [https://spring.io/projects/spring-security](https://spring.io/projects/spring-security)
 MyBatis | ORM框架  | [http://www.mybatis.org/mybatis-3/zh/index.html](http://www.mybatis.org/mybatis-3/zh/index.html)
@@ -104,6 +71,34 @@ Axios | 前端HTTP框架 | [https://github.com/axios/axios](https://github.com/a
 v-charts | 基于Echarts的图表框架 | [https://v-charts.js.org/](https://v-charts.js.org/)
 Js-cookie | cookie管理工具 | [https://github.com/js-cookie/js-cookie](https://github.com/js-cookie/js-cookie)
 nprogress | 进度条控件 | [https://github.com/rstacruz/nprogress](https://github.com/rstacruz/nprogress)
+
+#### 架构图
+
+##### 系统架构图
+
+![系统架构图](document/resource/mall_system_arch.png)
+
+##### 业务架构图
+
+![系统架构图](document/resource/mall_business_arch.png)
+
+#### 模块介绍
+
+##### 后台管理系统 `mallplus-admin`
+
+- 商品管理：[功能结构图-商品.jpg](document/resource/mind_product.jpg)
+- 订单管理：[功能结构图-订单.jpg](document/resource/mind_order.jpg)
+- 促销管理：[功能结构图-促销.jpg](document/resource/mind_sale.jpg)
+- 内容管理：[功能结构图-内容.jpg](document/resource/mind_content.jpg)
+- 用户管理：[功能结构图-用户.jpg](document/resource/mind_member.jpg)
+
+##### 前台商城系统 `mallplus-portal`
+
+[功能结构图-前台.jpg](document/resource/mind_portal.jpg)
+
+#### 开发进度
+
+![项目开发进度图](document/resource/mall_dev_flow.png)
 
 ## 环境搭建
 
@@ -136,3 +131,39 @@ MongoDb | 3.2 | https://www.mongodb.com/download-center
 RabbitMq | 5.25 | http://www.rabbitmq.com/download.html
 nginx | 1.10 | http://nginx.org/en/download.html
 
+### 搭建步骤
+
+> 本地环境搭建
+
+- 本地安装开发环境中的所有工具并启动，具体参考
+- 安装最新的数据库mallplus.sql，解压 前端vue mallplsu-admin-web.zip
+- 克隆源代码到本地，使用IDEA或Eclipse打开，并完成编译;
+- 在mysql中新建mall数据库，导入document/sql下的mall.sql文件；
+- 启动mallplus-admin项目：直接运行org.openmall.mall.MallAdminApplication的main方法即可，
+  接口文档地址：http://localhost:8080/swagger-ui.html;
+- 启动mall-search项目：直接运行org.openmall.mall.search.MallSearchApplication的main方法即可，
+  接口文档地址：http://localhost:8081/swagger-ui.html;
+- 启动mallplus-portal项目：直接运行org.openmall.mall.portal.MallPortalApplication的main方法即可，
+  接口文档地址：http://localhost:8085/swagger-ui.html;
+
+
+
+## 项目相关文档
+
+
+
+## 参考资料
+
+- [Spring实战（第4版）](https://book.douban.com/subject/26767354/)
+- [Spring Boot实战](https://book.douban.com/subject/26857423/)
+- [Spring Cloud微服务实战](https://book.douban.com/subject/27025912/)
+- [Spring Cloud与Docker微服务架构实战](https://book.douban.com/subject/27028228/)
+- [Spring Data实战](https://book.douban.com/subject/25975186/)
+- [MyBatis从入门到精通](https://book.douban.com/subject/27074809/)
+- [深入浅出MySQL](https://book.douban.com/subject/25817684/)
+- [循序渐进Linux（第2版）](https://book.douban.com/subject/26758194/)
+- [Elasticsearch 技术解析与实战](https://book.douban.com/subject/26967826/)
+- [MongoDB实战(第二版)](https://book.douban.com/subject/27061123/)
+- [Kubernetes权威指南](https://book.douban.com/subject/26902153/)
+- [mall商城](https://github.com/shenzhuan/mallplus)
+- [mybatis-plus](https://gitee.com/baomidou/mybatis-plus)
