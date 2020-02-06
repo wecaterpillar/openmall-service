@@ -29,6 +29,26 @@
             <artifactId>oms-api</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.openmall.mall</groupId>
+            <artifactId>ums-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openmall.mall</groupId>
+            <artifactId>sms-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openmall.mall</groupId>
+            <artifactId>pms-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openmall.mall</groupId>
+            <artifactId>pms-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>io.springfox</groupId>

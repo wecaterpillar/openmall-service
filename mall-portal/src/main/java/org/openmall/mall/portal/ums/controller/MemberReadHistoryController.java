@@ -1,8 +1,8 @@
 package org.openmall.mall.portal.ums.controller;
 
 import org.openmall.mall.common.api.CommonResult;
-import org.openmall.mall.portal.ums.domain.MemberReadHistory;
-import org.openmall.mall.portal.ums.service.MemberReadHistoryService;
+import org.openmall.mall.ums.domain.MemberReadHistory;
+import org.openmall.mall.ums.service.MemberReadHistoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

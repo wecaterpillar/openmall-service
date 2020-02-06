@@ -1,7 +1,7 @@
 package org.openmall.mall.portal.ums.controller;
 
 import org.openmall.mall.common.api.CommonResult;
-import org.openmall.mall.portal.ums.service.UmsMemberService;
+import org.openmall.mall.ums.service.UmsMemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,12 +1,12 @@
 package org.openmall.mall.portal.ums.controller;
 
 import org.openmall.mall.common.api.CommonResult;
-import org.openmall.mall.portal.ums.service.UmsMemberCouponService;
-import org.openmall.mall.portal.ums.service.UmsMemberService;
+import org.openmall.mall.ums.service.UmsMemberCouponService;
+import org.openmall.mall.ums.service.UmsMemberService;
 import org.openmall.mall.sms.model.SmsCouponHistory;
-import org.openmall.mall.portal.oms.domain.CartPromotionItem;
-import org.openmall.mall.portal.ums.domain.SmsCouponHistoryDetail;
-import org.openmall.mall.portal.oms.service.OmsCartItemService;
+import org.openmall.mall.oms.domain.CartPromotionItem;
+import org.openmall.mall.ums.domain.SmsCouponHistoryDetail;
+import org.openmall.mall.oms.service.OmsCartItemService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;

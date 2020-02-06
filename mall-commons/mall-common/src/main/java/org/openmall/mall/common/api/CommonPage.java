@@ -1,5 +1,6 @@
 package org.openmall.mall.common.api;
 
+
 import com.github.pagehelper.PageInfo;
 import org.springframework.data.domain.Page;
 
