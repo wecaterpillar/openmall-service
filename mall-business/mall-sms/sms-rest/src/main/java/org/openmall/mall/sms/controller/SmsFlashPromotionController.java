@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Controller
 @Api(tags = "SmsFlashPromotionController", description = "限时购活动管理")
-@RequestMapping("/flash")
+@RequestMapping("/sms/flash")
 public class SmsFlashPromotionController {
     @Autowired
     private SmsFlashPromotionService flashPromotionService;

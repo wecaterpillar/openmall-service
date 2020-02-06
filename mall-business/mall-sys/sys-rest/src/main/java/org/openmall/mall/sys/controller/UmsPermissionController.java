@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Controller
 @Api(tags = "UmsPermissionController", description = "后台用户权限管理")
-@RequestMapping("/permission")
+@RequestMapping("/sys/permission")
 public class UmsPermissionController {
     @Autowired
     private UmsPermissionService permissionService;

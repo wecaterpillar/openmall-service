@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Controller
 @Api(tags = "PmsProductController", description = "商品管理")
-@RequestMapping("/product")
+@RequestMapping("/pms/product")
 public class PmsProductController {
     @Autowired
     private PmsProductService productService;

@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Controller
 @Api(tags = "CmsSubjectController", description = "商品专题管理")
-@RequestMapping("/subject")
+@RequestMapping("/cms/subject")
 public class CmsSubjectController {
     @Autowired
     private CmsSubjectService subjectService;

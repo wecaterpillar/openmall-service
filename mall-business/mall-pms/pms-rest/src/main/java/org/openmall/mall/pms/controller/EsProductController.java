@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Controller
 @Api(tags = "EsProductController", description = "搜索商品管理")
-@RequestMapping("/esProduct")
+@RequestMapping("/pms/esProduct")
 public class EsProductController {
     @Autowired
     private EsProductService esProductService;

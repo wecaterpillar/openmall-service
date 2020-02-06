@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Controller
 @Api(tags = "SmsCouponController", description = "优惠券管理")
-@RequestMapping("/coupon")
+@RequestMapping("/sms/coupon")
 public class SmsCouponController {
     @Autowired
     private SmsCouponService couponService;

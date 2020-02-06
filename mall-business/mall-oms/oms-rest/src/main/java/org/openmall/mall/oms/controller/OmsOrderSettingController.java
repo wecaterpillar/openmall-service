@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @Api(tags = "OmsOrderSettingController", description = "订单设置管理")
-@RequestMapping("/orderSetting")
+@RequestMapping("/oms/orderSetting")
 public class OmsOrderSettingController {
     @Autowired
     private OmsOrderSettingService orderSettingService;
