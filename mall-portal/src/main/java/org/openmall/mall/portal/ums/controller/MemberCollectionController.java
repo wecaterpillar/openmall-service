@@ -13,7 +13,6 @@ import java.util.List;
 
 /**
  * 会员收藏管理Controller
- * Created by macro on 2018/8/2.
  */
 @Controller
 @Api(tags = "MemberCollectionController", description = "会员收藏管理")

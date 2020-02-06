@@ -14,7 +14,6 @@ import java.util.List;
 
 /**
  * 首页人气推荐管理Controller
- * Created by macro on 2018/11/6.
  */
 @Controller
 @Api(tags = "SmsHomeRecommendProductController", description = "首页人气推荐管理")

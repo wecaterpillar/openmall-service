@@ -3,11 +3,20 @@ package org.openmall.mall.pms.model;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
+/**
+ * 商品属性值
+ *
+ * 如果对应的参数是规格且规格支持手动添加，那么该表用于存储手动新增的值；
+ * 如果对应的商品属性是参数，那么该表用于存储参数的值。
+ */
+@lombok.Data
 public class PmsProductAttributeValue implements Serializable {
     private Long id;
 
+    @ApiModelProperty(value = "商品id")
     private Long productId;
 
+    @ApiModelProperty(value = "商品属性id")
     private Long productAttributeId;
 
     @ApiModelProperty(value = "手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开")
@@ -15,50 +24,4 @@ public class PmsProductAttributeValue implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
-    public Long getProductAttributeId() {
-        return productAttributeId;
-    }
-
-    public void setProductAttributeId(Long productAttributeId) {
-        this.productAttributeId = productAttributeId;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", productId=").append(productId);
-        sb.append(", productAttributeId=").append(productAttributeId);
-        sb.append(", value=").append(value);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
-    }
 }

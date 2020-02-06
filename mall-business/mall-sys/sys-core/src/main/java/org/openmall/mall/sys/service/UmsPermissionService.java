@@ -7,7 +7,6 @@ import java.util.List;
 
 /**
  * 后台用户权限管理Service
- * Created by macro on 2018/9/29.
  */
 public interface UmsPermissionService {
     /**

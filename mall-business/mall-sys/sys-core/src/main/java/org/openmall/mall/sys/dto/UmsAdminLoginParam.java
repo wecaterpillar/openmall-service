@@ -6,7 +6,6 @@ import javax.validation.constraints.NotEmpty;
 
 /**
  * 用户登录参数
- * Created by macro on 2018/4/26.
  */
 public class UmsAdminLoginParam {
     @ApiModelProperty(value = "用户名", required = true)

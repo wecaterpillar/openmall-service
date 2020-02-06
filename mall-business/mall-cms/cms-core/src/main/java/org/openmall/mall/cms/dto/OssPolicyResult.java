@@ -4,7 +4,6 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 获取OSS上传文件授权返回结果
- * Created by macro on 2018/5/17.
  */
 public class OssPolicyResult {
     @ApiModelProperty("访问身份验证中用到用户标识")

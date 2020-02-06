@@ -9,7 +9,6 @@ import java.util.List;
 
 /**
  * 确认单信息封装
- * Created by macro on 2018/8/30.
  */
 public class ConfirmOrderResult {
     //包含优惠信息的购物车信息

@@ -19,7 +19,6 @@ import java.util.List;
 
 /**
  * Swagger2API文档的配置
- * Created by macro on 2018/4/26.
  */
 @Configuration
 @EnableSwagger2
@@ -29,7 +28,7 @@ public class Swagger2Config {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("org.openmall.mall.pms.controller"))
+                .apis(RequestHandlerSelectors.basePackage("org.openmall.mall.pms"))
                 .paths(PathSelectors.any())
                 .build();
     }

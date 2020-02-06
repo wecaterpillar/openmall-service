@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by macro on 2018/8/27.
  * 前台商品查询逻辑单元测试
  */
 @RunWith(SpringRunner.class)

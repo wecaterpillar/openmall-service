@@ -8,7 +8,6 @@ import java.util.List;
 
 /**
  * 优惠券管理Service
- * Created by macro on 2018/8/28.
  */
 public interface SmsCouponService {
     /**

@@ -14,7 +14,6 @@ import java.util.List;
 
 /**
  * 后台用户权限管理
- * Created by macro on 2018/9/29.
  */
 @Controller
 @Api(tags = "UmsPermissionController", description = "后台用户权限管理")
