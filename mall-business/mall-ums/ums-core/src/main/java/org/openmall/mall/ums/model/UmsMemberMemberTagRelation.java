@@ -3,6 +3,10 @@ package org.openmall.mall.ums.model;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
+/**
+ * 会员标签关联
+ */
+@lombok.Data
 public class UmsMemberMemberTagRelation implements Serializable {
     private Long id;
 

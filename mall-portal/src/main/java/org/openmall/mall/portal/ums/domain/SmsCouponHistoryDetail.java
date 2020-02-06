@@ -10,7 +10,9 @@ import java.util.List;
 /**
  * 优惠券领取历史详情封装
  */
+@lombok.Data
 public class SmsCouponHistoryDetail extends SmsCouponHistory {
+
     //相关优惠券信息
     private SmsCoupon coupon;
     //优惠券关联商品
