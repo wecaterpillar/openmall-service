@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Controller
 @Api(tags = "MemberAttentionController", description = "会员关注品牌管理")
-@RequestMapping("/ums/member/attention")
+@RequestMapping("/member/attention")
 public class MemberAttentionController {
     @Autowired
     private MemberAttentionService memberAttentionService;

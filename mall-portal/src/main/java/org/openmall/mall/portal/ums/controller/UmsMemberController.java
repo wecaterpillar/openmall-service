@@ -21,7 +21,7 @@ import java.util.Map;
  */
 @Controller
 @Api(tags = "UmsMemberController", description = "会员登录注册管理")
-@RequestMapping("/ums/sso")
+@RequestMapping("/sso")
 public class UmsMemberController {
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;

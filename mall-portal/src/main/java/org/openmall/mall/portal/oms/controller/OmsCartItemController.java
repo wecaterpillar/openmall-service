@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Controller
 @Api(tags = "OmsCartItemController", description = "购物车管理")
-@RequestMapping("/oms/cart")
+@RequestMapping("/cart")
 public class OmsCartItemController {
     @Autowired
     private OmsCartItemService cartItemService;

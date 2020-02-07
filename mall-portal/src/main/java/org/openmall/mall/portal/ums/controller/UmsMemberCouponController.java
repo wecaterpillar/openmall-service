@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Controller
 @Api(tags = "UmsMemberCouponController", description = "用户优惠券管理")
-@RequestMapping("/ums/member/coupon")
+@RequestMapping("/member/coupon")
 public class UmsMemberCouponController {
     @Autowired
     private UmsMemberCouponService memberCouponService;

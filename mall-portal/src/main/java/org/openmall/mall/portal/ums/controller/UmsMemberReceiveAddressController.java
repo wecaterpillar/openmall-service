@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Controller
 @Api(tags = "UmsMemberReceiveAddressController", description = "会员收货地址管理")
-@RequestMapping("/ums/member/address")
+@RequestMapping("/member/address")
 public class UmsMemberReceiveAddressController {
     @Autowired
     private UmsMemberReceiveAddressService memberReceiveAddressService;
