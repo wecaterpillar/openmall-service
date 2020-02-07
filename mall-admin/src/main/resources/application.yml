@@ -92,8 +92,8 @@ secure:
       - /druid/**
       - /admin/login
       - /admin/register
-      - /sys/admin/login
-      - /sys/admin/register
+      - /sys/user/login
+      - /sys/user/register
 
 aliyun:
   oss:
