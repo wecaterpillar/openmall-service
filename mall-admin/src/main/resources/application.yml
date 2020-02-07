@@ -61,6 +61,15 @@ mybatis-plus:
     - classpath*:dao/*.xml
     - classpath*:org/openmall/**/mapper/*.xml
 
+# 自定义redis key
+redis:
+  key:
+    prefix:
+      authCode: "portal:authCode:"
+      orderId: "portal:orderId:"
+    expire:
+      authCode: 90 # 验证码超期时间
+
 jwt:
   tokenHeader: Authorization #JWT存储的请求头
   secret: mall-admin-secret #JWT加解密使用的密钥

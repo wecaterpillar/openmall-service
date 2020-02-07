@@ -2,7 +2,7 @@ package org.openmall.mall.portal.ums.controller;
 
 import org.openmall.mall.common.api.CommonResult;
 import org.openmall.mall.ums.model.UmsMemberReceiveAddress;
-import org.openmall.mall.ums.service.UmsMemberReceiveAddressService;
+import org.openmall.mall.portal.ums.service.UmsMemberReceiveAddressService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

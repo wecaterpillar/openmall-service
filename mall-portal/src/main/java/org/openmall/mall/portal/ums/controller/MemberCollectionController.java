@@ -1,8 +1,8 @@
 package org.openmall.mall.portal.ums.controller;
 
 import org.openmall.mall.common.api.CommonResult;
-import org.openmall.mall.ums.domain.MemberProductCollection;
-import org.openmall.mall.ums.service.MemberCollectionService;
+import org.openmall.mall.portal.ums.domain.MemberProductCollection;
+import org.openmall.mall.portal.ums.service.MemberCollectionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,7 @@
 package org.openmall.mall.portal.oms.service.impl;
 
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.service.RedisService;
 import org.openmall.mall.portal.oms.domain.CartPromotionItem;
 import org.openmall.mall.portal.oms.domain.ConfirmOrderResult;
 import org.openmall.mall.oms.mapper.OmsOrderItemMapper;
@@ -17,7 +18,6 @@ import org.openmall.mall.portal.ums.dao.SmsCouponHistoryDao;
 import org.openmall.mall.portal.oms.domain.OmsOrderDetail;
 import org.openmall.mall.portal.oms.domain.OrderParam;
 import org.openmall.mall.portal.oms.service.OmsCartItemService;
-import org.openmall.mall.portal.home.service.*;
 import org.openmall.mall.portal.ums.domain.SmsCouponHistoryDetail;
 import org.openmall.mall.portal.ums.service.UmsMemberCouponService;
 import org.openmall.mall.portal.ums.service.UmsMemberReceiveAddressService;
