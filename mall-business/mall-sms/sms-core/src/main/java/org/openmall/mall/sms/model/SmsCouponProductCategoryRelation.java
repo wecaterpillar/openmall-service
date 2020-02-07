@@ -3,9 +3,16 @@ package org.openmall.mall.sms.model;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
+/**
+ * 优惠券和商品分类关系
+ *
+ * 用于存储优惠券与商品分类的关系，当优惠券的使用类型为指定分类时，优惠券与商品分类需要建立关系。
+ */
+@lombok.Data
 public class SmsCouponProductCategoryRelation implements Serializable {
     private Long id;
 
+    @ApiModelProperty(value = "优惠券id")
     private Long couponId;
 
     private Long productCategoryId;
@@ -18,59 +25,4 @@ public class SmsCouponProductCategoryRelation implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getCouponId() {
-        return couponId;
-    }
-
-    public void setCouponId(Long couponId) {
-        this.couponId = couponId;
-    }
-
-    public Long getProductCategoryId() {
-        return productCategoryId;
-    }
-
-    public void setProductCategoryId(Long productCategoryId) {
-        this.productCategoryId = productCategoryId;
-    }
-
-    public String getProductCategoryName() {
-        return productCategoryName;
-    }
-
-    public void setProductCategoryName(String productCategoryName) {
-        this.productCategoryName = productCategoryName;
-    }
-
-    public String getParentCategoryName() {
-        return parentCategoryName;
-    }
-
-    public void setParentCategoryName(String parentCategoryName) {
-        this.parentCategoryName = parentCategoryName;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", couponId=").append(couponId);
-        sb.append(", productCategoryId=").append(productCategoryId);
-        sb.append(", productCategoryName=").append(productCategoryName);
-        sb.append(", parentCategoryName=").append(parentCategoryName);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
-    }
 }

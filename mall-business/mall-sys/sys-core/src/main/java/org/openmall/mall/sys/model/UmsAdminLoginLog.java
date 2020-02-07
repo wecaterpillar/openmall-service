@@ -4,6 +4,9 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 后台用户登录记录
+ */
 @lombok.Data
 public class UmsAdminLoginLog implements Serializable {
     private Long id;

@@ -3,6 +3,12 @@ package org.openmall.mall.sms.model;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
+/**
+ *  首页新品推荐
+ *
+ *  用于管理首页显示的新鲜好物信息。
+ */
+@lombok.Data
 public class SmsHomeNewProduct implements Serializable {
     private Long id;
 

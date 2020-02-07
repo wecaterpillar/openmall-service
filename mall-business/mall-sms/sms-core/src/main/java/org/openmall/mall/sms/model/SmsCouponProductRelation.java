@@ -3,9 +3,16 @@ package org.openmall.mall.sms.model;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
+/**
+ * 优惠券和商品的关系
+ *
+ * 用于存储优惠券与商品的关系，当优惠券的使用类型为指定商品时，优惠券与商品需要建立关系。
+ */
+@lombok.Data
 public class SmsCouponProductRelation implements Serializable {
     private Long id;
 
+    @ApiModelProperty(value = "优惠券id")
     private Long couponId;
 
     private Long productId;
@@ -18,59 +25,5 @@ public class SmsCouponProductRelation implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getCouponId() {
-        return couponId;
-    }
-
-    public void setCouponId(Long couponId) {
-        this.couponId = couponId;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getProductSn() {
-        return productSn;
-    }
-
-    public void setProductSn(String productSn) {
-        this.productSn = productSn;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", couponId=").append(couponId);
-        sb.append(", productId=").append(productId);
-        sb.append(", productName=").append(productName);
-        sb.append(", productSn=").append(productSn);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
-    }
 }
