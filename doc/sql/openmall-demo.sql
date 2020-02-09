@@ -2181,3 +2181,5 @@ INSERT INTO `ums_role_permission_relation` VALUES ('14', '4', '6');
 INSERT INTO `ums_role_permission_relation` VALUES ('15', '4', '15');
 INSERT INTO `ums_role_permission_relation` VALUES ('16', '4', '16');
 INSERT INTO `ums_role_permission_relation` VALUES ('17', '4', '17');
+
+SET FOREIGN_KEY_CHECKS=1;
