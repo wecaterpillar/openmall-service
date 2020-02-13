@@ -59,6 +59,9 @@ public class PmsProduct implements Serializable {
     @ApiModelProperty(value = "价格")
     private BigDecimal price;
 
+    @ApiModelProperty(value = "货币")
+    private String currency;
+
     @ApiModelProperty(value = "促销价格")
     private BigDecimal promotionPrice;
 

@@ -6,6 +6,8 @@ Date: 2019-03-21 15:44:19
 
 SET FOREIGN_KEY_CHECKS=0;
 
+
+
 -- ----------------------------
 -- Table structure for cms_help
 -- ----------------------------
@@ -840,6 +842,7 @@ CREATE TABLE `pms_product` (
   `sort` int(11) DEFAULT NULL COMMENT '排序',
   `sale` int(11) DEFAULT NULL COMMENT '销量',
   `price` decimal(10,2) DEFAULT NULL,
+  `currency` varchar(20) comment '货币',
   `promotion_price` decimal(10,2) DEFAULT NULL COMMENT '促销价格',
   `gift_growth` int(11) DEFAULT '0' COMMENT '赠送的成长值',
   `gift_point` int(11) DEFAULT '0' COMMENT '赠送的积分',

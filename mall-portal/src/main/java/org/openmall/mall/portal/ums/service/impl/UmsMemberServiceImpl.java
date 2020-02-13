@@ -1,16 +1,16 @@
 package org.openmall.mall.portal.ums.service.impl;
 
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.service.RedisService;
+import org.openmall.mall.portal.ums.domain.MemberDetails;
 import org.openmall.mall.portal.ums.service.UmsMemberService;
+import org.openmall.mall.security.util.JwtTokenUtil;
 import org.openmall.mall.ums.mapper.UmsMemberLevelMapper;
 import org.openmall.mall.ums.mapper.UmsMemberMapper;
 import org.openmall.mall.ums.model.UmsMember;
 import org.openmall.mall.ums.model.UmsMemberExample;
 import org.openmall.mall.ums.model.UmsMemberLevel;
 import org.openmall.mall.ums.model.UmsMemberLevelExample;
-import org.openmall.mall.portal.ums.domain.MemberDetails;
-import org.openmall.mall.common.service.RedisService;
-import org.openmall.mall.security.util.JwtTokenUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,7 +138,8 @@ public class UmsMemberServiceImpl implements UmsMemberService {
     public UmsMember getCurrentMember() {
         SecurityContext ctx = SecurityContextHolder.getContext();
         Authentication auth = ctx.getAuthentication();
-        MemberDetails memberDetails = (MemberDetails) auth.getPrincipal();
+        Object principal = auth.getPrincipal();
+        MemberDetails memberDetails = (MemberDetails) principal;
         return memberDetails.getUmsMember();
     }
 

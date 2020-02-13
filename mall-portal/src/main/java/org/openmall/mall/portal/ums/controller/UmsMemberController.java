@@ -1,9 +1,11 @@
 package org.openmall.mall.portal.ums.controller;
 
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.portal.ums.domain.MemberDto;
 import org.openmall.mall.portal.ums.service.UmsMemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.openmall.mall.ums.model.UmsMember;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -71,6 +73,20 @@ public class UmsMemberController {
         return memberService.updatePassword(telephone,password,authCode);
     }
 
+    @ApiOperation("当前用户信息")
+    @RequestMapping(value = "/current", method = RequestMethod.GET)
+    @ResponseBody
+    public MemberDto getCurrent(){
+        final UmsMember currentMember = memberService.getCurrentMember();
+        MemberDto member = new MemberDto();
+        member.setId(currentMember.getId());
+        member.setUsername(currentMember.getUsername());
+        member.setPhone(currentMember.getPhone());
+        member.setMemberLevelId(currentMember.getMemberLevelId());
+        member.setNickname(currentMember.getNickname());
+        member.setIcon(currentMember.getIcon());
+        return member;
+    }
 
     @ApiOperation(value = "刷新token")
     @RequestMapping(value = "/refreshToken", method = RequestMethod.GET)
