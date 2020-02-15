@@ -17,7 +17,7 @@ import java.util.List;
  * 商品分类模块Controller
  */
 @Controller
-@Api(tags = "PmsProductCategoryController", description = "商品分类管理")
+@Api(tags = "PortalPmsProductCategoryController", description = "商品分类管理")
 @RequestMapping("/pms/productCategory")
 public class PortalPmsProductCategoryController {
     @Autowired

@@ -19,7 +19,7 @@ import java.util.List;
  * 商品查询Controller
  */
 @Controller
-@Api(tags = "PmsProductController", description = "商品管理")
+@Api(tags = "PortalPmsProductService", description = "商品管理")
 @RequestMapping("/pms/product")
 public class PortalPmsProductController {
     @Autowired
