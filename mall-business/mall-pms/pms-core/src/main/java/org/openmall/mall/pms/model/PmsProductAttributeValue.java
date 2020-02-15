@@ -22,6 +22,13 @@ public class PmsProductAttributeValue implements Serializable {
     @ApiModelProperty(value = "手动添加规格或参数的值，参数单值，规格有多个时以逗号隔开")
     private String value;
 
+    @ApiModelProperty(value = "商品属性名称")
+    private String name;
+
     private static final long serialVersionUID = 1L;
 
+    public PmsProductAttributeValue(){
+        int k=0;
+        k++;
+    }
 }

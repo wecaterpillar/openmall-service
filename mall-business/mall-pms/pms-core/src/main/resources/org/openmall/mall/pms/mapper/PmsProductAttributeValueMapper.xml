@@ -6,6 +6,7 @@
     <result column="product_id" jdbcType="BIGINT" property="productId" />
     <result column="product_attribute_id" jdbcType="BIGINT" property="productAttributeId" />
     <result column="value" jdbcType="VARCHAR" property="value" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
