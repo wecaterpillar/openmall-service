@@ -46,11 +46,6 @@
             </dependency>
             <dependency>
                 <groupId>org.openmall.mall</groupId>
-                <artifactId>mall-encrypt</artifactId>
-                <version>${mall-commons.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.openmall.mall</groupId>
                 <artifactId>cms-api</artifactId>
                 <version>${mall-cms.version}</version>
             </dependency>

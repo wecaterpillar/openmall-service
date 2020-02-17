@@ -34,6 +34,7 @@
         <module>pms-api</module>
         <module>pms-core</module>
         <module>pms-rest</module>
+        <module>pms-search</module>
         <module>pms-app</module>
         <module>pms-feign</module>
     </modules>
@@ -47,17 +48,17 @@
             </dependency>
             <dependency>
                 <groupId>org.openmall.mall</groupId>
-                <artifactId>mall-encrypt</artifactId>
-                <version>${mall-commons.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.openmall.mall</groupId>
                 <artifactId>pms-api</artifactId>
                 <version>${mall-pms.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.openmall.mall</groupId>
                 <artifactId>pms-rest</artifactId>
+                <version>${mall-pms.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openmall.mall</groupId>
+                <artifactId>pms-search</artifactId>
                 <version>${mall-pms.version}</version>
             </dependency>
         </dependencies>

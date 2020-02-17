@@ -120,6 +120,11 @@
             </dependency>
             <dependency>
                 <groupId>org.openmall.mall</groupId>
+                <artifactId>pms-search</artifactId>
+                <version>${mall-business.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openmall.mall</groupId>
                 <artifactId>oms-rest</artifactId>
                 <version>${mall-business.version}</version>
             </dependency>

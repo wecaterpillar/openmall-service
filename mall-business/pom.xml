@@ -48,12 +48,6 @@
             </dependency>
             <dependency>
                 <groupId>org.openmall.mall</groupId>
-                <artifactId>mall-encrypt</artifactId>
-                <version>${mall-commons.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.openmall.mall</groupId>
                 <artifactId>mall-security</artifactId>
                 <version>${mall-commons.version}</version>
             </dependency>
