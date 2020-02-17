@@ -12,6 +12,8 @@ services:
     external_links:
       - mall-mysql:db
       - mall-redis:redis
+      - mall-mongo:mongo
+      - mall-elasticsearch:es
   mall-portal:
     image: szopen/mall-portal:1.1-SNAPSHOT
     container_name: demo-mall-portal
@@ -25,3 +27,4 @@ services:
       - mall-redis:redis
       - mall-mongo:mongo
       - mall-rabbitmq:rabbit
+      - mall-elasticsearch:es
