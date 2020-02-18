@@ -2505,6 +2505,12 @@ public class PmsProductExample {
             addCriterion("product_category_name not between", value1, value2, "productCategoryName");
             return (Criteria) this;
         }
+
+        public Criteria andProductTreeIdLike(String value) {
+            addCriterion("product_category_tree_id like ", value+"%", "product_category_tree_id");
+            return (Criteria) this;
+        }
+
     }
 
     public static class Criteria extends GeneratedCriteria {

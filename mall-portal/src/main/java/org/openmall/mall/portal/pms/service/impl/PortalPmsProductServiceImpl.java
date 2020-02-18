@@ -4,8 +4,10 @@ import com.github.pagehelper.PageHelper;
 import org.openmall.mall.pms.dao.PmsProductDao;
 import org.openmall.mall.pms.dto.PmsProductQueryParam;
 import org.openmall.mall.pms.dto.PmsProductResult;
+import org.openmall.mall.pms.mapper.PmsProductCategoryMapper;
 import org.openmall.mall.pms.mapper.PmsProductMapper;
 import org.openmall.mall.pms.model.PmsProduct;
+import org.openmall.mall.pms.model.PmsProductCategory;
 import org.openmall.mall.pms.model.PmsProductExample;
 import org.openmall.mall.portal.pms.service.PortalPmsProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ import java.util.List;
 public class PortalPmsProductServiceImpl implements PortalPmsProductService{
     @Autowired
     private PmsProductMapper productMapper;
+
+    @Autowired
+    private PmsProductCategoryMapper productCategoryMapper;
 
     @Autowired
     private PmsProductDao productDao;
@@ -60,7 +65,8 @@ public class PortalPmsProductServiceImpl implements PortalPmsProductService{
             criteria.andBrandIdEqualTo(productQueryParam.getBrandId());
         }
         if (productQueryParam.getProductCategoryId() != null) {
-            criteria.andProductCategoryIdEqualTo(productQueryParam.getProductCategoryId());
+            PmsProductCategory category = productCategoryMapper.selectByPrimaryKey(productQueryParam.getProductCategoryId());
+            criteria.andProductTreeIdLike(category.getTreeId());
         }
         return productMapper.selectByExample(productExample);
     }

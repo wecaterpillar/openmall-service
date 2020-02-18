@@ -13,6 +13,7 @@
     <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="icon" jdbcType="VARCHAR" property="icon" />
     <result column="keywords" jdbcType="VARCHAR" property="keywords" />
+    <result column="parent_tree_id" jdbcType="VARCHAR" property="parentTreeId" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.openmall.mall.pms.model.PmsProductCategory">
     <result column="description" jdbcType="LONGVARCHAR" property="description" />
@@ -77,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, parent_id, name, level, product_count, product_unit, nav_status, show_status,
-    sort, icon, keywords
+    sort, icon, keywords, parent_tree_id
   </sql>
   <sql id="Blob_Column_List">
     description
@@ -182,6 +183,9 @@
       <if test="description != null">
         description,
       </if>
+      <if test="parentTreeId != null">
+        parent_tree_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="parentId != null">
@@ -216,6 +220,9 @@
       </if>
       <if test="description != null">
         #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="parentTreeId != null">
+        #{parentTreeId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -264,6 +271,9 @@
       <if test="record.description != null">
         description = #{record.description,jdbcType=LONGVARCHAR},
       </if>
+      <if test="record.parentTreeId != null">
+        parent_tree_id = #{record.parentTreeId,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -282,7 +292,8 @@
       sort = #{record.sort,jdbcType=INTEGER},
       icon = #{record.icon,jdbcType=VARCHAR},
       keywords = #{record.keywords,jdbcType=VARCHAR},
-      description = #{record.description,jdbcType=LONGVARCHAR}
+      description = #{record.description,jdbcType=LONGVARCHAR},
+      parent_tree_id = #{record.parentTreeId,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -299,7 +310,8 @@
       show_status = #{record.showStatus,jdbcType=INTEGER},
       sort = #{record.sort,jdbcType=INTEGER},
       icon = #{record.icon,jdbcType=VARCHAR},
-      keywords = #{record.keywords,jdbcType=VARCHAR}
+      keywords = #{record.keywords,jdbcType=VARCHAR},
+      parent_tree_id = #{record.parentTreeId,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -340,6 +352,9 @@
       <if test="description != null">
         description = #{description,jdbcType=LONGVARCHAR},
       </if>
+      <if test="record.parentTreeId != null">
+        parent_tree_id = #{record.parentTreeId,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -355,6 +370,7 @@
       sort = #{sort,jdbcType=INTEGER},
       icon = #{icon,jdbcType=VARCHAR},
       keywords = #{keywords,jdbcType=VARCHAR},
+      parent_tree_id = #{record.parentTreeId,jdbcType=VARCHAR},
       description = #{description,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -369,7 +385,8 @@
       show_status = #{showStatus,jdbcType=INTEGER},
       sort = #{sort,jdbcType=INTEGER},
       icon = #{icon,jdbcType=VARCHAR},
-      keywords = #{keywords,jdbcType=VARCHAR}
+      keywords = #{keywords,jdbcType=VARCHAR},
+      parent_tree_id = #{record.parentTreeId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

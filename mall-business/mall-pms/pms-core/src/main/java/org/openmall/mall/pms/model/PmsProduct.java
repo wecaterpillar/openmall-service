@@ -20,6 +20,9 @@ public class PmsProduct implements Serializable {
     @ApiModelProperty(value = "分类id")
     private Long productCategoryId;
 
+    @ApiModelProperty(value = "分类树id")
+    private String productCategoryTreeId;
+
     @ApiModelProperty(value = "运费模版id")
     private Long feightTemplateId;
 

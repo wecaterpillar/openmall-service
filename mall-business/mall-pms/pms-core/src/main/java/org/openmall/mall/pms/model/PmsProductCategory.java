@@ -47,6 +47,17 @@ public class PmsProductCategory implements Serializable {
     @ApiModelProperty(value = "描述")
     private String description;
 
+    @ApiModelProperty(value = "父树分类")
+    private String parentTreeId;
+
+    @ApiModelProperty(value = "树分类,格式 [parentTreeId:id] ")
+    public String getTreeId(){
+        if(parentId==null || parentId==0){
+            return this.getId()+":";
+        }
+        return parentTreeId+this.getId()+":";
+    }
+
     private static final long serialVersionUID = 1L;
 
 }

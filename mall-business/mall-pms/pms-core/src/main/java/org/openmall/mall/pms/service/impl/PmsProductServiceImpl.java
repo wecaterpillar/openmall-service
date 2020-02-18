@@ -36,6 +36,8 @@ public class PmsProductServiceImpl implements PmsProductService {
     @Autowired
     private PmsProductMapper productMapper;
     @Autowired
+    private PmsProductCategoryMapper productCategoryMapper;
+    @Autowired
     private PmsMemberPriceDao memberPriceDao;
     @Autowired
     private PmsMemberPriceMapper memberPriceMapper;
@@ -71,6 +73,9 @@ public class PmsProductServiceImpl implements PmsProductService {
     @Override
     public int create(PmsProductParam productParam) {
         int count;
+
+        setProductCategoryTreeId(productParam);
+
         //创建商品
         PmsProduct product = productParam;
         product.setId(null);
@@ -95,6 +100,11 @@ public class PmsProductServiceImpl implements PmsProductService {
         relateAndInsertList(prefrenceAreaProductRelationDao, productParam.getPrefrenceAreaProductRelationList(), productId);
         count = 1;
         return count;
+    }
+
+    private void setProductCategoryTreeId(PmsProductParam productParam) {
+        PmsProductCategory productCategory = productCategoryMapper.selectByPrimaryKey(productParam.getProductCategoryId());
+        productParam.setProductCategoryTreeId(productCategory.getTreeId());
     }
 
     private void handleSkuStockCode(List<PmsSkuStock> skuStockList, Long productId) {
@@ -124,6 +134,7 @@ public class PmsProductServiceImpl implements PmsProductService {
     public int update(Long id, PmsProductParam productParam) {
         int count;
         //更新商品信息
+        setProductCategoryTreeId(productParam);
         PmsProduct product = productParam;
         product.setId(id);
         productMapper.updateByPrimaryKeySelective(product);
