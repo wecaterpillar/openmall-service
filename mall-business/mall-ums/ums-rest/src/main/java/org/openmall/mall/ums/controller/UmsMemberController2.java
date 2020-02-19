@@ -9,18 +9,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.openmall.mall.common.annotation.SysLog;
 import org.openmall.mall.common.api.CommonResult;
 import org.openmall.mall.ums.model.UmsMember;
-import org.openmall.mall.ums.service.UmsMemberLevelService;
-import org.openmall.mall.ums.service.UmsMemberService;
+import org.openmall.mall.ums.service.UmsMemberService2;
 import org.openmall.mall.validator.ValidatorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,11 +25,11 @@ import java.util.List;
 @RestController
 @Api(tags = "UmsMemberController", description = "会员管理")
 @RequestMapping("/ums/member")
-public class UmsMemberController {
+public class UmsMemberController2 {
 
 
     @Autowired
-    private UmsMemberService memberService;
+    private UmsMemberService2 memberService;
 
     @SysLog(MODULE = "ums", REMARK = "根据条件查询所有会员表列表")
     @ApiOperation("根据条件查询所有会员表列表")

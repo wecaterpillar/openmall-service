@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 会员管理Service
  */
-public interface UmsMemberService extends IBaseService<UmsMember> {
+public interface UmsMemberService2 extends IBaseService<UmsMember> {
 
     void updataMemberOrderInfo();
 
