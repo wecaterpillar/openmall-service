@@ -43,6 +43,7 @@
         WHERE
             hp.recommend_status = 1
             AND p.publish_status = 1
+            AND p.delete_status = 0
         ORDER BY
             hp.sort DESC
         LIMIT #{offset}, #{limit};
@@ -56,6 +57,7 @@
         WHERE
             hp.recommend_status = 1
             AND p.publish_status = 1
+            AND p.delete_status = 0
         ORDER BY
             hp.sort DESC
         LIMIT #{offset}, #{limit};
