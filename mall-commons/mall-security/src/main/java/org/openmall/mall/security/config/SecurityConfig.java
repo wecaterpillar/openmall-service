@@ -20,6 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 /**
  * 对SpringSecurity的配置的扩展，支持自定义白名单资源路径和查询用户逻辑
  */
+@SuppressWarnings("ALL")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -52,6 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 自定义权限拦截器JWT过滤器
                 .and()
                 .addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+
     }
 
     @Override
@@ -95,5 +97,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public JwtTokenUtil jwtTokenUtil() {
         return new JwtTokenUtil();
     }
+
 
 }

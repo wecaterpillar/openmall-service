@@ -1,8 +1,9 @@
 package org.openmall.mall.ums.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.openmall.mall.ums.mapper.UmsMemberMapper;
 import org.openmall.mall.ums.model.UmsMember;
-import org.openmall.mall.ums.service.UmsMemberService2;
+import org.openmall.mall.ums.service.UmsMemberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +15,14 @@ import java.util.List;
  * 会员管理Service实现类
  */
 @Service
-public class UmsMemberService2Impl implements UmsMemberService2 {
-    private static final Logger LOGGER = LoggerFactory.getLogger(UmsMemberService2Impl.class);
+public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember> implements UmsMemberService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(UmsMemberServiceImpl.class);
 
     @Autowired
     private UmsMemberMapper memberMapper;
 
-
-    public List<UmsMember> listAll(){
-        return memberMapper.selectByExample(null);
+    @Override
+    public void updataMemberOrderInfo() {
+        // TODO
     }
-
 }

@@ -88,6 +88,25 @@ public class CommonResult<T> {
         return new CommonResult<T>(ResultCode.FORBIDDEN.getCode(), ResultCode.FORBIDDEN.getMessage(), data);
     }
 
+    //// add
+    /**
+     * 成功返回结果
+     *
+     */
+    public static  CommonResult<String> success() {
+        return new CommonResult(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getMessage(), null);
+    }
+
+    /**
+     * 参数验证失败返回结果
+     */
+    public static <T> CommonResult<T> paramFailed(String message) {
+        return new CommonResult(ResultCode.VALIDATE_FAILED.getCode(), message, null);
+    }
+
+
+
+
     public long getCode() {
         return code;
     }

@@ -1,6 +1,6 @@
 package org.openmall.mall.ums.service.impl;
 
-import org.openmall.mall.common.service.impl.BaseServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.openmall.mall.ums.mapper.UmsMemberLevelMapper;
 import org.openmall.mall.ums.model.UmsMemberLevel;
 import org.openmall.mall.ums.model.UmsMemberLevelExample;
@@ -14,7 +14,7 @@ import java.util.List;
  * 会员等级管理Service实现类
  */
 @Service
-public class UmsMemberLevelServiceImpl extends BaseServiceImpl<UmsMemberLevelMapper,UmsMemberLevel> implements UmsMemberLevelService{
+public class UmsMemberLevelServiceImpl extends ServiceImpl<UmsMemberLevelMapper,UmsMemberLevel> implements UmsMemberLevelService{
     @Autowired
     private UmsMemberLevelMapper memberLevelMapper;
     @Override

@@ -1,11 +1,13 @@
 package org.openmall.mall.ums.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.openmall.mall.ums.model.UmsMember;
 import org.openmall.mall.ums.model.UmsMemberExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface UmsMemberMapper {
+public interface UmsMemberMapper extends BaseMapper<UmsMember> {
+
     long countByExample(UmsMemberExample example);
 
     int deleteByExample(UmsMemberExample example);

@@ -15,10 +15,12 @@ import javax.annotation.Resource;
 
 /**
  * mall-security模块相关配置
+ *
+ * TODO 开发关闭URL权限检车 prePostEnabled=false
  */
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled=true)
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled=false)
 public class MallSecurityConfig extends SecurityConfig {
 
     @Autowired
