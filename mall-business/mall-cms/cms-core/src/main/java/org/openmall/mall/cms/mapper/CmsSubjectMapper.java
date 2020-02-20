@@ -1,11 +1,12 @@
 package org.openmall.mall.cms.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.openmall.mall.cms.model.CmsSubject;
 import org.openmall.mall.cms.model.CmsSubjectExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface CmsSubjectMapper {
+public interface CmsSubjectMapper extends BaseMapper<CmsSubject> {
     long countByExample(CmsSubjectExample example);
 
     int deleteByExample(CmsSubjectExample example);
