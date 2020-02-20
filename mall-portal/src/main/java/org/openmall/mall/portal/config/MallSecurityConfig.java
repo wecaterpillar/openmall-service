@@ -1,6 +1,6 @@
 package org.openmall.mall.portal.config;
 
-import org.openmall.mall.portal.ums.service.UmsMemberService;
+import org.openmall.mall.portal.ums.service.UmsMemberLoginService;
 import org.openmall.mall.security.config.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +18,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public class MallSecurityConfig extends SecurityConfig {
 
     @Autowired
-    private UmsMemberService memberService;
+    private UmsMemberLoginService memberService;
 
     @Bean
     public UserDetailsService userDetailsService() {

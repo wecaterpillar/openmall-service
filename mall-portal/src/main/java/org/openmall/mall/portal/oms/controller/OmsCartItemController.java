@@ -5,7 +5,7 @@ import org.openmall.mall.oms.model.OmsCartItem;
 import org.openmall.mall.portal.oms.domain.CartProduct;
 import org.openmall.mall.portal.oms.domain.CartPromotionItem;
 import org.openmall.mall.portal.oms.service.OmsCartItemService;
-import org.openmall.mall.portal.ums.service.UmsMemberService;
+import org.openmall.mall.portal.ums.service.UmsMemberLoginService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class OmsCartItemController {
     @Autowired
     private OmsCartItemService cartItemService;
     @Autowired
-    private UmsMemberService memberService;
+    private UmsMemberLoginService memberService;
 
     @ApiOperation("添加商品到购物车")
     @RequestMapping(value = "/add", method = RequestMethod.POST)

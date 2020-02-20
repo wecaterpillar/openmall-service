@@ -21,13 +21,14 @@ import org.openmall.mall.portal.oms.service.OmsCartItemService;
 import org.openmall.mall.portal.ums.domain.SmsCouponHistoryDetail;
 import org.openmall.mall.portal.ums.service.UmsMemberCouponService;
 import org.openmall.mall.portal.ums.service.UmsMemberReceiveAddressService;
-import org.openmall.mall.portal.ums.service.UmsMemberService;
+import org.openmall.mall.portal.ums.service.UmsMemberLoginService;
 import org.openmall.mall.sms.mapper.SmsCouponHistoryMapper;
 import org.openmall.mall.sms.model.*;
 import org.openmall.mall.ums.mapper.UmsIntegrationConsumeSettingMapper;
 import org.openmall.mall.ums.model.UmsIntegrationConsumeSetting;
 import org.openmall.mall.ums.model.UmsMember;
 import org.openmall.mall.ums.model.UmsMemberReceiveAddress;
+import org.openmall.mall.ums.service.UmsMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,8 @@ import java.util.*;
  */
 @Service
 public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
+    @Autowired
+    private UmsMemberLoginService memberLoginService;
     @Autowired
     private UmsMemberService memberService;
     @Autowired
@@ -80,7 +83,7 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
     public ConfirmOrderResult generateConfirmOrder() {
         ConfirmOrderResult result = new ConfirmOrderResult();
         //获取购物车信息
-        UmsMember currentMember = memberService.getCurrentMember();
+        UmsMember currentMember = memberLoginService.getCurrentMember();
         List<CartPromotionItem> cartPromotionItemList = cartItemService.listPromotion(currentMember.getId());
         result.setCartPromotionItemList(cartPromotionItemList);
         //获取用户收货地址列表
@@ -104,7 +107,7 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
     public CommonResult generateOrder(OrderParam orderParam) {
         List<OmsOrderItem> orderItemList = new ArrayList<>();
         //获取购物车及优惠信息
-        UmsMember currentMember = memberService.getCurrentMember();
+        UmsMember currentMember = memberLoginService.getCurrentMember();
         List<CartPromotionItem> cartPromotionItemList = cartItemService.listPromotion(currentMember.getId());
         for (CartPromotionItem cartPromotionItem : cartPromotionItemList) {
             //生成下单商品信息

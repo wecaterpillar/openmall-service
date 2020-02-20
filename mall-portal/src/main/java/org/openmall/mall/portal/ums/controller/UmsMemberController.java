@@ -2,10 +2,11 @@ package org.openmall.mall.portal.ums.controller;
 
 import org.openmall.mall.common.api.CommonResult;
 import org.openmall.mall.portal.ums.domain.MemberDto;
-import org.openmall.mall.portal.ums.service.UmsMemberService;
+import org.openmall.mall.portal.ums.service.UmsMemberLoginService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.openmall.mall.ums.model.UmsMember;
+import org.openmall.mall.ums.service.UmsMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,9 @@ public class UmsMemberController {
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
+
+    @Autowired
+    private UmsMemberLoginService memberLoginService;
     @Autowired
     private UmsMemberService memberService;
 
@@ -39,7 +43,11 @@ public class UmsMemberController {
                                  @RequestParam String password,
                                  @RequestParam String telephone,
                                  @RequestParam String authCode) {
-        return memberService.register(username, password, telephone, authCode);
+        //验证验证码
+        if(!memberLoginService.verifyAuthCode(authCode,telephone)){
+            return CommonResult.failed("验证码错误");
+        }
+        return memberService.register(username, password, telephone);
     }
 
     @ApiOperation("会员登录")
@@ -47,7 +55,7 @@ public class UmsMemberController {
     @ResponseBody
     public CommonResult login(@RequestParam String username,
                               @RequestParam String password) {
-        String token = memberService.login(username, password);
+        String token = memberLoginService.login(username, password);
         if (token == null) {
             return CommonResult.validateFailed("用户名或密码错误");
         }
@@ -61,7 +69,7 @@ public class UmsMemberController {
     @RequestMapping(value = "/getAuthCode", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult getAuthCode(@RequestParam String telephone) {
-        return memberService.generateAuthCode(telephone);
+        return memberLoginService.generateAuthCode(telephone);
     }
 
     @ApiOperation("修改密码")
@@ -70,14 +78,18 @@ public class UmsMemberController {
     public CommonResult updatePassword(@RequestParam String telephone,
                                  @RequestParam String password,
                                  @RequestParam String authCode) {
-        return memberService.updatePassword(telephone,password,authCode);
+        //验证验证码
+        if(!memberLoginService.verifyAuthCode(authCode,telephone)){
+            return CommonResult.failed("验证码错误");
+        }
+        return memberService.updatePassword(telephone,password);
     }
 
     @ApiOperation("当前用户信息")
     @RequestMapping(value = "/current", method = RequestMethod.GET)
     @ResponseBody
     public MemberDto getCurrent(){
-        final UmsMember currentMember = memberService.getCurrentMember();
+        final UmsMember currentMember = memberLoginService.getCurrentMember();
         MemberDto member = new MemberDto();
         member.setId(currentMember.getId());
         member.setUsername(currentMember.getUsername());
@@ -93,7 +105,7 @@ public class UmsMemberController {
     @ResponseBody
     public CommonResult refreshToken(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
-        String refreshToken = memberService.refreshToken(token);
+        String refreshToken = memberLoginService.refreshToken(token);
         if (refreshToken == null) {
             return CommonResult.failed("token已经过期！");
         }

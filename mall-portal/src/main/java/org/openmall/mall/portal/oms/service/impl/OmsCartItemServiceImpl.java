@@ -9,7 +9,7 @@ import org.openmall.mall.ums.model.UmsMember;
 import org.openmall.mall.portal.home.dao.PortalProductDao;
 import org.openmall.mall.portal.oms.domain.CartProduct;
 import org.openmall.mall.portal.oms.domain.CartPromotionItem;
-import org.openmall.mall.portal.ums.service.UmsMemberService;
+import org.openmall.mall.portal.ums.service.UmsMemberLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -31,7 +31,7 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
     @Autowired
     private OmsPromotionService promotionService;
     @Autowired
-    private UmsMemberService memberService;
+    private UmsMemberLoginService memberService;
 
     @Override
     public int add(OmsCartItem cartItem) {

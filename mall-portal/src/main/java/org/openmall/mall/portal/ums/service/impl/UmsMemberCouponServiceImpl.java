@@ -2,7 +2,7 @@ package org.openmall.mall.portal.ums.service.impl;
 
 import org.openmall.mall.common.api.CommonResult;
 import org.openmall.mall.portal.oms.domain.CartPromotionItem;
-import org.openmall.mall.portal.ums.service.UmsMemberService;
+import org.openmall.mall.portal.ums.service.UmsMemberLoginService;
 import org.openmall.mall.sms.mapper.SmsCouponHistoryMapper;
 import org.openmall.mall.sms.mapper.SmsCouponMapper;
 import org.openmall.mall.portal.ums.dao.SmsCouponHistoryDao;
@@ -22,7 +22,7 @@ import java.util.*;
 @Service
 public class UmsMemberCouponServiceImpl implements UmsMemberCouponService {
     @Autowired
-    private UmsMemberService memberService;
+    private UmsMemberLoginService memberService;
     @Autowired
     private SmsCouponMapper couponMapper;
     @Autowired

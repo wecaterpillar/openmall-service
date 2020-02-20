@@ -3,8 +3,9 @@ package org.openmall.mall.sys.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
-import org.openmall.mall.sys.bo.AdminUserDetails;
 import org.openmall.mall.security.util.JwtTokenUtil;
+import org.openmall.mall.security.util.SecurityUtil;
+import org.openmall.mall.sys.bo.AdminUserDetails;
 import org.openmall.mall.sys.dao.UmsAdminPermissionRelationDao;
 import org.openmall.mall.sys.dao.UmsAdminRoleRelationDao;
 import org.openmall.mall.sys.dto.UmsAdminParam;
@@ -20,9 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -101,8 +100,7 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             if(!passwordEncoder.matches(password,userDetails.getPassword())){
                 throw new BadCredentialsException("密码不正确");
             }
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            SecurityUtil.setCurrentUserDetails(userDetails);
             token = jwtTokenUtil.generateToken(userDetails);
 //            updateLoginTimeByUsername(username);
             insertLoginLog(username);

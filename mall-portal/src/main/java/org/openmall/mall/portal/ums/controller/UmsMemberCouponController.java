@@ -2,7 +2,7 @@ package org.openmall.mall.portal.ums.controller;
 
 import org.openmall.mall.common.api.CommonResult;
 import org.openmall.mall.portal.ums.service.UmsMemberCouponService;
-import org.openmall.mall.portal.ums.service.UmsMemberService;
+import org.openmall.mall.portal.ums.service.UmsMemberLoginService;
 import org.openmall.mall.sms.model.SmsCouponHistory;
 import org.openmall.mall.portal.oms.domain.CartPromotionItem;
 import org.openmall.mall.portal.ums.domain.SmsCouponHistoryDetail;
@@ -28,7 +28,7 @@ public class UmsMemberCouponController {
     @Autowired
     private OmsCartItemService cartItemService;
     @Autowired
-    private UmsMemberService memberService;
+    private UmsMemberLoginService memberService;
 
     @ApiOperation("领取指定优惠券")
     @RequestMapping(value = "/add/{couponId}", method = RequestMethod.POST)

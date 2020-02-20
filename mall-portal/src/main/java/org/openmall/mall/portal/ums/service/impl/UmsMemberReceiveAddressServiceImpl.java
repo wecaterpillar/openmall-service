@@ -1,7 +1,7 @@
 package org.openmall.mall.portal.ums.service.impl;
 
 import org.openmall.mall.portal.ums.service.UmsMemberReceiveAddressService;
-import org.openmall.mall.portal.ums.service.UmsMemberService;
+import org.openmall.mall.portal.ums.service.UmsMemberLoginService;
 import org.openmall.mall.ums.mapper.UmsMemberReceiveAddressMapper;
 import org.openmall.mall.ums.model.UmsMember;
 import org.openmall.mall.ums.model.UmsMemberReceiveAddress;
@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class UmsMemberReceiveAddressServiceImpl implements UmsMemberReceiveAddressService {
     @Autowired
-    private UmsMemberService memberService;
+    private UmsMemberLoginService memberService;
     @Autowired
     private UmsMemberReceiveAddressMapper addressMapper;
     @Override

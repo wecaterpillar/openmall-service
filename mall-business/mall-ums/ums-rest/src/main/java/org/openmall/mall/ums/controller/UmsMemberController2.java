@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.openmall.mall.common.annotation.SysLog;
 import org.openmall.mall.common.api.CommonResult;
 import org.openmall.mall.ums.model.UmsMember;
-import org.openmall.mall.ums.service.UmsMemberService2;
+import org.openmall.mall.ums.service.UmsMemberService;
 import org.openmall.mall.validator.ValidatorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,7 +29,7 @@ public class UmsMemberController2 {
 
 
     @Autowired
-    private UmsMemberService2 memberService;
+    private UmsMemberService memberService;
 
     @SysLog(MODULE = "ums", REMARK = "根据条件查询所有会员表列表")
     @ApiOperation("根据条件查询所有会员表列表")
