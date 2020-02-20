@@ -1,5 +1,6 @@
 package org.openmall.mall.pms.mapper;
 
+import org.openmall.mall.pms.model.PmsProductAttribute;
 import org.openmall.mall.pms.model.PmsProductCategory;
 import org.openmall.mall.pms.model.PmsProductCategoryExample;
 import java.util.List;
@@ -33,4 +34,6 @@ public interface PmsProductCategoryMapper {
     int updateByPrimaryKeyWithBLOBs(PmsProductCategory record);
 
     int updateByPrimaryKey(PmsProductCategory record);
+
+    List<PmsProductAttribute> listAttributes(Long id);
 }

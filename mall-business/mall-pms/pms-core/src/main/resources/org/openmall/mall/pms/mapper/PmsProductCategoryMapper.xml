@@ -232,6 +232,12 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  <select id="listAttributes" parameterType="java.lang.Long" resultType="org.openmall.mall.pms.model.PmsProductAttribute">
+    select a.`name`, a.id
+    FROM pms_product_attribute a join pms_product_category_attribute_relation r
+    on a.id=r.product_attribute_id
+    where r.product_category_id=#{id,jdbcType=BIGINT}
+  </select>
   <update id="updateByExampleSelective" parameterType="map">
     update pms_product_category
     <set>

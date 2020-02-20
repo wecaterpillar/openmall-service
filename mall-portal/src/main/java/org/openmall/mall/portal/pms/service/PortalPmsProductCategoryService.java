@@ -1,6 +1,8 @@
 package org.openmall.mall.portal.pms.service;
 
 import org.openmall.mall.pms.dto.PmsProductCategoryWithChildrenItem;
+import org.openmall.mall.pms.model.PmsProductAttribute;
+import org.openmall.mall.pms.model.PmsProductAttributeValue;
 import org.openmall.mall.pms.model.PmsProductCategory;
 
 import java.util.List;
@@ -12,4 +14,5 @@ public interface PortalPmsProductCategoryService {
     PmsProductCategory getCategoryById(long id);
     List<PmsProductCategory> getList(Long parentId, Integer pageSize, Integer pageNum);
     List<PmsProductCategoryWithChildrenItem> listWithChildren();
+    List<PmsProductAttribute> listAttributes(Long id);
 }

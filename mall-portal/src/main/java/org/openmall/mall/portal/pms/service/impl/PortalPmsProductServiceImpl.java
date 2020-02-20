@@ -21,6 +21,7 @@ import java.util.List;
  */
 @Service
 public class PortalPmsProductServiceImpl implements PortalPmsProductService{
+    private static final String FIELD_PRICE = "price";
     @Autowired
     private PmsProductMapper productMapper;
 
@@ -43,7 +44,7 @@ public class PortalPmsProductServiceImpl implements PortalPmsProductService{
     }
 
     @Override
-    public List<PmsProduct> list(PmsProductQueryParam productQueryParam, Integer pageSize, Integer pageNum) {
+    public List<PmsProduct> list(PmsProductQueryParam productQueryParam, String sortField, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
         PmsProductExample productExample = new PmsProductExample();
         PmsProductExample.Criteria criteria = productExample.createCriteria();
@@ -70,6 +71,18 @@ public class PortalPmsProductServiceImpl implements PortalPmsProductService{
                 criteria.andProductTreeIdLike(category.getTreeId());
             }
         }
+
+
+        if((null!=sortField) && (sortField.length()>1))  {
+            char sortType = sortField.charAt(0);
+            if('+'==sortType ||'-'==sortType){
+                sortField=sortField.substring(1);
+            }
+
+            if(FIELD_PRICE.equals(sortField)) {
+                productExample.setOrderByClause("price " + (sortType=='-'?"desc":""));
+            }
+    }
         return productMapper.selectByExample(productExample);
     }
 

@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import org.openmall.mall.pms.dao.PmsProductCategoryDao;
 import org.openmall.mall.pms.dto.PmsProductCategoryWithChildrenItem;
 import org.openmall.mall.pms.mapper.PmsProductCategoryMapper;
+import org.openmall.mall.pms.model.PmsProductAttribute;
 import org.openmall.mall.pms.model.PmsProductCategory;
 import org.openmall.mall.pms.model.PmsProductCategoryExample;
 import org.openmall.mall.portal.pms.service.PortalPmsProductCategoryService;
@@ -31,12 +32,17 @@ public class PortalPmsProductCategoryServiceImpl implements PortalPmsProductCate
     public List<PmsProductCategory> getList(Long parentId, Integer pageSize, Integer pageNum){
         PageHelper.startPage(pageNum, pageSize);
         PmsProductCategoryExample example = new PmsProductCategoryExample();
-        example.setOrderByClause("sort desc");
+
         example.createCriteria().andParentIdEqualTo(parentId);
         return productCategoryMapper.selectByExample(example);
     }
 
     public List<PmsProductCategoryWithChildrenItem> listWithChildren() {
         return productCategoryDao.listWithChildren();
+    }
+
+    @Override
+    public List<PmsProductAttribute> listAttributes(Long id) {
+        return productCategoryMapper.listAttributes(id);
     }
 }

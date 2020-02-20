@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiOperation;
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
 import org.openmall.mall.pms.dto.PmsProductCategoryWithChildrenItem;
+import org.openmall.mall.pms.model.PmsProductAttribute;
+import org.openmall.mall.pms.model.PmsProductAttributeValue;
 import org.openmall.mall.pms.model.PmsProductCategory;
 import org.openmall.mall.portal.pms.service.PortalPmsProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,7 @@ public class PortalPmsProductCategoryController {
     @RequestMapping(value = "/list/{parentId}", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<CommonPage<PmsProductCategory>> getList(@PathVariable Long parentId,
+
                                                                 @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                                 @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<PmsProductCategory> productCategoryList = productCategoryService.getList(parentId, pageSize, pageNum);
@@ -38,6 +41,14 @@ public class PortalPmsProductCategoryController {
     @ResponseBody
     public CommonResult<List<PmsProductCategoryWithChildrenItem>> listWithChildren() {
         List<PmsProductCategoryWithChildrenItem> list = productCategoryService.listWithChildren();
+        return CommonResult.success(list);
+    }
+
+    @ApiOperation("查询分类属性")
+    @RequestMapping(value = "/attrList/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<List<PmsProductAttribute>> listAttributes(@PathVariable Long id) {
+        List<PmsProductAttribute> list = productCategoryService.listAttributes(id);
         return CommonResult.success(list);
     }
 }

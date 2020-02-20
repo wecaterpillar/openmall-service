@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface PortalPmsProductService {
     List<PmsProduct> list(String keyword);
-    List<PmsProduct> list(PmsProductQueryParam productQueryParam, Integer pageSize, Integer pageNum);
+    List<PmsProduct> list(PmsProductQueryParam productQueryParam, String sortField, Integer pageSize, Integer pageNum);
     PmsProductResult getProductById(Long id);
 }
