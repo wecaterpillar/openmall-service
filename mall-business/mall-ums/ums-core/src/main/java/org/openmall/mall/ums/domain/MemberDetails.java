@@ -1,4 +1,4 @@
-package org.openmall.mall.portal.ums.domain;
+package org.openmall.mall.ums.domain;
 
 import org.openmall.mall.ums.model.UmsMember;
 import org.springframework.security.core.GrantedAuthority;

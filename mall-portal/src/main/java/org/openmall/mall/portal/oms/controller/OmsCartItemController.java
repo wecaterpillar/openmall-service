@@ -1,13 +1,14 @@
 package org.openmall.mall.portal.oms.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.openmall.mall.common.api.CommonResult;
 import org.openmall.mall.oms.model.OmsCartItem;
 import org.openmall.mall.portal.oms.domain.CartProduct;
 import org.openmall.mall.portal.oms.domain.CartPromotionItem;
 import org.openmall.mall.portal.oms.service.OmsCartItemService;
 import org.openmall.mall.portal.ums.service.UmsMemberLoginService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import org.openmall.mall.ums.util.MemberSecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +24,6 @@ import java.util.List;
 public class OmsCartItemController {
     @Autowired
     private OmsCartItemService cartItemService;
-    @Autowired
-    private UmsMemberLoginService memberService;
 
     @ApiOperation("添加商品到购物车")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -41,7 +40,7 @@ public class OmsCartItemController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<List<OmsCartItem>> list() {
-        List<OmsCartItem> cartItemList = cartItemService.list(memberService.getCurrentMember().getId());
+        List<OmsCartItem> cartItemList = cartItemService.list(MemberSecurityUtil.getCurrentMember().getId());
         return CommonResult.success(cartItemList);
     }
 
@@ -49,7 +48,7 @@ public class OmsCartItemController {
     @RequestMapping(value = "/list/promotion", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<List<CartPromotionItem>> listPromotion() {
-        List<CartPromotionItem> cartPromotionItemList = cartItemService.listPromotion(memberService.getCurrentMember().getId());
+        List<CartPromotionItem> cartPromotionItemList = cartItemService.listPromotion(MemberSecurityUtil.getCurrentMember().getId());
         return CommonResult.success(cartPromotionItemList);
     }
 
@@ -58,7 +57,7 @@ public class OmsCartItemController {
     @ResponseBody
     public CommonResult updateQuantity(@RequestParam Long id,
                                        @RequestParam Integer quantity) {
-        int count = cartItemService.updateQuantity(id, memberService.getCurrentMember().getId(), quantity);
+        int count = cartItemService.updateQuantity(id, MemberSecurityUtil.getCurrentMember().getId(), quantity);
         if (count > 0) {
             return CommonResult.success(count);
         }
@@ -88,7 +87,7 @@ public class OmsCartItemController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult delete(@RequestParam("ids") List<Long> ids) {
-        int count = cartItemService.delete(memberService.getCurrentMember().getId(), ids);
+        int count = cartItemService.delete(MemberSecurityUtil.getCurrentMember().getId(), ids);
         if (count > 0) {
             return CommonResult.success(count);
         }
@@ -99,7 +98,7 @@ public class OmsCartItemController {
     @RequestMapping(value = "/clear", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult clear() {
-        int count = cartItemService.clear(memberService.getCurrentMember().getId());
+        int count = cartItemService.clear(MemberSecurityUtil.getCurrentMember().getId());
         if (count > 0) {
             return CommonResult.success(count);
         }

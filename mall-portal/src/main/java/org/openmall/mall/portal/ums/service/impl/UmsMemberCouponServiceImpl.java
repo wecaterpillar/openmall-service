@@ -10,6 +10,7 @@ import org.openmall.mall.portal.ums.domain.SmsCouponHistoryDetail;
 import org.openmall.mall.portal.ums.service.UmsMemberCouponService;
 import org.openmall.mall.sms.model.*;
 import org.openmall.mall.ums.model.UmsMember;
+import org.openmall.mall.ums.util.MemberSecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,7 @@ import java.util.*;
  */
 @Service
 public class UmsMemberCouponServiceImpl implements UmsMemberCouponService {
-    @Autowired
-    private UmsMemberLoginService memberService;
+
     @Autowired
     private SmsCouponMapper couponMapper;
     @Autowired
@@ -31,7 +31,7 @@ public class UmsMemberCouponServiceImpl implements UmsMemberCouponService {
     private SmsCouponHistoryDao couponHistoryDao;
     @Override
     public CommonResult add(Long couponId) {
-        UmsMember currentMember = memberService.getCurrentMember();
+        UmsMember currentMember = MemberSecurityUtil.getCurrentMember();
         //获取优惠券信息，判断数量
         SmsCoupon coupon = couponMapper.selectByPrimaryKey(couponId);
         if(coupon==null){
@@ -92,7 +92,7 @@ public class UmsMemberCouponServiceImpl implements UmsMemberCouponService {
 
     @Override
     public List<SmsCouponHistory> list(Integer useStatus) {
-        UmsMember currentMember = memberService.getCurrentMember();
+        UmsMember currentMember = MemberSecurityUtil.getCurrentMember();
         SmsCouponHistoryExample couponHistoryExample=new SmsCouponHistoryExample();
         SmsCouponHistoryExample.Criteria criteria = couponHistoryExample.createCriteria();
         criteria.andMemberIdEqualTo(currentMember.getId());
@@ -103,7 +103,7 @@ public class UmsMemberCouponServiceImpl implements UmsMemberCouponService {
     }
 
     public List<SmsCouponHistoryDetail> listCart(List<CartPromotionItem> cartItemList, Integer type) {
-        UmsMember currentMember = memberService.getCurrentMember();
+        UmsMember currentMember = MemberSecurityUtil.getCurrentMember();
         Date now = new Date();
         //获取该用户所有优惠券
         List<SmsCouponHistoryDetail> allList = couponHistoryDao.getDetailList(currentMember.getId());

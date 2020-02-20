@@ -2,7 +2,7 @@ package org.openmall.mall.portal.ums.service.impl;
 
 import org.openmall.mall.common.api.CommonResult;
 import org.openmall.mall.common.service.RedisService;
-import org.openmall.mall.portal.ums.domain.MemberDetails;
+import org.openmall.mall.ums.domain.MemberDetails;
 import org.openmall.mall.portal.ums.service.UmsMemberLoginService;
 import org.openmall.mall.security.util.JwtTokenUtil;
 import org.openmall.mall.security.util.SecurityUtil;

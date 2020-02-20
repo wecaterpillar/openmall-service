@@ -1,4 +1,4 @@
-package org.openmall.mall.portal.ums.service;
+package org.openmall.mall.ums.service;
 
 import org.openmall.mall.ums.model.UmsMemberReceiveAddress;
 

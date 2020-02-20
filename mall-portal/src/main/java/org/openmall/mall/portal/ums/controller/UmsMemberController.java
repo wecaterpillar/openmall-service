@@ -1,12 +1,13 @@
 package org.openmall.mall.portal.ums.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.openmall.mall.common.api.CommonResult;
 import org.openmall.mall.portal.ums.domain.MemberDto;
 import org.openmall.mall.portal.ums.service.UmsMemberLoginService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.openmall.mall.ums.model.UmsMember;
 import org.openmall.mall.ums.service.UmsMemberService;
+import org.openmall.mall.ums.util.MemberSecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -89,7 +90,7 @@ public class UmsMemberController {
     @RequestMapping(value = "/current", method = RequestMethod.GET)
     @ResponseBody
     public MemberDto getCurrent(){
-        final UmsMember currentMember = memberLoginService.getCurrentMember();
+        final UmsMember currentMember = MemberSecurityUtil.getCurrentMember();
         MemberDto member = new MemberDto();
         member.setId(currentMember.getId());
         member.setUsername(currentMember.getUsername());

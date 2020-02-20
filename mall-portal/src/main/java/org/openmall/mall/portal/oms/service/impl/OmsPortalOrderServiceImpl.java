@@ -2,26 +2,26 @@ package org.openmall.mall.portal.oms.service.impl;
 
 import org.openmall.mall.common.api.CommonResult;
 import org.openmall.mall.common.service.RedisService;
-import org.openmall.mall.portal.oms.domain.CartPromotionItem;
-import org.openmall.mall.portal.oms.domain.ConfirmOrderResult;
 import org.openmall.mall.oms.mapper.OmsOrderItemMapper;
 import org.openmall.mall.oms.mapper.OmsOrderMapper;
 import org.openmall.mall.oms.mapper.OmsOrderSettingMapper;
 import org.openmall.mall.oms.model.*;
-import org.openmall.mall.portal.oms.service.OmsPortalOrderService;
 import org.openmall.mall.pms.mapper.PmsSkuStockMapper;
 import org.openmall.mall.pms.model.PmsSkuStock;
 import org.openmall.mall.portal.component.CancelOrderSender;
 import org.openmall.mall.portal.oms.dao.PortalOrderDao;
 import org.openmall.mall.portal.oms.dao.PortalOrderItemDao;
-import org.openmall.mall.portal.ums.dao.SmsCouponHistoryDao;
+import org.openmall.mall.portal.oms.domain.CartPromotionItem;
+import org.openmall.mall.portal.oms.domain.ConfirmOrderResult;
 import org.openmall.mall.portal.oms.domain.OmsOrderDetail;
 import org.openmall.mall.portal.oms.domain.OrderParam;
 import org.openmall.mall.portal.oms.service.OmsCartItemService;
+import org.openmall.mall.portal.oms.service.OmsPortalOrderService;
+import org.openmall.mall.portal.ums.dao.SmsCouponHistoryDao;
 import org.openmall.mall.portal.ums.domain.SmsCouponHistoryDetail;
 import org.openmall.mall.portal.ums.service.UmsMemberCouponService;
-import org.openmall.mall.portal.ums.service.UmsMemberReceiveAddressService;
 import org.openmall.mall.portal.ums.service.UmsMemberLoginService;
+import org.openmall.mall.ums.service.UmsMemberReceiveAddressService;
 import org.openmall.mall.sms.mapper.SmsCouponHistoryMapper;
 import org.openmall.mall.sms.model.*;
 import org.openmall.mall.ums.mapper.UmsIntegrationConsumeSettingMapper;
@@ -29,6 +29,7 @@ import org.openmall.mall.ums.model.UmsIntegrationConsumeSetting;
 import org.openmall.mall.ums.model.UmsMember;
 import org.openmall.mall.ums.model.UmsMemberReceiveAddress;
 import org.openmall.mall.ums.service.UmsMemberService;
+import org.openmall.mall.ums.util.MemberSecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -83,7 +84,7 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
     public ConfirmOrderResult generateConfirmOrder() {
         ConfirmOrderResult result = new ConfirmOrderResult();
         //获取购物车信息
-        UmsMember currentMember = memberLoginService.getCurrentMember();
+        UmsMember currentMember = MemberSecurityUtil.getCurrentMember();
         List<CartPromotionItem> cartPromotionItemList = cartItemService.listPromotion(currentMember.getId());
         result.setCartPromotionItemList(cartPromotionItemList);
         //获取用户收货地址列表
@@ -107,7 +108,7 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
     public CommonResult generateOrder(OrderParam orderParam) {
         List<OmsOrderItem> orderItemList = new ArrayList<>();
         //获取购物车及优惠信息
-        UmsMember currentMember = memberLoginService.getCurrentMember();
+        UmsMember currentMember = MemberSecurityUtil.getCurrentMember();
         List<CartPromotionItem> cartPromotionItemList = cartItemService.listPromotion(currentMember.getId());
         for (CartPromotionItem cartPromotionItem : cartPromotionItemList) {
             //生成下单商品信息
