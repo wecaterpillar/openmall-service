@@ -1,11 +1,12 @@
 package org.openmall.mall.cms.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.openmall.mall.cms.model.CmsPrefrenceArea;
 import org.openmall.mall.cms.model.CmsPrefrenceAreaExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface CmsPrefrenceAreaMapper {
+public interface CmsPrefrenceAreaMapper extends BaseMapper<CmsPrefrenceArea> {
     long countByExample(CmsPrefrenceAreaExample example);
 
     int deleteByExample(CmsPrefrenceAreaExample example);

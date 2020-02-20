@@ -21,9 +21,6 @@ import java.util.List;
  * <p>
  * 专题分类表
  * </p>
- *
- * @author zscat
- * @since 2019-04-19
  */
 @Slf4j
 @RestController
