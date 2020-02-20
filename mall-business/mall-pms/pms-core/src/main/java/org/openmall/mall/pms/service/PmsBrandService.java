@@ -1,5 +1,6 @@
 package org.openmall.mall.pms.service;
 
+import org.openmall.mall.common.service.IBaseService;
 import org.openmall.mall.pms.dto.PmsBrandParam;
 import org.openmall.mall.pms.model.PmsBrand;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * 商品品牌Service
  */
-public interface PmsBrandService {
+public interface PmsBrandService extends IBaseService<PmsBrand> {
     List<PmsBrand> listAllBrand();
 
     int createBrand(PmsBrandParam pmsBrandParam);

@@ -1,11 +1,12 @@
 package org.openmall.mall.pms.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.openmall.mall.pms.model.PmsBrand;
 import org.openmall.mall.pms.model.PmsBrandExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface PmsBrandMapper {
+public interface PmsBrandMapper extends BaseMapper<PmsBrand> {
     long countByExample(PmsBrandExample example);
 
     int deleteByExample(PmsBrandExample example);

@@ -58,6 +58,12 @@ public class PmsProductServiceImpl implements PmsProductService {
     @Autowired
     private PmsProductAttributeValueMapper productAttributeValueMapper;
     @Autowired
+    private PmsProductDao productDao;
+    @Autowired
+    private PmsProductVertifyRecordDao productVertifyRecordDao;
+
+
+    @Autowired
     private CmsSubjectProductRelationDao subjectProductRelationDao;
     @Autowired
     private CmsSubjectProductRelationMapper subjectProductRelationMapper;
@@ -65,10 +71,7 @@ public class PmsProductServiceImpl implements PmsProductService {
     private CmsPrefrenceAreaProductRelationDao prefrenceAreaProductRelationDao;
     @Autowired
     private CmsPrefrenceAreaProductRelationMapper prefrenceAreaProductRelationMapper;
-    @Autowired
-    private PmsProductDao productDao;
-    @Autowired
-    private PmsProductVertifyRecordDao productVertifyRecordDao;
+
 
     @Override
     public int create(PmsProductParam productParam) {

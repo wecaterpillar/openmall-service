@@ -1,5 +1,6 @@
 package org.openmall.mall.pms.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import org.openmall.mall.pms.dto.PmsBrandParam;
 import org.openmall.mall.pms.mapper.PmsBrandMapper;
@@ -20,7 +21,7 @@ import java.util.List;
  * 商品品牌Service实现类
  */
 @Service
-public class PmsBrandServiceImpl implements PmsBrandService {
+public class PmsBrandServiceImpl extends ServiceImpl<PmsBrandMapper,PmsBrand> implements PmsBrandService {
     @Autowired
     private PmsBrandMapper brandMapper;
     @Autowired
