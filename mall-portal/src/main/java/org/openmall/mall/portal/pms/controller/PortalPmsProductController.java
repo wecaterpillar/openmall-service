@@ -37,7 +37,7 @@ public class PortalPmsProductController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<CommonPage<PmsProduct>> getList(PmsProductQueryParam productQueryParam,
-                                                        @RequestParam(value = "sort") String sortField,
+                                                        @RequestParam(value = "sort", defaultValue = "") String sortField,
                                                         @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<PmsProduct> productList = productService.list(productQueryParam, sortField, pageSize, pageNum);
