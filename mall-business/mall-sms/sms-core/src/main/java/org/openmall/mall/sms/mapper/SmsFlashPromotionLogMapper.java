@@ -1,11 +1,12 @@
 package org.openmall.mall.sms.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.openmall.mall.sms.model.SmsFlashPromotionLog;
 import org.openmall.mall.sms.model.SmsFlashPromotionLogExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface SmsFlashPromotionLogMapper {
+public interface SmsFlashPromotionLogMapper extends BaseMapper<SmsFlashPromotionLog> {
     long countByExample(SmsFlashPromotionLogExample example);
 
     int deleteByExample(SmsFlashPromotionLogExample example);
