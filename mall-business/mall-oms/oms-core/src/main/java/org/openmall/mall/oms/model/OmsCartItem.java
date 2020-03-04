@@ -7,6 +7,9 @@ import java.util.Date;
 
 /**
  * 购物车商品
+ *
+ * TODO 增加购物车中商品是否选中，默认全选中
+ * 后台需要提供API供前端调用勾选或反钩选
  */
 @lombok.Data
 public class OmsCartItem implements Serializable {
