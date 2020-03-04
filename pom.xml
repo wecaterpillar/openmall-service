@@ -219,4 +219,37 @@
         </dependencies>
     </dependencyManagement>
 
+
+    <distributionManagement>
+        <repository>
+            <id>openmall-opentech-share</id>
+            <name>share</name>
+            <url>https://openmall-maven.pkg.coding.net/repository/opentech/share/</url>
+        </repository>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>openmall-opentech-share</id>
+            <name>share</name>
+            <url>https://openmall-maven.pkg.coding.net/repository/opentech/share/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>nexus-aliyun</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
 </project>

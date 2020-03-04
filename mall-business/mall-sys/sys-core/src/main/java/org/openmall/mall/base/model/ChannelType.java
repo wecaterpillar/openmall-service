@@ -1,5 +1,6 @@
-package org.openmall.mall.merchant.model;
+package org.openmall.mall.base.model;
 
+@lombok.Data
 public class  ChannelType {
 
     public static final ChannelType MALL = new ChannelType(1L,"MALL","");    //商城

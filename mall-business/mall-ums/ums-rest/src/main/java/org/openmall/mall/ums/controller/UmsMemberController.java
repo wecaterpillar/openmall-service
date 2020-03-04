@@ -25,7 +25,7 @@ import java.util.List;
 @RestController
 @Api(tags = "UmsMemberController", description = "会员管理")
 @RequestMapping("/ums/member")
-public class UmsMemberController2 {
+public class UmsMemberController {
 
 
     @Autowired
