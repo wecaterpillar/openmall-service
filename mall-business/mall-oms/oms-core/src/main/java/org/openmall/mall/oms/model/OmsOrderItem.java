@@ -18,8 +18,23 @@ public class OmsOrderItem implements Serializable {
     @ApiModelProperty(value = "订单编号")
     private String orderSn;
 
+    ////////////////////////////////////////////
     @ApiModelProperty(value = "商品id")
     private Long productId;
+
+    @ApiModelProperty(value = "商品sku编号")
+    private Long productSkuId;
+
+    @ApiModelProperty(value = "商品sku条码")
+    private String productSkuCode;
+
+    @ApiModelProperty(value = "销售价格")
+    private BigDecimal productPrice;
+
+    @ApiModelProperty(value = "购买数量")
+    private Integer productQuantity;
+
+    /////////////////////////////////////////////
 
     @ApiModelProperty(value = "商品图片")
     private String productPic;
@@ -33,17 +48,6 @@ public class OmsOrderItem implements Serializable {
     @ApiModelProperty(value = "商品SN")
     private String productSn;
 
-    @ApiModelProperty(value = "销售价格")
-    private BigDecimal productPrice;
-
-    @ApiModelProperty(value = "购买数量")
-    private Integer productQuantity;
-
-    @ApiModelProperty(value = "商品sku编号")
-    private Long productSkuId;
-
-    @ApiModelProperty(value = "商品sku条码")
-    private String productSkuCode;
 
     @ApiModelProperty(value = "商品分类id")
     private Long productCategoryId;
@@ -56,6 +60,11 @@ public class OmsOrderItem implements Serializable {
 
     @ApiModelProperty(value = "商品的销售属性3")
     private String sp3;
+
+    @ApiModelProperty(value = "商品销售属性:[{'key':'颜色','value':'颜色'},{'key':'容量','value':'4G'}]")
+    private String productAttr;
+
+    ////////////////////////////////////////////////
 
     @ApiModelProperty(value = "商品促销名称")
     private String promotionName;
@@ -78,8 +87,7 @@ public class OmsOrderItem implements Serializable {
     @ApiModelProperty(value = "成长值")
     private Integer giftGrowth;
 
-    @ApiModelProperty(value = "商品销售属性:[{'key':'颜色','value':'颜色'},{'key':'容量','value':'4G'}]")
-    private String productAttr;
+
 
     private static final long serialVersionUID = 1L;
 

@@ -8,7 +8,8 @@ import java.util.Date;
 /**
  * 商品信息
  *
- * 商品信息主要包括四部分：商品的基本信息、商品的促销信息、商品的属性信息、商品的关联，商品表是整个商品的基本信息部分。
+ * 商品信息主要包括四部分：
+ * 商品的基本信息、商品的促销信息、商品的属性信息、商品的关联，商品表是整个商品的基本信息部分。
  */
 @lombok.Data
 public class PmsProduct implements Serializable {
