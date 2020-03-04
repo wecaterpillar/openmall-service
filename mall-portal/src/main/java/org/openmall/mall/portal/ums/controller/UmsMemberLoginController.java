@@ -46,7 +46,8 @@ public class UmsMemberLoginController {
                                  @RequestParam String authCode) {
         //验证验证码
         if(!memberLoginService.verifyAuthCode(authCode,telephone)){
-            return CommonResult.failed("验证码错误");
+            //TODO 开发不检查验证码
+            //return CommonResult.failed("验证码错误");
         }
         return memberService.register(username, password, telephone);
     }

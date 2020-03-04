@@ -52,6 +52,11 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
 
     @Override
     public CommonResult register(String username, String password, String telephone) {
+        // TODO 需要增加快速注册的逻辑
+        if(username==null || "".equals(username)){
+            username = telephone;
+        }
+
         //查询是否已有该用户
         UmsMemberExample example = new UmsMemberExample();
         example.createCriteria().andUsernameEqualTo(username);

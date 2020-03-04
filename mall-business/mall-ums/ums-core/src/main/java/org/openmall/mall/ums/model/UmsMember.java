@@ -9,6 +9,7 @@ import java.util.Date;
  */
 @lombok.Data
 public class UmsMember implements Serializable {
+
     private Long id;
 
     @ApiModelProperty(value = "会员级别id")
@@ -25,6 +26,10 @@ public class UmsMember implements Serializable {
 
     @ApiModelProperty(value = "手机号码")
     private String phone;
+
+    //TODO 待增加邮箱字段，暂时使用phone字段来存放手机号码和邮箱地址
+    //@ApiModelProperty(value = "电子邮件")
+    //private String email;
 
     @ApiModelProperty(value = "帐号启用状态:0->禁用；1->启用")
     private Integer status;

@@ -12,11 +12,17 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * 订单管理Controller
+ *
+ * TODO:
+ * 1. 购物车生成订单时可选择部分商品下单
+ * 2. 直接选择某商品生成订单
  */
 @Controller
 @Api(tags = "OmsPortalOrderController",description = "订单管理")
 @RequestMapping("/order")
 public class OmsPortalOrderController {
+
+
     @Autowired
     private OmsPortalOrderService portalOrderService;
     @ApiOperation("根据购物车信息生成确认单信息")
