@@ -43,6 +43,13 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
         cartItem.setDeleteStatus(0);
         OmsCartItem existCartItem = getCartItem(cartItem);
         if (existCartItem == null) {
+            CartProduct cartProduct = productDao.getCartProduct(cartItem.getProductId());
+
+            if(null!=cartProduct){
+                cartItem.setProductName(cartProduct.getName());
+                cartItem.setProductPic(cartProduct.getPic());
+                cartItem.setPrice(cartProduct.getPrice());
+            }
             cartItem.setCreateDate(new Date());
             count = cartItemMapper.insert(cartItem);
         } else {
