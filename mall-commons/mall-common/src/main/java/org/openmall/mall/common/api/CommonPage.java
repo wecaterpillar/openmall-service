@@ -1,7 +1,6 @@
 package org.openmall.mall.common.api;
 
-
-import com.github.pagehelper.PageInfo;
+//import com.github.pagehelper.PageInfo;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -10,6 +9,7 @@ import java.util.List;
  * 分页数据封装类
  */
 public class CommonPage<T> {
+
     private Integer pageNum;
     private Integer pageSize;
     private Integer totalPage;
@@ -22,7 +22,7 @@ public class CommonPage<T> {
     public static <T> CommonPage<T> restPage(List<T> list) {
         CommonPage<T> result = new CommonPage<T>();
         PageInfo<T> pageInfo = new PageInfo<T>(list);
-        result.setTotalPage(pageInfo.getPages());
+        result.setTotalPage((int)pageInfo.getPages());
         result.setPageNum(pageInfo.getPageNum());
         result.setPageSize(pageInfo.getPageSize());
         result.setTotal(pageInfo.getTotal());

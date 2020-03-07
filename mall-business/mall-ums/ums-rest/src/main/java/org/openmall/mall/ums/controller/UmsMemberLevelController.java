@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.openmall.mall.common.annotation.SysLog;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.ums.model.UmsMemberLevel;
 import org.openmall.mall.ums.service.UmsMemberLevelService;
 import org.openmall.mall.validator.ValidatorUtils;
@@ -47,7 +48,7 @@ public class UmsMemberLevelController {
                                           @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize
     ) {
         try {
-            return CommonResult.success(memberLevelService.page(new Page<UmsMemberLevel>(pageNum, pageSize), new QueryWrapper<>(entity)));
+            return CommonResult.success(memberLevelService.page(new PageInfo<UmsMemberLevel>(pageNum, pageSize), new QueryWrapper<>(entity)));
         } catch (Exception e) {
             log.error("根据条件查询所有会员等级表列表：%s", e.getMessage(), e);
         }

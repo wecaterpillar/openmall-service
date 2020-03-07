@@ -10,6 +10,7 @@ import org.openmall.mall.cms.model.CmsPrefrenceArea;
 import org.openmall.mall.cms.service.CmsPrefrenceAreaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.validator.ValidatorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -46,7 +47,7 @@ public class CmsPrefrenceAreaController {
                                             @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize
     ) {
         try {
-            return CommonResult.success(prefrenceAreaService.page(new Page<CmsPrefrenceArea>(pageNum, pageSize), new QueryWrapper<>(entity)));
+            return CommonResult.success(prefrenceAreaService.page(new PageInfo<CmsPrefrenceArea>(pageNum, pageSize), new QueryWrapper<>(entity)));
         } catch (Exception e) {
             log.error("根据条件查询所有优选专区列表：%s", e.getMessage(), e);
         }

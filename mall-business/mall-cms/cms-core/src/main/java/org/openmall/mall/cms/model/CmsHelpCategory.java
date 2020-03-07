@@ -8,6 +8,7 @@ import java.io.Serializable;
  */
 @lombok.Data
 public class CmsHelpCategory implements Serializable {
+
     private Long id;
 
     private String name;

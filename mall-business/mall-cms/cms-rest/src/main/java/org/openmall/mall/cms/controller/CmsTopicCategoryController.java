@@ -6,6 +6,7 @@ import org.openmall.mall.cms.model.CmsTopicCategory;
 import org.openmall.mall.cms.service.CmsTopicCategoryService;
 import org.openmall.mall.common.annotation.SysLog;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.validator.ValidatorUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,7 +41,7 @@ public class CmsTopicCategoryController {
                                             @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize
     ) {
         try {
-            return CommonResult.success(topicCategoryService.page(new Page<CmsTopicCategory>(pageNum, pageSize), new QueryWrapper<>(entity)));
+            return CommonResult.success(topicCategoryService.page(new PageInfo<CmsTopicCategory>(pageNum, pageSize), new QueryWrapper<>(entity)));
         } catch (Exception e) {
             log.error("根据条件查询所有话题分类表列表：%s", e.getMessage(), e);
         }

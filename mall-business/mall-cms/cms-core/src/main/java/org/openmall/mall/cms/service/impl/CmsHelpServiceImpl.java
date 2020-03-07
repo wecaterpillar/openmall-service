@@ -28,7 +28,7 @@ public class CmsHelpServiceImpl extends ServiceImpl<CmsHelpMapper, CmsHelp>
         entity.setCreateTime(new Date());
         helpMapper.insert(entity);
         CmsHelpCategory category = helpCategoryMapper.selectById(entity.getCategoryId());
-        category.setHelpCount(category.getHelpCount() + 1);
+        category.setHelpCount(category.getHelpCount()==null?0:category.getHelpCount() + 1);
         helpCategoryMapper.updateById(category);
         return true;
     }

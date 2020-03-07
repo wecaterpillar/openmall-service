@@ -30,7 +30,7 @@ public class CmsTopicServiceImpl extends ServiceImpl<CmsTopicMapper, CmsTopic> i
         entity.setCreateTime(new Date());
         topicMapper.insert(entity);
         CmsTopicCategory category = topicCategoryMapper.selectById(entity.getCategoryId());
-        category.setSubjectCount(category.getSubjectCount() + 1);
+        category.setSubjectCount(category.getSubjectCount()==null?0:category.getSubjectCount() + 1);
         topicCategoryMapper.updateById(category);
         return true;
     }

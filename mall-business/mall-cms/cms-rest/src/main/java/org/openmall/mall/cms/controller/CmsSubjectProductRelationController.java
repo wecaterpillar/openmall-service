@@ -10,6 +10,7 @@ import org.openmall.mall.cms.model.CmsSubjectProductRelation;
 import org.openmall.mall.cms.service.CmsSubjectProductRelationService;
 import org.openmall.mall.common.annotation.SysLog;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.validator.ValidatorUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +40,7 @@ public class CmsSubjectProductRelationController {
                                                      @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize
     ) {
         try {
-            return CommonResult.success(subjectProductRelationService.page(new Page<CmsSubjectProductRelation>(pageNum, pageSize), new QueryWrapper<>(entity)));
+            return CommonResult.success(subjectProductRelationService.page(new PageInfo<CmsSubjectProductRelation>(pageNum, pageSize), new QueryWrapper<>(entity)));
         } catch (Exception e) {
             log.error("根据条件查询所有专题商品关系表列表：%s", e.getMessage(), e);
         }

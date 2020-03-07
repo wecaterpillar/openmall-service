@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.openmall.mall.common.annotation.SysLog;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.ums.model.UmsMember;
 import org.openmall.mall.ums.service.UmsMemberService;
 import org.openmall.mall.validator.ValidatorUtils;
@@ -40,7 +41,7 @@ public class UmsMemberController {
                                      @RequestParam(value = "pageSize", defaultValue = "20") Integer pageSize
     ) {
         try {
-            return CommonResult.success(memberService.page(new Page<UmsMember>(pageNum, pageSize), new QueryWrapper<>(entity).orderByDesc("create_time")));
+            return CommonResult.success(memberService.page(new PageInfo<UmsMember>(pageNum, pageSize), new QueryWrapper<>(entity).orderByDesc("create_time")));
         } catch (Exception e) {
             log.error("根据条件查询所有会员表列表：%s", e.getMessage(), e);
         }

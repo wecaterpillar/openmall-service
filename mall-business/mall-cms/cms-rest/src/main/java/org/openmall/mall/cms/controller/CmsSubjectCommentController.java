@@ -10,6 +10,7 @@ import org.openmall.mall.cms.model.CmsSubjectComment;
 import org.openmall.mall.cms.service.CmsSubjectCommentService;
 import org.openmall.mall.common.annotation.SysLog;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.validator.ValidatorUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +40,7 @@ public class CmsSubjectCommentController {
                                              @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize
     ) {
         try {
-            return CommonResult.success(subjectCommentService.page(new Page<CmsSubjectComment>(pageNum, pageSize), new QueryWrapper<>(entity)));
+            return CommonResult.success(subjectCommentService.page(new PageInfo<CmsSubjectComment>(pageNum, pageSize), new QueryWrapper<>(entity)));
         } catch (Exception e) {
             log.error("根据条件查询所有专题评论表列表：%s", e.getMessage(), e);
         }

@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.openmall.mall.common.annotation.SysLog;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.sms.model.SmsFlashPromotionLog;
 import org.openmall.mall.sms.service.SmsFlashPromotionLogService;
 import org.openmall.mall.validator.ValidatorUtils;
@@ -39,7 +40,7 @@ public class SmsFlashPromotionLogController {
                                                 @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize
     ) {
         try {
-            return CommonResult.success(flashPromotionLogService.page(new Page<SmsFlashPromotionLog>(pageNum, pageSize), new QueryWrapper<>(entity)));
+            return CommonResult.success(flashPromotionLogService.page(new PageInfo<SmsFlashPromotionLog>(pageNum, pageSize), new QueryWrapper<>(entity)));
         } catch (Exception e) {
             log.error("根据条件查询所有限时购通知记录列表：%s", e.getMessage(), e);
         }

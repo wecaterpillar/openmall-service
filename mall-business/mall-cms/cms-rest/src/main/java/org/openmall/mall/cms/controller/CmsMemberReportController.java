@@ -6,6 +6,7 @@ import org.openmall.mall.cms.model.CmsMemberReport;
 import org.openmall.mall.cms.service.CmsMemberReportService;
 import org.openmall.mall.common.annotation.SysLog;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.validator.ValidatorUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,7 +41,7 @@ public class CmsMemberReportController {
                                            @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize
     ) {
         try {
-            return CommonResult.success(memberReportService.page(new Page<CmsMemberReport>(pageNum, pageSize), new QueryWrapper<>(entity)));
+            return CommonResult.success(memberReportService.page(new PageInfo<CmsMemberReport>(pageNum, pageSize), new QueryWrapper<>(entity)));
         } catch (Exception e) {
             log.error("根据条件查询所有用户举报表列表：%s", e.getMessage(), e);
         }

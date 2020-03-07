@@ -11,6 +11,7 @@ import org.openmall.mall.cms.model.CmsSubject;
 import org.openmall.mall.cms.service.CmsSubjectService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.validator.ValidatorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -60,7 +61,7 @@ public class CmsSubjectController {
                                       @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize
     ) {
         try {
-            return CommonResult.success(subjectService.page(new Page<CmsSubject>(pageNum, pageSize), new QueryWrapper<>(entity).select(sampleSubjectList)));
+            return CommonResult.success(subjectService.page(new PageInfo<CmsSubject>(pageNum, pageSize), new QueryWrapper<>(entity).select(sampleSubjectList)));
         } catch (Exception e) {
             log.error("根据条件查询所有专题表列表：%s", e.getMessage(), e);
         }

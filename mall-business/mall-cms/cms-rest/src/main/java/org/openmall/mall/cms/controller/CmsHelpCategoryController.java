@@ -6,6 +6,7 @@ import org.openmall.mall.cms.model.CmsHelpCategory;
 import org.openmall.mall.cms.service.CmsHelpCategoryService;
 import org.openmall.mall.common.annotation.SysLog;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.validator.ValidatorUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,7 +41,7 @@ public class CmsHelpCategoryController {
                                            @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize
     ) {
         try {
-            return CommonResult.success(helpCategoryService.page(new Page<CmsHelpCategory>(pageNum, pageSize), new QueryWrapper<>(entity)));
+            return CommonResult.success(helpCategoryService.page(new PageInfo<CmsHelpCategory>(pageNum, pageSize), new QueryWrapper<>(entity)));
         } catch (Exception e) {
             log.error("根据条件查询所有帮助分类表列表：%s", e.getMessage(), e);
         }

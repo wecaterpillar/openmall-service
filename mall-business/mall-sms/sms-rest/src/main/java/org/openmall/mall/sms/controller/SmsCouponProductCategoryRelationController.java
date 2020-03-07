@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.openmall.mall.common.annotation.SysLog;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.sms.model.SmsCouponProductCategoryRelation;
 import org.openmall.mall.sms.service.SmsCouponProductCategoryRelationService;
 import org.openmall.mall.validator.ValidatorUtils;
@@ -40,7 +41,7 @@ public class SmsCouponProductCategoryRelationController {
                                                             @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize
     ) {
         try {
-            return CommonResult.success(couponProductCategoryRelationService.page(new Page<SmsCouponProductCategoryRelation>(pageNum, pageSize), new QueryWrapper<>(entity)));
+            return CommonResult.success(couponProductCategoryRelationService.page(new PageInfo<SmsCouponProductCategoryRelation>(pageNum, pageSize), new QueryWrapper<>(entity)));
         } catch (Exception e) {
             log.error("根据条件查询所有优惠券和产品分类关系表列表：%s", e.getMessage(), e);
         }
