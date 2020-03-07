@@ -34,7 +34,6 @@
         <module>pms-api</module>
         <module>pms-core</module>
         <module>pms-rest</module>
-        <module>pms-search</module>
         <module>pms-app</module>
         <module>pms-feign</module>
     </modules>

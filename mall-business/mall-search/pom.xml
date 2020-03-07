@@ -4,19 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-
     <parent>
         <groupId>org.openmall.mall</groupId>
-        <artifactId>mall-pms</artifactId>
+        <artifactId>mall-business</artifactId>
         <version>1.1-SNAPSHOT</version>
     </parent>
 
     <groupId>org.openmall.mall</groupId>
-    <artifactId>pms-search</artifactId>
+    <artifactId>mall-search</artifactId>
     <version>1.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>pms-search</name>
+    <name>mall-search</name>
     <description>mall pms search</description>
 
 
@@ -24,11 +23,6 @@
         <dependency>
             <groupId>org.openmall.mall</groupId>
             <artifactId>mall-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.openmall.mall</groupId>
-            <artifactId>pms-core</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

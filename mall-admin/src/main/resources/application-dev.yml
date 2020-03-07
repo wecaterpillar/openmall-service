@@ -17,10 +17,6 @@ spring:
       host: localhost
       port: 27017
       database: mall-port
-    elasticsearch:
-      repositories:
-        enabled: true
-      cluster-nodes: 127.0.0.1:9300
 
   redis:
     host: localhost # Redis服务器地址
