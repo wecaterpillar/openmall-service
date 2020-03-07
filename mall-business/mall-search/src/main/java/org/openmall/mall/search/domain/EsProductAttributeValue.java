@@ -1,4 +1,4 @@
-package org.openmall.mall.pms.domain;
+package org.openmall.mall.search.domain;
 
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;

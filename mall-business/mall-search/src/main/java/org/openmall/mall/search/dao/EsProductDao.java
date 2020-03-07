@@ -1,6 +1,6 @@
-package org.openmall.mall.pms.dao;
+package org.openmall.mall.search.dao;
 
-import org.openmall.mall.pms.domain.EsProduct;
+import org.openmall.mall.search.domain.EsProduct;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

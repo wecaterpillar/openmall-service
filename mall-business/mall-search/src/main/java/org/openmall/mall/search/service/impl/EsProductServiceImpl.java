@@ -1,10 +1,10 @@
-package org.openmall.mall.pms.service.impl;
+package org.openmall.mall.search.service.impl;
 
-import org.openmall.mall.pms.dao.EsProductDao;
-import org.openmall.mall.pms.domain.EsProduct;
-import org.openmall.mall.pms.domain.EsProductRelatedInfo;
-import org.openmall.mall.pms.repository.EsProductRepository;
-import org.openmall.mall.pms.service.EsProductService;
+import org.openmall.mall.search.dao.EsProductDao;
+import org.openmall.mall.search.domain.EsProduct;
+import org.openmall.mall.search.domain.EsProductRelatedInfo;
+import org.openmall.mall.search.repository.EsProductRepository;
+import org.openmall.mall.search.service.EsProductService;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.common.lucene.search.function.FunctionScoreQuery;
 import org.elasticsearch.index.query.BoolQueryBuilder;

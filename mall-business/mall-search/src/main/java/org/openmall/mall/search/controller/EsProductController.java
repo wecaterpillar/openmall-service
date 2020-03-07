@@ -1,10 +1,10 @@
-package org.openmall.mall.pms.controller;
+package org.openmall.mall.search.controller;
 
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
-import org.openmall.mall.pms.domain.EsProduct;
-import org.openmall.mall.pms.domain.EsProductRelatedInfo;
-import org.openmall.mall.pms.service.EsProductService;
+import org.openmall.mall.search.domain.EsProduct;
+import org.openmall.mall.search.domain.EsProductRelatedInfo;
+import org.openmall.mall.search.service.EsProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;

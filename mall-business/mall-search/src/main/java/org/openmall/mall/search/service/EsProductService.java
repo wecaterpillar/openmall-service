@@ -1,7 +1,7 @@
-package org.openmall.mall.pms.service;
+package org.openmall.mall.search.service;
 
-import org.openmall.mall.pms.domain.EsProduct;
-import org.openmall.mall.pms.domain.EsProductRelatedInfo;
+import org.openmall.mall.search.domain.EsProduct;
+import org.openmall.mall.search.domain.EsProductRelatedInfo;
 import org.springframework.data.domain.Page;
 
 import java.util.List;

@@ -1,6 +1,6 @@
-package org.openmall.mall.pms.repository;
+package org.openmall.mall.search.repository;
 
-import org.openmall.mall.pms.domain.EsProduct;
+import org.openmall.mall.search.domain.EsProduct;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
