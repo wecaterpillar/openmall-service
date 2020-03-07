@@ -30,6 +30,7 @@
     </properties>
 
     <modules>
+        <module>mall-base</module>
         <module>mall-sys</module>
         <module>mall-cms</module>
         <module>mall-pms</module>

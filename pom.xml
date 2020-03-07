@@ -105,6 +105,12 @@
 
             <dependency>
                 <groupId>org.openmall.mall</groupId>
+                <artifactId>mall-base-admin</artifactId>
+                <version>${mall-business.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmall.mall</groupId>
                 <artifactId>sys-rest</artifactId>
                 <version>${mall-business.version}</version>
             </dependency>

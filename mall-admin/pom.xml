@@ -29,6 +29,10 @@
         <!-- 电商中台服务 -->
         <dependency>
             <groupId>org.openmall.mall</groupId>
+            <artifactId>mall-base-admin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openmall.mall</groupId>
             <artifactId>sys-rest</artifactId>
         </dependency>
         <dependency>
