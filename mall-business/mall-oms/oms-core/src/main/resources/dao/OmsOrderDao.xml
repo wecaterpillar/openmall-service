@@ -32,6 +32,9 @@
             OR receiver_phone LIKE concat("%",#{queryParam.receiverKeyword},"%")
             )
         </if>
+        <if test="queryParam.memberId!=null and queryParam.memberId!=''">
+            AND member_id = #{queryParam.memberId}
+        </if>
     </select>
     <update id="delivery">
         UPDATE oms_order

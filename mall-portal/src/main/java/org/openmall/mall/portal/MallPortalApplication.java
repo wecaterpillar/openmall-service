@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan({"org.openmall.mall.portal"
-        ,"org.openmall.mall.common","org.openmall.mall.ums"})
+        ,"org.openmall.mall.common","org.openmall.mall.ums","org.openmall.mall.oms"})
 public class MallPortalApplication {
 
     public static void main(String[] args) {

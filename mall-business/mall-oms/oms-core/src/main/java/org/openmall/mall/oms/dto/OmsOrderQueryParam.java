@@ -10,6 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class OmsOrderQueryParam {
+
     @ApiModelProperty(value = "订单编号")
     private String orderSn;
     @ApiModelProperty(value = "收货人姓名/号码")
@@ -22,4 +23,7 @@ public class OmsOrderQueryParam {
     private Integer sourceType;
     @ApiModelProperty(value = "订单提交时间")
     private String createTime;
+
+    @ApiModelProperty(value = "会员ID")
+    private String memberId;
 }

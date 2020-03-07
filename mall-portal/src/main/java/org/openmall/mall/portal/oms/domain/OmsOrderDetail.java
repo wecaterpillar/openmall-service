@@ -12,6 +12,7 @@ import java.util.List;
  */
 @lombok.Data
 public class OmsOrderDetail extends OmsOrder {
+
     private List<OmsOrderItem> orderItemList;
 
     public List<OmsOrderItem> getOrderItemList() {
