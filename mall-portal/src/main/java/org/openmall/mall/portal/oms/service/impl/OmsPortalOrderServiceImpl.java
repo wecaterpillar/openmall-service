@@ -130,6 +130,7 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
             orderItem.setGiftGrowth(cartPromotionItem.getGrowth());
             orderItemList.add(orderItem);
         }
+        // TODO 需要改进库存判断逻辑，对某些订单是否允许keep而未支付完成的订单进行下单，类似抢购模式
         //判断购物车中商品是否都有库存
         if (!hasStock(cartPromotionItemList)) {
             return CommonResult.failed("库存不足，无法下单");
@@ -641,10 +642,10 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
      */
     private boolean hasStock(List<CartPromotionItem> cartPromotionItemList) {
         for (CartPromotionItem cartPromotionItem : cartPromotionItemList) {
-            // TODO 开发环境注释掉实际库存检查
-            //if (cartPromotionItem.getRealStock()==null||cartPromotionItem.getRealStock() <= 0) {
+            if (cartPromotionItem.getRealStock()==null||cartPromotionItem.getRealStock() <= 0) {
+                // TODO 开发环境注释掉实际库存检查
             //    return false;
-            //}
+            }
         }
         return true;
     }
