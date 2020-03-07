@@ -627,6 +627,10 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
     private void lockStock(List<CartPromotionItem> cartPromotionItemList) {
         for (CartPromotionItem cartPromotionItem : cartPromotionItemList) {
             PmsSkuStock skuStock = skuStockMapper.selectByPrimaryKey(cartPromotionItem.getProductSkuId());
+            if(skuStock==null){
+                // TODO 开发环境注释掉实际库存检查后可能存在异常
+                continue;
+            }
             skuStock.setLockStock(skuStock.getLockStock() + cartPromotionItem.getQuantity());
             skuStockMapper.updateByPrimaryKeySelective(skuStock);
         }
