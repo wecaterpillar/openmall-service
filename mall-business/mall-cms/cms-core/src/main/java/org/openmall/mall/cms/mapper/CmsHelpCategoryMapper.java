@@ -1,0 +1,31 @@
+package org.openmall.mall.cms.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.openmall.mall.cms.model.CmsHelpCategory;
+import org.openmall.mall.cms.model.CmsHelpCategoryExample;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
+
+public interface CmsHelpCategoryMapper extends BaseMapper<CmsHelpCategory> {
+    long countByExample(CmsHelpCategoryExample example);
+
+    int deleteByExample(CmsHelpCategoryExample example);
+
+    int deleteByPrimaryKey(Long id);
+
+    int insert(CmsHelpCategory record);
+
+    int insertSelective(CmsHelpCategory record);
+
+    List<CmsHelpCategory> selectByExample(CmsHelpCategoryExample example);
+
+    CmsHelpCategory selectByPrimaryKey(Long id);
+
+    int updateByExampleSelective(@Param("record") CmsHelpCategory record, @Param("example") CmsHelpCategoryExample example);
+
+    int updateByExample(@Param("record") CmsHelpCategory record, @Param("example") CmsHelpCategoryExample example);
+
+    int updateByPrimaryKeySelective(CmsHelpCategory record);
+
+    int updateByPrimaryKey(CmsHelpCategory record);
+}

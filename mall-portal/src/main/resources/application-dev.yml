@@ -1,9 +1,6 @@
-server:
-  port: 8085
-
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/openmall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
     password: root
     druid:
@@ -47,6 +44,6 @@ spring:
 logging:
   level:
     org.springframework.data.mongodb.core: debug
-    com.macro.mall.mapper: debug
-    com.macro.mall.portal.dao: debug
+    org.openmall.mall.mapper: debug
+    org.openmall.mall.portal.dao: debug
 

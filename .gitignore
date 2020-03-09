@@ -1,6 +1,9 @@
 # Maven #
 target/
 
+**/target
+**/bin
+
 # IDEA #
 .idea/
 *.iml
@@ -9,3 +12,7 @@ target/
 .settings/
 .classpath
 .project
+
+# system ignore
+.DS_Store
+Thumbs.db

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <parent>
+        <groupId>org.openmall.mall</groupId>
+        <artifactId>mall-business</artifactId>
+        <version>1.1-SNAPSHOT</version>
+    </parent>
+
+
+    <groupId>org.openmall.mall</groupId>
+    <artifactId>mall-ums</artifactId>
+    <version>1.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>mall-ums</name>
+    <description>mall-ums project for mall</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+        <mall-commons.version>1.1-SNAPSHOT</mall-commons.version>
+        <mall-ums.version>1.1-SNAPSHOT</mall-ums.version>
+    </properties>
+
+    <modules>
+        <module>ums-api</module>
+        <module>ums-core</module>
+        <module>ums-rest</module>
+        <module>ums-app</module>
+        <module>ums-feign</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.openmall.mall</groupId>
+                <artifactId>mall-common</artifactId>
+                <version>${mall-commons.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openmall.mall</groupId>
+                <artifactId>ums-api</artifactId>
+                <version>${mall-ums.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.openmall.mall</groupId>
+                <artifactId>ums-rest</artifactId>
+                <version>${mall-ums.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

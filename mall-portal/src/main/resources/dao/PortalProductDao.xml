@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.macro.mall.portal.dao.PortalProductDao">
-    <resultMap id="cartProductMap" type="com.macro.mall.portal.domain.CartProduct" autoMapping="true">
+<mapper namespace="org.openmall.mall.portal.home.dao.PortalProductDao">
+    <resultMap id="cartProductMap" type="org.openmall.mall.portal.oms.domain.CartProduct" autoMapping="true">
         <id column="id" jdbcType="BIGINT" property="id" />
-        <collection property="productAttributeList" columnPrefix="attr_" resultMap="com.macro.mall.mapper.PmsProductAttributeMapper.BaseResultMap">
+        <collection property="productAttributeList" columnPrefix="attr_" resultMap="org.openmall.mall.pms.mapper.PmsProductAttributeMapper.BaseResultMap">
         </collection>
-        <collection property="skuStockList" columnPrefix="sku_" resultMap="com.macro.mall.mapper.PmsSkuStockMapper.BaseResultMap">
+        <collection property="skuStockList" columnPrefix="sku_" resultMap="org.openmall.mall.pms.mapper.PmsSkuStockMapper.BaseResultMap">
         </collection>
     </resultMap>
-    <resultMap id="promotionProductMap" type="com.macro.mall.portal.domain.PromotionProduct" extends="com.macro.mall.mapper.PmsProductMapper.BaseResultMap">
+    <resultMap id="promotionProductMap" type="org.openmall.mall.portal.home.domain.PromotionProduct" extends="org.openmall.mall.pms.mapper.PmsProductMapper.BaseResultMap">
         <id column="id" jdbcType="BIGINT" property="id" />
-        <collection property="skuStockList" columnPrefix="sku_" resultMap="com.macro.mall.mapper.PmsSkuStockMapper.BaseResultMap">
+        <collection property="skuStockList" columnPrefix="sku_" resultMap="org.openmall.mall.pms.mapper.PmsSkuStockMapper.BaseResultMap">
         </collection>
-        <collection property="productLadderList" columnPrefix="ladder_" resultMap="com.macro.mall.mapper.PmsProductLadderMapper.BaseResultMap">
+        <collection property="productLadderList" columnPrefix="ladder_" resultMap="org.openmall.mall.pms.mapper.PmsProductLadderMapper.BaseResultMap">
         </collection>
-        <collection property="productFullReductionList" columnPrefix="full_" resultMap="com.macro.mall.mapper.PmsProductFullReductionMapper.BaseResultMap">
+        <collection property="productFullReductionList" columnPrefix="full_" resultMap="org.openmall.mall.pms.mapper.PmsProductFullReductionMapper.BaseResultMap">
         </collection>
     </resultMap>
     <select id="getCartProduct" resultMap="cartProductMap">
@@ -31,6 +31,9 @@
             ps.id sku_id,
             ps.sku_code sku_code,
             ps.price sku_price,
+            ps.sp1 sku_sp1,
+            ps.sp2 sku_sp2,
+            ps.sp3 sku_sp3,
             ps.stock sku_stock,
             ps.pic sku_pic
         FROM

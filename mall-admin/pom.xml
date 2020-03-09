@@ -2,40 +2,64 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.macro.mall</groupId>
+    <groupId>org.openmall.mall</groupId>
     <artifactId>mall-admin</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>mall-admin</name>
     <description>mall-admin project for mall</description>
 
     <parent>
-        <groupId>com.macro.mall</groupId>
-        <artifactId>mall</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <groupId>org.openmall.mall</groupId>
+        <artifactId>openmall</artifactId>
+        <version>1.1-SNAPSHOT</version>
     </parent>
 
     <dependencies>
         <dependency>
-            <groupId>com.macro.mall</groupId>
-            <artifactId>mall-mbg</artifactId>
+            <groupId>org.openmall.mall</groupId>
+            <artifactId>mall-common</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.macro.mall</groupId>
+            <groupId>org.openmall.mall</groupId>
             <artifactId>mall-security</artifactId>
         </dependency>
+
+        <!-- 电商中台服务 -->
         <dependency>
-            <groupId>com.aliyun.oss</groupId>
-            <artifactId>aliyun-sdk-oss</artifactId>
+            <groupId>org.openmall.mall</groupId>
+            <artifactId>mall-base-admin</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.openmall.mall</groupId>
+            <artifactId>sys-rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openmall.mall</groupId>
+            <artifactId>cms-rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openmall.mall</groupId>
+            <artifactId>pms-rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openmall.mall</groupId>
+            <artifactId>oms-rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openmall.mall</groupId>
+            <artifactId>ums-rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openmall.mall</groupId>
+            <artifactId>sms-rest</artifactId>
+        </dependency>
+
+
         <dependency>
             <groupId>net.logstash.logback</groupId>
             <artifactId>logstash-logback-encoder</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.minio</groupId>
-            <artifactId>minio</artifactId>
         </dependency>
     </dependencies>
     <build>
@@ -44,6 +68,50 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <repository>${project.artifactId}</repository>
+                    <tag>${project.version}</tag>
+                    <buildArgs>
+                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+                    </buildArgs>
+                </configuration>
+            </plugin>
+            <!--
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.13</version>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <repository>config-server</repository>
+                    <tag>${project.version}</tag>
+                    <buildArgs>
+                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+                    </buildArgs>
+                </configuration>
+            </plugin>
+            -->
             <!--<plugin>-->
                 <!--<groupId>com.spotify</groupId>-->
                 <!--<artifactId>docker-maven-plugin</artifactId>-->
