@@ -1,13 +1,12 @@
 package org.openmall.mall.portal.ums.service.impl;
 
-import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.exception.Asserts;
 import org.openmall.mall.portal.oms.domain.CartPromotionItem;
-import org.openmall.mall.portal.ums.service.UmsMemberLoginService;
-import org.openmall.mall.sms.mapper.SmsCouponHistoryMapper;
-import org.openmall.mall.sms.mapper.SmsCouponMapper;
 import org.openmall.mall.portal.ums.dao.SmsCouponHistoryDao;
 import org.openmall.mall.portal.ums.domain.SmsCouponHistoryDetail;
 import org.openmall.mall.portal.ums.service.UmsMemberCouponService;
+import org.openmall.mall.sms.mapper.SmsCouponHistoryMapper;
+import org.openmall.mall.sms.mapper.SmsCouponMapper;
 import org.openmall.mall.sms.model.*;
 import org.openmall.mall.ums.model.UmsMember;
 import org.openmall.mall.ums.util.MemberSecurityUtil;
@@ -15,7 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 /**
  * 会员优惠券管理Service实现类
@@ -30,26 +32,26 @@ public class UmsMemberCouponServiceImpl implements UmsMemberCouponService {
     @Autowired
     private SmsCouponHistoryDao couponHistoryDao;
     @Override
-    public CommonResult add(Long couponId) {
+    public void add(Long couponId) {
         UmsMember currentMember = MemberSecurityUtil.getCurrentMember();
         //获取优惠券信息，判断数量
         SmsCoupon coupon = couponMapper.selectByPrimaryKey(couponId);
         if(coupon==null){
-            return CommonResult.failed("优惠券不存在");
+            Asserts.fail("优惠券不存在");
         }
         if(coupon.getCount()<=0){
-            return CommonResult.failed("优惠券已经领完了");
+            Asserts.fail("优惠券已经领完了");
         }
         Date now = new Date();
         if(now.before(coupon.getEnableTime())){
-            return CommonResult.failed("优惠券还没到领取时间");
+            Asserts.fail("优惠券还没到领取时间");
         }
         //判断用户领取的优惠券数量是否超过限制
         SmsCouponHistoryExample couponHistoryExample = new SmsCouponHistoryExample();
         couponHistoryExample.createCriteria().andCouponIdEqualTo(couponId).andMemberIdEqualTo(currentMember.getId());
         long count = couponHistoryMapper.countByExample(couponHistoryExample);
         if(count>=coupon.getPerLimit()){
-            return CommonResult.failed("您已经领取过该优惠券");
+            Asserts.fail("您已经领取过该优惠券");
         }
         //生成领取优惠券历史
         SmsCouponHistory couponHistory = new SmsCouponHistory();
@@ -67,7 +69,6 @@ public class UmsMemberCouponServiceImpl implements UmsMemberCouponService {
         coupon.setCount(coupon.getCount()-1);
         coupon.setReceiveCount(coupon.getReceiveCount()==null?1:coupon.getReceiveCount()+1);
         couponMapper.updateByPrimaryKey(coupon);
-        return CommonResult.success(null,"领取成功");
     }
 
     /**

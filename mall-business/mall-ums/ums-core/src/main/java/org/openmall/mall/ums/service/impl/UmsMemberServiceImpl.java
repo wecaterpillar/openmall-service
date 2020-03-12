@@ -1,7 +1,8 @@
 package org.openmall.mall.ums.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.exception.Asserts;
+import org.openmall.mall.common.service.RedisService;
 import org.openmall.mall.ums.mapper.UmsMemberLevelMapper;
 import org.openmall.mall.ums.mapper.UmsMemberMapper;
 import org.openmall.mall.ums.model.UmsMember;
@@ -12,10 +13,11 @@ import org.openmall.mall.ums.service.UmsMemberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -34,6 +36,14 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
     @Autowired
     private UmsMemberLevelMapper memberLevelMapper;
 
+    @Autowired
+    private RedisService redisService;
+
+    @Value("${redis.key.prefix.authCode}")
+    private String REDIS_KEY_PREFIX_AUTH_CODE;
+    @Value("${redis.key.expire.authCode}")
+    private Long AUTH_CODE_EXPIRE_SECONDS;
+
     @Override
     public UmsMember getByUsername(String username) {
         UmsMemberExample example = new UmsMemberExample();
@@ -51,7 +61,12 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
     }
 
     @Override
-    public CommonResult register(String username, String password, String telephone) {
+    public void register(String username, String password, String telephone, String authCode) {
+        //验证验证码
+        if(!verifyAuthCode(authCode,telephone)){
+            Asserts.fail("验证码错误");
+        }
+
         // TODO 需要增加快速注册的逻辑
         if(username==null || "".equals(username)){
             username = telephone;
@@ -63,7 +78,7 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
         example.or(example.createCriteria().andPhoneEqualTo(telephone));
         List<UmsMember> umsMembers = memberMapper.selectByExample(example);
         if (!CollectionUtils.isEmpty(umsMembers)) {
-            return CommonResult.failed("该用户已经存在");
+            Asserts.fail("该用户已经存在");
         }
         //没有该用户进行添加操作
         UmsMember umsMember = new UmsMember();
@@ -81,23 +96,25 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
         }
         memberMapper.insert(umsMember);
         umsMember.setPassword(null);
-        return CommonResult.success(null,"注册成功");
     }
 
 
 
     @Override
-    public CommonResult updatePassword(String telephone, String password) {
+    public void updatePassword(String telephone, String password, String authCode) {
         UmsMemberExample example = new UmsMemberExample();
         example.createCriteria().andPhoneEqualTo(telephone);
         List<UmsMember> memberList = memberMapper.selectByExample(example);
         if(CollectionUtils.isEmpty(memberList)){
-            return CommonResult.failed("该账号不存在");
+            Asserts.fail("该账号不存在");
+        }
+        //验证验证码
+        if(!verifyAuthCode(authCode,telephone)){
+            Asserts.fail("验证码错误");
         }
         UmsMember umsMember = memberList.get(0);
         umsMember.setPassword(passwordEncoder.encode(password));
         memberMapper.updateByPrimaryKeySelective(umsMember);
-        return CommonResult.success(null,"密码修改成功");
     }
 
 
@@ -117,5 +134,14 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
     @Override
     public void updataMemberOrderInfo() {
         // TODO
+    }
+
+    //对输入的验证码进行校验
+    public boolean verifyAuthCode(String authCode, String telephone){
+        if(StringUtils.isEmpty(authCode)){
+            return false;
+        }
+        String realAuthCode = redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + telephone);
+        return authCode.equals(realAuthCode);
     }
 }

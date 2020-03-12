@@ -1,9 +1,7 @@
 package org.openmall.mall.ums.service;
 
-import org.openmall.mall.common.api.CommonResult;
 import org.openmall.mall.common.service.IBaseService;
 import org.openmall.mall.ums.model.UmsMember;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -26,14 +24,14 @@ public interface UmsMemberService extends IBaseService<UmsMember> {
      * 用户注册
      */
     @Transactional
-    CommonResult register(String username, String password, String telephone);
+    void register(String username, String password, String telephone, String authCode);
 
 
     /**
      * 修改密码
      */
     @Transactional
-    CommonResult updatePassword(String telephone, String password);
+    void updatePassword(String telephone, String password, String authCode);
 
 
     /**

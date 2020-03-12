@@ -1,9 +1,8 @@
 package org.openmall.mall.portal.ums.service;
 
-import org.openmall.mall.common.api.CommonResult;
 import org.openmall.mall.portal.oms.domain.CartPromotionItem;
-import org.openmall.mall.sms.model.SmsCouponHistory;
 import org.openmall.mall.portal.ums.domain.SmsCouponHistoryDetail;
+import org.openmall.mall.sms.model.SmsCouponHistory;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -16,7 +15,7 @@ public interface UmsMemberCouponService {
      * 会员添加优惠券
      */
     @Transactional
-    CommonResult add(Long couponId);
+    void add(Long couponId);
 
     /**
      * 获取优惠券列表

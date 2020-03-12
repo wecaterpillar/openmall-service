@@ -1,11 +1,10 @@
 package org.openmall.mall.portal.ums.service.impl;
 
-import org.openmall.mall.common.api.CommonResult;
 import org.openmall.mall.common.service.RedisService;
-import org.openmall.mall.ums.domain.MemberDetails;
 import org.openmall.mall.portal.ums.service.UmsMemberLoginService;
 import org.openmall.mall.security.util.JwtTokenUtil;
 import org.openmall.mall.security.util.SecurityUtil;
+import org.openmall.mall.ums.domain.MemberDetails;
 import org.openmall.mall.ums.mapper.UmsMemberMapper;
 import org.openmall.mall.ums.model.UmsMember;
 import org.openmall.mall.ums.model.UmsMemberExample;
@@ -49,7 +48,7 @@ public class UmsMemberLoginServiceImpl implements UmsMemberLoginService {
 
 
     @Override
-    public CommonResult generateAuthCode(String telephone) {
+    public String generateAuthCode(String telephone) {
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
         for(int i=0;i<6;i++){
@@ -58,7 +57,7 @@ public class UmsMemberLoginServiceImpl implements UmsMemberLoginService {
         //验证码绑定手机号并存储到redis
         redisService.set(REDIS_KEY_PREFIX_AUTH_CODE+telephone,sb.toString());
         redisService.expire(REDIS_KEY_PREFIX_AUTH_CODE+telephone,AUTH_CODE_EXPIRE_SECONDS);
-        return CommonResult.success(sb.toString(),"获取验证码成功");
+        return sb.toString();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package org.openmall.mall.portal.oms.service.impl;
 
-import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.exception.Asserts;
 import org.openmall.mall.common.service.RedisService;
 import org.openmall.mall.oms.mapper.OmsOrderItemMapper;
 import org.openmall.mall.oms.mapper.OmsOrderMapper;
@@ -20,14 +20,13 @@ import org.openmall.mall.portal.oms.service.OmsPortalOrderService;
 import org.openmall.mall.portal.ums.dao.SmsCouponHistoryDao;
 import org.openmall.mall.portal.ums.domain.SmsCouponHistoryDetail;
 import org.openmall.mall.portal.ums.service.UmsMemberCouponService;
-import org.openmall.mall.portal.ums.service.UmsMemberLoginService;
-import org.openmall.mall.ums.service.UmsMemberReceiveAddressService;
 import org.openmall.mall.sms.mapper.SmsCouponHistoryMapper;
 import org.openmall.mall.sms.model.*;
 import org.openmall.mall.ums.mapper.UmsIntegrationConsumeSettingMapper;
 import org.openmall.mall.ums.model.UmsIntegrationConsumeSetting;
 import org.openmall.mall.ums.model.UmsMember;
 import org.openmall.mall.ums.model.UmsMemberReceiveAddress;
+import org.openmall.mall.ums.service.UmsMemberReceiveAddressService;
 import org.openmall.mall.ums.service.UmsMemberService;
 import org.openmall.mall.ums.util.MemberSecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +44,7 @@ import java.util.*;
  */
 @Service
 public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
-    @Autowired
-    private UmsMemberLoginService memberLoginService;
+
     @Autowired
     private UmsMemberService memberService;
     @Autowired
@@ -105,7 +103,7 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
     }
 
     @Override
-    public CommonResult generateOrder(OrderParam orderParam) {
+    public Map<String, Object> generateOrder(OrderParam orderParam) {
         List<OmsOrderItem> orderItemList = new ArrayList<>();
         //获取购物车及优惠信息
         UmsMember currentMember = MemberSecurityUtil.getCurrentMember();
@@ -133,7 +131,7 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
         // TODO 需要改进库存判断逻辑，对某些订单是否允许keep而未支付完成的订单进行下单，类似抢购模式
         //判断购物车中商品是否都有库存
         if (!hasStock(cartPromotionItemList)) {
-            return CommonResult.failed("库存不足，无法下单");
+            Asserts.fail("库存不足，无法下单");
         }
         //判断使用使用了优惠券
         if (orderParam.getCouponId() == null) {
@@ -145,7 +143,7 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
             //使用优惠券
             SmsCouponHistoryDetail couponHistoryDetail = getUseCoupon(cartPromotionItemList, orderParam.getCouponId());
             if (couponHistoryDetail == null) {
-                return CommonResult.failed("该优惠券不可用");
+                Asserts.fail("该优惠券不可用");
             }
             //对下单商品的优惠券进行处理
             handleCouponAmount(orderItemList, couponHistoryDetail);
@@ -161,7 +159,7 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
             BigDecimal totalAmount = calcTotalAmount(orderItemList);
             BigDecimal integrationAmount = getUseIntegrationAmount(orderParam.getUseIntegration(), totalAmount, currentMember, orderParam.getCouponId() != null);
             if (integrationAmount.compareTo(new BigDecimal(0)) == 0) {
-                return CommonResult.failed("积分不可用");
+                Asserts.fail("积分不可用");
             } else {
                 //可用情况下分摊到可用商品中
                 for (OmsOrderItem orderItem : orderItemList) {
@@ -249,11 +247,11 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
         Map<String, Object> result = new HashMap<>();
         result.put("order", order);
         result.put("orderItemList", orderItemList);
-        return CommonResult.success(result, "下单成功");
+        return result;
     }
 
     @Override
-    public CommonResult paySuccess(Long orderId) {
+    public Integer paySuccess(Long orderId) {
         //修改订单支付状态
         OmsOrder order = new OmsOrder();
         order.setId(orderId);
@@ -263,16 +261,17 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
         //恢复所有下单商品的锁定库存，扣减真实库存
         OmsOrderDetail orderDetail = portalOrderDao.getDetail(orderId);
         int count = portalOrderDao.updateSkuStock(orderDetail.getOrderItemList());
-        return CommonResult.success(count,"支付成功");
+        return  count;
     }
 
     @Override
-    public CommonResult cancelTimeOutOrder() {
+    public Integer cancelTimeOutOrder() {
+        Integer count=0;
         OmsOrderSetting orderSetting = orderSettingMapper.selectByPrimaryKey(1L);
         //查询超时、未支付的订单及订单详情
         List<OmsOrderDetail> timeOutOrders = portalOrderDao.getTimeOutOrders(orderSetting.getNormalOrderOvertime());
         if (CollectionUtils.isEmpty(timeOutOrders)) {
-            return CommonResult.failed("暂无超时订单");
+            return count;
         }
         //修改订单状态为交易取消
         List<Long> ids = new ArrayList<>();
@@ -291,7 +290,7 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
                 memberService.updateIntegration(timeOutOrder.getMemberId(), member.getIntegration() + timeOutOrder.getUseIntegration());
             }
         }
-        return CommonResult.success(null);
+        return timeOutOrders.size();
     }
 
     @Override
