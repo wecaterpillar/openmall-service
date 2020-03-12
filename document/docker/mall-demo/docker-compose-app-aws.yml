@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  mall-admin:
+    image: mall-admin:1.1-SNAPSHOT
+    container_name: demo-mall-admin
+    environment:
+      - spring.profiles.active=demo
+      - port=8080
+    ports:
+      - 8180:8080
+    external_links:
+      - mall-mysql:db
+      - mall-redis:redis
+      - mall-mongo:mongo
+  mall-portal:
+    image: mall-portal:1.1-SNAPSHOT
+    container_name: demo-mall-portal
+    environment:
+      - spring.profiles.active=demo
+      - port=8085
+    ports:
+      - 8185:8085
+    external_links:
+      - mall-mysql:db
+      - mall-redis:redis
+      - mall-mongo:mongo
+      - mall-rabbitmq:rabbit
+  mall-search:
+    image: mall-search:1.1-SNAPSHOT
+    container_name: demo-mall-search
+    environment:
+      - spring.profiles.active=demo
+      - port=8083
+    ports:
+      - 8185:8083
+    external_links:
+      - mall-mysql:db
+      - mall-elasticsearch:es
