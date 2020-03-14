@@ -30,15 +30,6 @@ public class OmsCartItem implements Serializable {
     @ApiModelProperty(value = "添加到购物车的价格")
     private BigDecimal price;
 
-    @ApiModelProperty(value = "销售属性1")
-    private String sp1;
-
-    @ApiModelProperty(value = "销售属性2")
-    private String sp2;
-
-    @ApiModelProperty(value = "销售属性3")
-    private String sp3;
-
     @ApiModelProperty(value = "商品主图")
     private String productPic;
 

@@ -52,14 +52,6 @@ public class OmsOrderItem implements Serializable {
     @ApiModelProperty(value = "商品分类id")
     private Long productCategoryId;
 
-    @ApiModelProperty(value = "商品的销售属性1")
-    private String sp1;
-
-    @ApiModelProperty(value = "商品的销售属性2")
-    private String sp2;
-
-    @ApiModelProperty(value = "商品的销售属性3")
-    private String sp3;
 
     @ApiModelProperty(value = "商品销售属性:[{'key':'颜色','value':'颜色'},{'key':'容量','value':'4G'}]")
     private String productAttr;

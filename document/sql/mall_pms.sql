@@ -166,7 +166,7 @@ CREATE TABLE `pms_product`
     `id`                            bigint(20)  NOT NULL AUTO_INCREMENT,
     `brand_id`                      bigint(20)     DEFAULT NULL,
     `product_category_id`           bigint(20)     DEFAULT NULL,
-    `product_category_tree_id`      varchar(255)    DEFAULT NULL,
+    `product_category_tree_id`      varchar(255)   DEFAULT NULL,
     `feight_template_id`            bigint(20)     DEFAULT NULL,
     `product_attribute_category_id` bigint(20)     DEFAULT NULL,
     `name`                          varchar(64) NOT NULL,
@@ -287,19 +287,19 @@ CREATE TABLE `pms_product_attribute_value`
 DROP TABLE IF EXISTS `pms_product_category`;
 CREATE TABLE `pms_product_category`
 (
-    `id`            bigint(20) NOT NULL AUTO_INCREMENT,
-    `parent_id`     bigint(20)   DEFAULT NULL COMMENT '上级分类的编号：0表示一级分类',
-    `parent_tree_id`     varchar(255)   DEFAULT NULL COMMENT '树状父ID，冒号分割',
-    `name`          varchar(64)  DEFAULT NULL,
-    `level`         int(1)       DEFAULT NULL COMMENT '分类级别：0->1级；1->2级',
-    `product_count` int(11)      DEFAULT NULL,
-    `product_unit`  varchar(64)  DEFAULT NULL,
-    `nav_status`    int(1)       DEFAULT NULL COMMENT '是否显示在导航栏：0->不显示；1->显示',
-    `show_status`   int(1)       DEFAULT NULL COMMENT '显示状态：0->不显示；1->显示',
-    `sort`          int(11)      DEFAULT NULL,
-    `icon`          varchar(255) DEFAULT NULL COMMENT '图标',
-    `keywords`      varchar(255) DEFAULT NULL,
-    `description`   text COMMENT '描述',
+    `id`             bigint(20) NOT NULL AUTO_INCREMENT,
+    `parent_id`      bigint(20)   DEFAULT NULL COMMENT '上级分类的编号：0表示一级分类',
+    `parent_tree_id` varchar(255) DEFAULT NULL COMMENT '树状父ID，冒号分割',
+    `name`           varchar(64)  DEFAULT NULL,
+    `level`          int(1)       DEFAULT NULL COMMENT '分类级别：0->1级；1->2级',
+    `product_count`  int(11)      DEFAULT NULL,
+    `product_unit`   varchar(64)  DEFAULT NULL,
+    `nav_status`     int(1)       DEFAULT NULL COMMENT '是否显示在导航栏：0->不显示；1->显示',
+    `show_status`    int(1)       DEFAULT NULL COMMENT '显示状态：0->不显示；1->显示',
+    `sort`           int(11)      DEFAULT NULL,
+    `icon`           varchar(255) DEFAULT NULL COMMENT '图标',
+    `keywords`       varchar(255) DEFAULT NULL,
+    `description`    text COMMENT '描述',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 1000
@@ -436,6 +436,7 @@ CREATE TABLE `pms_sku_stock`
     `sale`            int(11)        DEFAULT NULL COMMENT '销量',
     `promotion_price` decimal(10, 2) DEFAULT NULL COMMENT '单品促销价格',
     `lock_stock`      int(11)        DEFAULT '0' COMMENT '锁定库存',
+    `sp_data`         varchar(500)   DEFAULT NULL COMMENT '商品销售属性，json格式',
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 1000
@@ -444,7 +445,6 @@ CREATE TABLE `pms_sku_stock`
 -- ----------------------------
 -- Records of pms_sku_stock
 -- ----------------------------
-
 
 
 SET FOREIGN_KEY_CHECKS = 1;

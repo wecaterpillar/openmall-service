@@ -34,17 +34,16 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
     private UmsMemberLoginService memberService;
 
     private boolean matchSp(PmsSkuStock sku, OmsCartItem cartItem) {
-        List<String> listCart = makeSpList(cartItem.getSp1(), cartItem.getSp2(), cartItem.getSp3());
-        List<String> listSku = makeSpList(cartItem.getSp1(), cartItem.getSp2(), cartItem.getSp3());
-
-        int size = Math.min(listCart.size(), listSku.size());
-
-        for (int i=0;i<size;i++) {
-            if(!listCart.get(i).equals(listSku.get(i))) {
-                return false;
-            }
-        }
-
+//        List<String> listCart = makeSpList(cartItem.getSp1(), cartItem.getSp2(), cartItem.getSp3());
+//        List<String> listSku = makeSpList(cartItem.getSp1(), cartItem.getSp2(), cartItem.getSp3());
+//
+//        int size = Math.min(listCart.size(), listSku.size());
+//
+//        for (int i=0;i<size;i++) {
+//            if(!listCart.get(i).equals(listSku.get(i))) {
+//                return false;
+//            }
+//        }
         return true;
     }
 
@@ -83,9 +82,9 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
                         if(matchSp(sku, cartItem)) {
                             cartItem.setProductSkuCode(sku.getSkuCode());
                             cartItem.setProductSkuId(sku.getId());
-                            cartItem.setSp1(sku.getSp1());
-                            cartItem.setSp2(sku.getSp2());
-                            cartItem.setSp3(sku.getSp3());
+//                            cartItem.setSp1(sku.getSp1());
+//                            cartItem.setSp2(sku.getSp2());
+//                            cartItem.setSp3(sku.getSp3());
                             break;
                         }
                     }
@@ -109,14 +108,8 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
         OmsCartItemExample example = new OmsCartItemExample();
         OmsCartItemExample.Criteria criteria = example.createCriteria().andMemberIdEqualTo(cartItem.getMemberId())
                 .andProductIdEqualTo(cartItem.getProductId()).andDeleteStatusEqualTo(0);
-        if (!StringUtils.isEmpty(cartItem.getSp1())) {
-            criteria.andSp1EqualTo(cartItem.getSp1());
-        }
-        if (!StringUtils.isEmpty(cartItem.getSp2())) {
-            criteria.andSp2EqualTo(cartItem.getSp2());
-        }
-        if (!StringUtils.isEmpty(cartItem.getSp3())) {
-            criteria.andSp3EqualTo(cartItem.getSp3());
+        if (!StringUtils.isEmpty(cartItem.getProductSkuId())) {
+            criteria.andProductSkuIdEqualTo(cartItem.getProductSkuId());
         }
         List<OmsCartItem> cartItemList = cartItemMapper.selectByExample(example);
         if (!CollectionUtils.isEmpty(cartItemList)) {

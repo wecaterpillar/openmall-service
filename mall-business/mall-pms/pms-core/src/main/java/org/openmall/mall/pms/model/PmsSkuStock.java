@@ -29,14 +29,6 @@ public class PmsSkuStock implements Serializable {
     @ApiModelProperty(value = "预警库存")
     private Integer lowStock;
 
-    @ApiModelProperty(value = "规格属性1")
-    private String sp1;
-
-    @ApiModelProperty(value = "规格属性2")
-    private String sp2;
-
-    @ApiModelProperty(value = "规格属性3")
-    private String sp3;
 
     @ApiModelProperty(value = "展示图片")
     private String pic;
@@ -49,6 +41,9 @@ public class PmsSkuStock implements Serializable {
 
     @ApiModelProperty(value = "锁定库存")
     private Integer lockStock;
+
+    @ApiModelProperty(value = "商品销售属性，json格式")
+    private String spData;
 
     private static final long serialVersionUID = 1L;
 
