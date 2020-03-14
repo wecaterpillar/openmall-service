@@ -34,6 +34,7 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
     private UmsMemberLoginService memberService;
 
     private boolean matchSp(PmsSkuStock sku, OmsCartItem cartItem) {
+        return cartItem.getProductSkuId().intValue()==sku.getId().intValue();
 //        List<String> listCart = makeSpList(cartItem.getSp1(), cartItem.getSp2(), cartItem.getSp3());
 //        List<String> listSku = makeSpList(cartItem.getSp1(), cartItem.getSp2(), cartItem.getSp3());
 //
@@ -44,7 +45,7 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
 //                return false;
 //            }
 //        }
-        return true;
+        //return true;
     }
 
     private List<String> makeSpList(String sp1, String sp2, String sp3) {
