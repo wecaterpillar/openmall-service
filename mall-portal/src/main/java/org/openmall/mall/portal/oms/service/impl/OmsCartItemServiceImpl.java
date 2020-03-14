@@ -34,7 +34,13 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
     private UmsMemberLoginService memberService;
 
     private boolean matchSp(PmsSkuStock sku, OmsCartItem cartItem) {
-        return cartItem.getProductSkuId().intValue()==sku.getId().intValue();
+        if (sku == null
+                || sku.getId() == null
+                || cartItem.getProductSkuId() == null
+                || cartItem.getProductSkuId() == null) {
+            return false;
+        }
+        return cartItem.getProductSkuId().intValue() == sku.getId().intValue();
 //        List<String> listCart = makeSpList(cartItem.getSp1(), cartItem.getSp2(), cartItem.getSp3());
 //        List<String> listSku = makeSpList(cartItem.getSp1(), cartItem.getSp2(), cartItem.getSp3());
 //
@@ -50,9 +56,9 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
 
     private List<String> makeSpList(String sp1, String sp2, String sp3) {
         ArrayList<String> strings = new ArrayList<>();
-        if(null!=sp1) strings.add(sp1);
-        if(null!=sp2) strings.add(sp2);
-        if(null!=sp3) strings.add(sp3);
+        if (null != sp1) strings.add(sp1);
+        if (null != sp2) strings.add(sp2);
+        if (null != sp3) strings.add(sp3);
         Collections.sort(strings);
         return strings;
     }
@@ -68,7 +74,7 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
         if (existCartItem == null) {
             CartProduct cartProduct = productDao.getCartProduct(cartItem.getProductId());
 
-            if(null!=cartProduct){
+            if (null != cartProduct) {
                 cartItem.setProductName(cartProduct.getName());
                 cartItem.setProductPic(cartProduct.getPic());
                 cartItem.setPrice(cartProduct.getPrice());
@@ -78,9 +84,9 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
                 cartItem.setProductCategoryId(cartProduct.getProductCategoryId());
 
                 List<PmsSkuStock> skuStockList = cartProduct.getSkuStockList();
-                if(null!=skuStockList) {
-                    for(PmsSkuStock sku: skuStockList) {
-                        if(matchSp(sku, cartItem)) {
+                if (null != skuStockList) {
+                    for (PmsSkuStock sku : skuStockList) {
+                        if (matchSp(sku, cartItem)) {
                             cartItem.setProductSkuCode(sku.getSkuCode());
                             cartItem.setProductSkuId(sku.getId());
 //                            cartItem.setSp1(sku.getSp1());
@@ -130,7 +136,7 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
     public List<CartPromotionItem> listPromotion(Long memberId) {
         List<OmsCartItem> cartItemList = list(memberId);
         List<CartPromotionItem> cartPromotionItemList = new ArrayList<>();
-        if(!CollectionUtils.isEmpty(cartItemList)){
+        if (!CollectionUtils.isEmpty(cartItemList)) {
             cartPromotionItemList = promotionService.calcCartPromotion(cartItemList);
         }
         return cartPromotionItemList;
@@ -179,6 +185,6 @@ public class OmsCartItemServiceImpl implements OmsCartItemService {
         record.setDeleteStatus(1);
         OmsCartItemExample example = new OmsCartItemExample();
         example.createCriteria().andMemberIdEqualTo(memberId);
-        return cartItemMapper.updateByExampleSelective(record,example);
+        return cartItemMapper.updateByExampleSelective(record, example);
     }
 }
