@@ -1,5 +1,6 @@
 package org.openmall.mall.ums.service.impl;
 
+
 import org.openmall.mall.ums.service.UmsMemberReceiveAddressService;
 import org.openmall.mall.ums.mapper.UmsMemberReceiveAddressMapper;
 import org.openmall.mall.ums.model.UmsMember;

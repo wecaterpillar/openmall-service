@@ -4,13 +4,15 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.openmall.mall.common.api.CommonResult;
 import org.openmall.mall.portal.ums.domain.MemberDto;
-import org.openmall.mall.portal.ums.service.UmsMemberLoginService;
+import org.openmall.mall.portal.ums.service.PortalUmsMemberService;
 import org.openmall.mall.ums.model.UmsMember;
-import org.openmall.mall.ums.service.UmsMemberService;
 import org.openmall.mall.ums.util.MemberSecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -22,7 +24,7 @@ import java.util.Map;
 @RestController
 @Api(tags = "UmsMemberLoginController", description = "会员登录注册管理")
 @RequestMapping("/sso")
-public class UmsMemberLoginController {
+public class PortalUmsMemberController {
 
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
@@ -30,10 +32,8 @@ public class UmsMemberLoginController {
     private String tokenHead;
 
     @Autowired
-    private UmsMemberLoginService memberLoginService;
+    private PortalUmsMemberService memberService;
 
-    @Autowired
-    private UmsMemberService memberService;
 
     @ApiOperation("会员注册")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -49,7 +49,7 @@ public class UmsMemberLoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public CommonResult login(@RequestParam String username,
                               @RequestParam String password) {
-        String token = memberLoginService.login(username, password);
+        String token = memberService.login(username, password);
         if (token == null) {
             return CommonResult.validateFailed("用户名或密码错误");
         }
@@ -93,7 +93,7 @@ public class UmsMemberLoginController {
     @RequestMapping(value = "/refreshToken", method = RequestMethod.GET)
     public CommonResult refreshToken(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
-        String refreshToken = memberLoginService.refreshToken(token);
+        String refreshToken = memberService.refreshToken(token);
         if (refreshToken == null) {
             return CommonResult.failed("token已经过期！");
         }

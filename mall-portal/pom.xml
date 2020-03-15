@@ -30,27 +30,33 @@
         <!-- 电商中台服务 -->
         <dependency>
             <groupId>org.openmall.mall</groupId>
-            <artifactId>sys-rest</artifactId>
+            <artifactId>sys-core</artifactId>
+            <version>${mall-business.version}</version>
         </dependency>
         <dependency>
             <groupId>org.openmall.mall</groupId>
-            <artifactId>cms-rest</artifactId>
+            <artifactId>cms-core</artifactId>
+            <version>${mall-business.version}</version>
         </dependency>
         <dependency>
             <groupId>org.openmall.mall</groupId>
-            <artifactId>pms-rest</artifactId>
+            <artifactId>pms-core</artifactId>
+            <version>${mall-business.version}</version>
         </dependency>
         <dependency>
             <groupId>org.openmall.mall</groupId>
-            <artifactId>oms-rest</artifactId>
+            <artifactId>oms-core</artifactId>
+            <version>${mall-business.version}</version>
         </dependency>
         <dependency>
             <groupId>org.openmall.mall</groupId>
-            <artifactId>ums-rest</artifactId>
+            <artifactId>ums-core</artifactId>
+            <version>${mall-business.version}</version>
         </dependency>
         <dependency>
             <groupId>org.openmall.mall</groupId>
-            <artifactId>sms-rest</artifactId>
+            <artifactId>sms-core</artifactId>
+            <version>${mall-business.version}</version>
         </dependency>
 
         <!--mongodb依赖配置-->

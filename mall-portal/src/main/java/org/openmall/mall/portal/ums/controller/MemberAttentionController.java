@@ -20,6 +20,7 @@ import java.util.List;
 public class MemberAttentionController {
     @Autowired
     private MemberAttentionService memberAttentionService;
+
     @ApiOperation("添加品牌关注")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody

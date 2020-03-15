@@ -20,6 +20,7 @@ import org.openmall.mall.portal.oms.service.OmsPortalOrderService;
 import org.openmall.mall.portal.ums.dao.SmsCouponHistoryDao;
 import org.openmall.mall.portal.ums.domain.SmsCouponHistoryDetail;
 import org.openmall.mall.portal.ums.service.UmsMemberCouponService;
+import org.openmall.mall.portal.ums.service.PortalUmsMemberService;
 import org.openmall.mall.sms.mapper.SmsCouponHistoryMapper;
 import org.openmall.mall.sms.model.*;
 import org.openmall.mall.ums.mapper.UmsIntegrationConsumeSettingMapper;
@@ -27,7 +28,6 @@ import org.openmall.mall.ums.model.UmsIntegrationConsumeSetting;
 import org.openmall.mall.ums.model.UmsMember;
 import org.openmall.mall.ums.model.UmsMemberReceiveAddress;
 import org.openmall.mall.ums.service.UmsMemberReceiveAddressService;
-import org.openmall.mall.ums.service.UmsMemberService;
 import org.openmall.mall.ums.util.MemberSecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,7 +46,8 @@ import java.util.*;
 public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
 
     @Autowired
-    private UmsMemberService memberService;
+    private PortalUmsMemberService memberService;
+
     @Autowired
     private OmsCartItemService cartItemService;
     @Autowired

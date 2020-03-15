@@ -12,19 +12,6 @@ import java.util.List;
 public interface UmsMemberService extends IBaseService<UmsMember> {
 
     /**
-     * 生成验证码
-     */
-    String generateAuthCode(String telephone);
-
-    /**
-     * 对输入的验证码进行校验
-     * @param authCode
-     * @param telephone
-     */
-    boolean verifyAuthCode(String authCode, String telephone);
-
-
-    /**
      * 根据用户名获取会员
      */
     UmsMember getByUsername(String username);
@@ -38,14 +25,13 @@ public interface UmsMemberService extends IBaseService<UmsMember> {
      * 用户注册
      */
     @Transactional
-    void register(String username, String password, String telephone, String authCode);
-
+    void register(String username, String password, String telephone);
 
     /**
      * 修改密码
      */
     @Transactional
-    void updatePassword(String telephone, String password, String authCode);
+    void updatePassword(String telephone, String password);
 
 
     /**

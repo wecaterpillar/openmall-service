@@ -7,7 +7,6 @@ import org.openmall.mall.oms.model.OmsCartItem;
 import org.openmall.mall.portal.oms.domain.CartProduct;
 import org.openmall.mall.portal.oms.domain.CartPromotionItem;
 import org.openmall.mall.portal.oms.service.OmsCartItemService;
-import org.openmall.mall.portal.ums.service.UmsMemberLoginService;
 import org.openmall.mall.ums.util.MemberSecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
