@@ -10,6 +10,20 @@ import java.util.List;
  * 会员管理Service
  */
 public interface UmsMemberService extends IBaseService<UmsMember> {
+
+    /**
+     * 生成验证码
+     */
+    String generateAuthCode(String telephone);
+
+    /**
+     * 对输入的验证码进行校验
+     * @param authCode
+     * @param telephone
+     */
+    boolean verifyAuthCode(String authCode, String telephone);
+
+
     /**
      * 根据用户名获取会员
      */

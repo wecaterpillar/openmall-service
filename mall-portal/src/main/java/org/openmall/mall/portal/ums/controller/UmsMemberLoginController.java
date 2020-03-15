@@ -23,6 +23,7 @@ import java.util.Map;
 @Api(tags = "UmsMemberLoginController", description = "会员登录注册管理")
 @RequestMapping("/sso")
 public class UmsMemberLoginController {
+
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
@@ -30,6 +31,7 @@ public class UmsMemberLoginController {
 
     @Autowired
     private UmsMemberLoginService memberLoginService;
+
     @Autowired
     private UmsMemberService memberService;
 
@@ -60,7 +62,7 @@ public class UmsMemberLoginController {
     @ApiOperation("获取验证码")
     @RequestMapping(value = "/getAuthCode", method = RequestMethod.GET)
     public CommonResult getAuthCode(@RequestParam String telephone) {
-        String authCode = memberLoginService.generateAuthCode(telephone);
+        String authCode = memberService.generateAuthCode(telephone);
         return CommonResult.success(authCode,"获取验证码成功");
     }
 

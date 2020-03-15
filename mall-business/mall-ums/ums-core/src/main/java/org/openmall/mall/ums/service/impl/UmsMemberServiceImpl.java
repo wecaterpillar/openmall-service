@@ -21,6 +21,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 /**
  * 会员管理Service实现类
@@ -30,19 +31,24 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
     private static final Logger LOGGER = LoggerFactory.getLogger(UmsMemberServiceImpl.class);
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    protected PasswordEncoder passwordEncoder;
     @Autowired
-    private UmsMemberMapper memberMapper;
+    protected UmsMemberMapper memberMapper;
     @Autowired
-    private UmsMemberLevelMapper memberLevelMapper;
+    protected UmsMemberLevelMapper memberLevelMapper;
 
     @Autowired
-    private RedisService redisService;
+    protected RedisService redisService;
+
+    @Value("${openmall.verify-auth-code:false}")
+    protected boolean needVerifyAuthCode;
 
     @Value("${redis.key.prefix.authCode}")
-    private String REDIS_KEY_PREFIX_AUTH_CODE;
+    protected String REDIS_KEY_PREFIX_AUTH_CODE;
     @Value("${redis.key.expire.authCode}")
-    private Long AUTH_CODE_EXPIRE_SECONDS;
+    protected Long AUTH_CODE_EXPIRE_SECONDS;
+
+
 
     @Override
     public UmsMember getByUsername(String username) {
@@ -63,7 +69,7 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
     @Override
     public void register(String username, String password, String telephone, String authCode) {
         //验证验证码
-        if(!verifyAuthCode(authCode,telephone)){
+        if(needVerifyAuthCode && !verifyAuthCode(authCode,telephone)){
             Asserts.fail("验证码错误");
         }
 
@@ -109,7 +115,7 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
             Asserts.fail("该账号不存在");
         }
         //验证验证码
-        if(!verifyAuthCode(authCode,telephone)){
+        if(needVerifyAuthCode && !verifyAuthCode(authCode,telephone)){
             Asserts.fail("验证码错误");
         }
         UmsMember umsMember = memberList.get(0);
@@ -136,13 +142,26 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
         // TODO
     }
 
+
+    public String generateAuthCode(String telephone) {
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for(int i=0;i<6;i++){
+            sb.append(random.nextInt(10));
+        }
+        //验证码绑定手机号并存储到redis
+        redisService.set(REDIS_KEY_PREFIX_AUTH_CODE+telephone,sb.toString());
+        redisService.expire(REDIS_KEY_PREFIX_AUTH_CODE+telephone,AUTH_CODE_EXPIRE_SECONDS);
+        return sb.toString();
+    }
+
+
     //对输入的验证码进行校验
     public boolean verifyAuthCode(String authCode, String telephone){
-        return true;
-//        if(StringUtils.isEmpty(authCode)){
-//            return false;
-//        }
-//        String realAuthCode = redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + telephone);
-//        return authCode.equals(realAuthCode);
+        if(StringUtils.isEmpty(authCode)){
+            return false;
+        }
+        String realAuthCode = redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + telephone);
+        return authCode.equals(realAuthCode);
     }
 }

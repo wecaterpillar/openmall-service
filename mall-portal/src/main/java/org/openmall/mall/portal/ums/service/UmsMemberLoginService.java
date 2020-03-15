@@ -8,10 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 public interface UmsMemberLoginService {
 
-    /**
-     * 生成验证码
-     */
-    String generateAuthCode(String telephone);
 
     /**
      * 获取当前登录会员
@@ -31,12 +27,5 @@ public interface UmsMemberLoginService {
      * 刷新token
      */
     String refreshToken(String token);
-
-    /**
-     * 对输入的验证码进行校验
-     * @param authCode
-     * @param telephone
-     */
-    boolean verifyAuthCode(String authCode, String telephone);
 
 }
