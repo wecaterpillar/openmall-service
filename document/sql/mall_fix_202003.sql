@@ -1,4 +1,6 @@
 
+# pms_product_category  parent_tree_id
+# pms_product product_category_tree_id
 
 -- update 20200314
 -- pms_sku_stock增加字段sp_data

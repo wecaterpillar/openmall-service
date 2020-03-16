@@ -2506,10 +2506,6 @@ public class PmsProductExample {
             return (Criteria) this;
         }
 
-        public Criteria andProductTreeIdLike(String value) {
-            addCriterion("product_category_tree_id like ", value+"%", "product_category_tree_id");
-            return (Criteria) this;
-        }
 
     }
 

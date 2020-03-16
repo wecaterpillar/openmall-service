@@ -140,26 +140,14 @@ public class PmsProductCategoryServiceImpl implements PmsProductCategoryService 
         //没有父分类时为一级分类
         if (productCategory.getParentId() == 0) {
             productCategory.setLevel(0);
-            productCategory.setParentTreeId("0:");
         } else {
             //有父分类时选择根据父分类level设置
             PmsProductCategory parentCategory = productCategoryMapper.selectByPrimaryKey(productCategory.getParentId());
             if (parentCategory != null) {
                 productCategory.setLevel(parentCategory.getLevel() + 1);
-                productCategory.setParentTreeId(parentCategory.getTreeId());
             } else {
                 productCategory.setLevel(0);
             }
         }
-    }
-
-    /**
-     * 树状分类 Id
-     * @param productCategory
-     * @param parentCategory
-     * @return
-     */
-    private String makeTreeId(PmsProductCategory productCategory, PmsProductCategory parentCategory) {
-        return parentCategory.getParentTreeId()+";"+productCategory.getId();
     }
 }

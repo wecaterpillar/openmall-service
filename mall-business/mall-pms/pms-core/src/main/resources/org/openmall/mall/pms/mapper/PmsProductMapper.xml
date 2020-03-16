@@ -5,7 +5,6 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="brand_id" jdbcType="BIGINT" property="brandId" />
     <result column="product_category_id" jdbcType="BIGINT" property="productCategoryId" />
-    <result column="product_category_tree_id" jdbcType="VARCHAR" property="productCategoryTreeId" />
     <result column="feight_template_id" jdbcType="BIGINT" property="feightTemplateId" />
     <result column="product_attribute_category_id" jdbcType="BIGINT" property="productAttributeCategoryId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
@@ -211,16 +210,13 @@
       <if test="productCategoryId != null">
         product_category_id,
       </if>
-      <if test="productCategoryId != null">
-        product_category_tree_id,
-      </if>
       <if test="feightTemplateId != null">
         feight_template_id,
       </if>
       <if test="productAttributeCategoryId != null">
         product_attribute_category_id,
       </if>
-      
+
       <if test="name != null">
         name,
       </if>
@@ -702,10 +698,6 @@
       </if>
       <if test="productCategoryId != null">
         product_category_id = #{productCategoryId,jdbcType=BIGINT},
-      </if>
-
-      <if test="productCategoryTreeId != null">
-        product_category_tree_id = #{productCategoryTreeId,jdbcType=VARCHAR},
       </if>
       <if test="feightTemplateId != null">
         feight_template_id = #{feightTemplateId,jdbcType=BIGINT},

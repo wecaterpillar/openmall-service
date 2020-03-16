@@ -68,7 +68,7 @@ public class PortalPmsProductServiceImpl implements PortalPmsProductService{
         if (productQueryParam.getProductCategoryId() != null) {
             PmsProductCategory category = productCategoryMapper.selectByPrimaryKey(productQueryParam.getProductCategoryId());
             if(null!=category) {
-                criteria.andProductTreeIdLike(category.getTreeId());
+                //criteria.andProductTreeIdLike(category.getTreeId());
             }
         }
 

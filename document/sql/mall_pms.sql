@@ -166,7 +166,6 @@ CREATE TABLE `pms_product`
     `id`                            bigint(20)  NOT NULL AUTO_INCREMENT,
     `brand_id`                      bigint(20)     DEFAULT NULL,
     `product_category_id`           bigint(20)     DEFAULT NULL,
-    `product_category_tree_id`      varchar(255)   DEFAULT NULL,
     `feight_template_id`            bigint(20)     DEFAULT NULL,
     `product_attribute_category_id` bigint(20)     DEFAULT NULL,
     `name`                          varchar(64) NOT NULL,
@@ -289,7 +288,6 @@ CREATE TABLE `pms_product_category`
 (
     `id`             bigint(20) NOT NULL AUTO_INCREMENT,
     `parent_id`      bigint(20)   DEFAULT NULL COMMENT '上级分类的编号：0表示一级分类',
-    `parent_tree_id` varchar(255) DEFAULT NULL COMMENT '树状父ID，冒号分割',
     `name`           varchar(64)  DEFAULT NULL,
     `level`          int(1)       DEFAULT NULL COMMENT '分类级别：0->1级；1->2级',
     `product_count`  int(11)      DEFAULT NULL,
