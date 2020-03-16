@@ -40,6 +40,12 @@ spring:
         min-idle: 0 # 连接池中的最小空闲连接
     timeout: 3000ms # 连接超时时间（毫秒）
 
+  liquibase:
+    enabled: false
+
+liquibase:
+  modules: mall/base,mall/cms,mall/oms,mall/pms,mall/sms,mall/ums,mall/sys
+
 mybatis-plus:
   configuration:
     cache-enabled: false
