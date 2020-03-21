@@ -77,7 +77,7 @@ public class OmsPortalOrderController {
     @RequestMapping(value = "/createPay",method = RequestMethod.POST)
     public CommonResult pay(PaymentDto dto){
         try {
-            String url = portalOrderService.pay(dto);
+            String url = portalOrderService.createPay(dto);
             return CommonResult.success(url);
         }catch(RuntimeException e){
             log.warn("Failed to create pay url.", e);

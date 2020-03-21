@@ -35,6 +35,7 @@ import org.openmall.mall.ums.model.UmsIntegrationConsumeSetting;
 import org.openmall.mall.ums.model.UmsMember;
 import org.openmall.mall.ums.model.UmsMemberReceiveAddress;
 import org.openmall.mall.ums.service.UmsMemberReceiveAddressService;
+import org.openmall.mall.ums.service.UmsMemberService;
 import org.openmall.mall.ums.util.MemberSecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -259,7 +260,7 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
         return result;
     }
 
-    public String pay(PaymentDto paymentDto) {
+    public String createPay(PaymentDto paymentDto) {
         OmsOrder order = findValidOrder(paymentDto.getOrderId());
 
         if (null == order) {

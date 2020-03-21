@@ -26,7 +26,7 @@ public interface OmsPortalOrderService {
      * @param PaymentDto
      * @return PAY URL
      */
-    String pay(PaymentDto paymentDto);
+    String createPay(PaymentDto paymentDto);
 
     /**
      * 支付成功后的回调
