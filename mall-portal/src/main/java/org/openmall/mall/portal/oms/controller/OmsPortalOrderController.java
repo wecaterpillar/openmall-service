@@ -10,7 +10,10 @@ import org.openmall.mall.oms.service.OmsOrderService;
 import org.openmall.mall.portal.oms.domain.ConfirmOrderResult;
 import org.openmall.mall.portal.oms.domain.OrderParam;
 import org.openmall.mall.portal.oms.service.OmsPortalOrderService;
+import org.openmall.mall.portal.pay.dto.PaymentDto;
 import org.openmall.mall.ums.util.MemberSecurityUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -70,6 +73,18 @@ public class OmsPortalOrderController {
         return CommonResult.success(null);
     }
 
+    @ApiOperation("创建支付 URL")
+    @RequestMapping(value = "/createPay",method = RequestMethod.POST)
+    public CommonResult pay(PaymentDto dto){
+        try {
+            String url = portalOrderService.pay(dto);
+            return CommonResult.success(url);
+        }catch(RuntimeException e){
+            log.warn("Failed to create pay url.", e);
+            return CommonResult.failed(e.getMessage());
+        }
+    }
+
     /// 我的订单列表
     @ApiOperation("获取我的订单列表")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -91,4 +106,5 @@ public class OmsPortalOrderController {
     }
 
 
+   private static Logger log = LoggerFactory.getLogger(OmsPortalOrderController.class);
 }

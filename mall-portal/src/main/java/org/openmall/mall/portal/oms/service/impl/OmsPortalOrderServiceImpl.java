@@ -1,5 +1,8 @@
 package org.openmall.mall.portal.oms.service.impl;
 
+import com.paypal.api.payments.Links;
+import com.paypal.api.payments.Payment;
+import com.paypal.base.rest.PayPalRESTException;
 import org.openmall.mall.common.exception.Asserts;
 import org.openmall.mall.common.service.RedisService;
 import org.openmall.mall.oms.mapper.OmsOrderItemMapper;
@@ -17,6 +20,10 @@ import org.openmall.mall.portal.oms.domain.OmsOrderDetail;
 import org.openmall.mall.portal.oms.domain.OrderParam;
 import org.openmall.mall.portal.oms.service.OmsCartItemService;
 import org.openmall.mall.portal.oms.service.OmsPortalOrderService;
+import org.openmall.mall.portal.pay.dto.PaymentDto;
+import org.openmall.mall.portal.pay.service.PaypalService;
+import org.openmall.mall.portal.pay.util.PaypalPaymentIntent;
+import org.openmall.mall.portal.pay.util.PaypalPaymentMethod;
 import org.openmall.mall.portal.ums.dao.SmsCouponHistoryDao;
 import org.openmall.mall.portal.ums.domain.SmsCouponHistoryDetail;
 import org.openmall.mall.portal.ums.service.UmsMemberCouponService;
@@ -46,8 +53,9 @@ import java.util.*;
 public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
 
     @Autowired
-    private PortalUmsMemberService memberService;
-
+    PaypalService paypalService;
+    @Autowired
+    private UmsMemberService memberService;
     @Autowired
     private OmsCartItemService cartItemService;
     @Autowired
@@ -251,6 +259,55 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
         return result;
     }
 
+    public String pay(PaymentDto paymentDto) {
+        OmsOrder order = findValidOrder(paymentDto.getOrderId());
+
+        if (null == order) {
+            throw new RuntimeException("No valid order found.");
+        }
+
+        if (order.getPayAmount().doubleValue() <= 0) {
+            throw new RuntimeException("金额错误。");
+        }
+
+        // Make payment description
+        String desc = new StringBuilder().append(paymentDto.getOrderId()).append("\n").append(order.getPayAmount()).append("\n").append(paymentDto.getDescription()).toString();
+
+        try {
+            Payment payment = paypalService.createPayment(
+                    paymentDto.getTotal(),
+                    paymentDto.getCurrency(),
+                    PaypalPaymentMethod.paypal,
+                    PaypalPaymentIntent.sale,
+                    paymentDto.getDescription(),
+                    paymentDto.getCancelUrl(),
+                    paymentDto.getSuccessUrl());
+            for (Links links : payment.getLinks()) {
+                if (links.getRel().equals("approval_url")) {
+                    return links.getHref();
+                }
+            }
+
+            // TODO save the payment
+        } catch (PayPalRESTException e) {
+            throw new RuntimeException(e);
+        }
+
+        throw new RuntimeException("创建支付失败，未找到 approval_url");
+    }
+
+    private OmsOrder findValidOrder(Long orderId) {
+        UmsMember currentMember = MemberSecurityUtil.getCurrentMember();
+
+        OmsOrderExample example = new OmsOrderExample();
+        example.createCriteria().andIdEqualTo(orderId).andStatusEqualTo(0).andDeleteStatusEqualTo(0).andMemberIdEqualTo(currentMember.getId());
+        List<OmsOrder> orderList = orderMapper.selectByExample(example);
+        if (CollectionUtils.isEmpty(orderList)) {
+            return null;
+        }
+        return orderList.get(0);
+    }
+
     @Override
     public Integer paySuccess(Long orderId) {
         //修改订单支付状态
@@ -262,12 +319,12 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
         //恢复所有下单商品的锁定库存，扣减真实库存
         OmsOrderDetail orderDetail = portalOrderDao.getDetail(orderId);
         int count = portalOrderDao.updateSkuStock(orderDetail.getOrderItemList());
-        return  count;
+        return count;
     }
 
     @Override
     public Integer cancelTimeOutOrder() {
-        Integer count=0;
+        Integer count = 0;
         OmsOrderSetting orderSetting = orderSettingMapper.selectByPrimaryKey(1L);
         //查询超时、未支付的订单及订单详情
         List<OmsOrderDetail> timeOutOrders = portalOrderDao.getTimeOutOrders(orderSetting.getNormalOrderOvertime());
@@ -628,7 +685,7 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
     private void lockStock(List<CartPromotionItem> cartPromotionItemList) {
         for (CartPromotionItem cartPromotionItem : cartPromotionItemList) {
             PmsSkuStock skuStock = skuStockMapper.selectByPrimaryKey(cartPromotionItem.getProductSkuId());
-            if(skuStock==null){
+            if (skuStock == null) {
                 // TODO 开发环境注释掉实际库存检查后可能存在异常
                 continue;
             }
@@ -642,9 +699,9 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
      */
     private boolean hasStock(List<CartPromotionItem> cartPromotionItemList) {
         for (CartPromotionItem cartPromotionItem : cartPromotionItemList) {
-            if (cartPromotionItem.getRealStock()==null||cartPromotionItem.getRealStock() <= 0) {
+            if (cartPromotionItem.getRealStock() == null || cartPromotionItem.getRealStock() <= 0) {
                 // TODO 开发环境注释掉实际库存检查
-            //    return false;
+                //    return false;
             }
         }
         return true;

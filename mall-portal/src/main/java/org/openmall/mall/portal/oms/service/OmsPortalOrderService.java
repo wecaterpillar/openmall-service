@@ -2,6 +2,7 @@ package org.openmall.mall.portal.oms.service;
 
 import org.openmall.mall.portal.oms.domain.ConfirmOrderResult;
 import org.openmall.mall.portal.oms.domain.OrderParam;
+import org.openmall.mall.portal.pay.dto.PaymentDto;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
@@ -20,6 +21,12 @@ public interface OmsPortalOrderService {
      */
     @Transactional
     Map<String, Object> generateOrder(OrderParam orderParam);
+
+    /**
+     * @param PaymentDto
+     * @return PAY URL
+     */
+    String pay(PaymentDto paymentDto);
 
     /**
      * 支付成功后的回调
