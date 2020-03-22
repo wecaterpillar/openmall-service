@@ -118,6 +118,11 @@
                 <artifactId>mall-common</artifactId>
                 <version>${mall-common.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.openmall.mall</groupId>
+                <artifactId>mall-common-db</artifactId>
+                <version>${mall-common.version}</version>
+            </dependency>
             <!--mall安全模块-->
             <dependency>
                 <groupId>org.openmall.mall</groupId>
