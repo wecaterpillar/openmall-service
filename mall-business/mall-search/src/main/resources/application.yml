@@ -27,6 +27,9 @@ spring:
         enabled: true
       cluster-nodes: ${es_nodes:es:9300}
 
+  liquibase:
+    enabled: false
+
 mybatis-plus:
   configuration:
     cache-enabled: false

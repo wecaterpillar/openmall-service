@@ -50,6 +50,9 @@ spring:
       password: ${rabbit-password:mall}
       publisher-confirms: true #如果对异步消息需要回调必须设置为true
 
+  liquibase:
+    enabled: false
+
 # 自定义redis key
 redis:
   key:
