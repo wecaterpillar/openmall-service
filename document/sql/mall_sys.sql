@@ -1,6 +1,3 @@
-SET FOREIGN_KEY_CHECKS = 0;
-
-
 -- ----------------------------
 -- Table structure for ums_admin
 -- ----------------------------
@@ -79,7 +76,6 @@ CREATE TABLE `ums_admin_role_relation`
 
 
 
-
 -- ----------------------------
 -- Table structure for ums_permission
 -- ----------------------------
@@ -139,6 +135,83 @@ CREATE TABLE `ums_role_permission_relation`
 
 
 
+-- ----------------------------
+-- Table structure for ums_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `ums_menu`;
+CREATE TABLE `ums_menu`
+(
+    `id`          bigint(20) NOT NULL AUTO_INCREMENT,
+    `parent_id`   bigint(20)   DEFAULT NULL COMMENT '父级ID',
+    `create_time` datetime     DEFAULT NULL COMMENT '创建时间',
+    `title`       varchar(100) DEFAULT NULL COMMENT '菜单名称',
+    `level`       int(4)       DEFAULT NULL COMMENT '菜单级数',
+    `sort`        int(4)       DEFAULT NULL COMMENT '菜单排序',
+    `name`        varchar(100) DEFAULT NULL COMMENT '前端名称',
+    `icon`        varchar(200) DEFAULT NULL COMMENT '前端图标',
+    `hidden`      int(1)       DEFAULT NULL COMMENT '前端隐藏',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 26
+  DEFAULT CHARSET = utf8 COMMENT ='后台菜单表';
 
 
-SET FOREIGN_KEY_CHECKS = 1;
+-- ----------------------------
+-- Table structure for ums_resource
+-- ----------------------------
+DROP TABLE IF EXISTS `ums_resource`;
+CREATE TABLE `ums_resource`
+(
+    `id`          bigint(20) NOT NULL AUTO_INCREMENT,
+    `create_time` datetime     DEFAULT NULL COMMENT '创建时间',
+    `name`        varchar(200) DEFAULT NULL COMMENT '资源名称',
+    `url`         varchar(200) DEFAULT NULL COMMENT '资源URL',
+    `description` varchar(500) DEFAULT NULL COMMENT '描述',
+    `category_id` bigint(20)   DEFAULT NULL COMMENT '资源分类ID',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 31
+  DEFAULT CHARSET = utf8 COMMENT ='后台资源表';
+
+-- ----------------------------
+-- Table structure for ums_resource_category
+-- ----------------------------
+DROP TABLE IF EXISTS `ums_resource_category`;
+CREATE TABLE `ums_resource_category`
+(
+    `id`          bigint(20) NOT NULL AUTO_INCREMENT,
+    `create_time` datetime     DEFAULT NULL COMMENT '创建时间',
+    `name`        varchar(200) DEFAULT NULL COMMENT '分类名称',
+    `sort`        int(4)       DEFAULT NULL COMMENT '排序',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 8
+  DEFAULT CHARSET = utf8 COMMENT ='资源分类表';
+
+-- ----------------------------
+-- Table structure for ums_role_menu_relation
+-- ----------------------------
+DROP TABLE IF EXISTS `ums_role_menu_relation`;
+CREATE TABLE `ums_role_menu_relation`
+(
+    `id`      bigint(20) NOT NULL AUTO_INCREMENT,
+    `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
+    `menu_id` bigint(20) DEFAULT NULL COMMENT '菜单ID',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 96
+  DEFAULT CHARSET = utf8 COMMENT ='后台角色菜单关系表';
+
+-- ----------------------------
+-- Table structure for ums_role_resource_relation
+-- ----------------------------
+DROP TABLE IF EXISTS `ums_role_resource_relation`;
+CREATE TABLE `ums_role_resource_relation`
+(
+    `id`          bigint(20) NOT NULL AUTO_INCREMENT,
+    `role_id`     bigint(20) DEFAULT NULL COMMENT '角色ID',
+    `resource_id` bigint(20) DEFAULT NULL COMMENT '资源ID',
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 178
+  DEFAULT CHARSET = utf8 COMMENT ='后台角色资源关系表';
