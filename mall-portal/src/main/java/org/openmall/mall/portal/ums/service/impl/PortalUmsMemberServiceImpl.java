@@ -1,8 +1,8 @@
 package org.openmall.mall.portal.ums.service.impl;
 
 import org.openmall.mall.common.exception.Asserts;
-import org.openmall.mall.common.service.RedisService;
 import org.openmall.mall.portal.ums.service.PortalUmsMemberService;
+import org.openmall.mall.ums.service.UmsMemberCacheService;
 import org.openmall.mall.security.util.JwtTokenUtil;
 import org.openmall.mall.security.util.SecurityUtil;
 import org.openmall.mall.ums.domain.MemberDetails;
@@ -49,8 +49,12 @@ public class PortalUmsMemberServiceImpl implements PortalUmsMemberService {
     protected UmsMemberLevelMapper memberLevelMapper;
 
 
+    //@Autowired
+    //protected RedisService redisService;
+
     @Autowired
-    protected RedisService redisService;
+    private UmsMemberCacheService memberCacheService;
+
 
     @Value("${openmall.verify-auth-code:false}")
     protected boolean needVerifyAuthCode;
@@ -142,11 +146,15 @@ public class PortalUmsMemberServiceImpl implements PortalUmsMemberService {
     }
 
     private UmsMember getByUsername(String username) {
+        UmsMember member = memberCacheService.getMember(username);
+        if(member!=null) return member;
         UmsMemberExample example = new UmsMemberExample();
         example.createCriteria().andUsernameEqualTo(username);
         List<UmsMember> memberList = memberMapper.selectByExample(example);
         if (!CollectionUtils.isEmpty(memberList)) {
-            return memberList.get(0);
+            member = memberList.get(0);
+            memberCacheService.setMember(member);
+            return member;
         }
         return null;
     }
@@ -180,6 +188,7 @@ public class PortalUmsMemberServiceImpl implements PortalUmsMemberService {
         record.setId(id);
         record.setIntegration(integration);
         memberMapper.updateByPrimaryKeySelective(record);
+        memberCacheService.delMember(id);
     }
 
 
@@ -190,8 +199,9 @@ public class PortalUmsMemberServiceImpl implements PortalUmsMemberService {
             sb.append(random.nextInt(10));
         }
         //验证码绑定手机号并存储到redis
-        redisService.set(REDIS_KEY_PREFIX_AUTH_CODE+telephone,sb.toString());
-        redisService.expire(REDIS_KEY_PREFIX_AUTH_CODE+telephone,AUTH_CODE_EXPIRE_SECONDS);
+        memberCacheService.setAuthCode(telephone,sb.toString());
+        //redisService.set(REDIS_KEY_PREFIX_AUTH_CODE+telephone,sb.toString());
+        //redisService.expire(REDIS_KEY_PREFIX_AUTH_CODE+telephone,AUTH_CODE_EXPIRE_SECONDS);
         return sb.toString();
     }
 
@@ -201,7 +211,8 @@ public class PortalUmsMemberServiceImpl implements PortalUmsMemberService {
         if(StringUtils.isEmpty(authCode)){
             return false;
         }
-        String realAuthCode = (String)redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + telephone);
+        String realAuthCode = memberCacheService.getAuthCode(telephone);
+        //String realAuthCode = (String)redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + telephone);
         return authCode.equals(realAuthCode);
     }
 

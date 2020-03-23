@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,6 +59,17 @@ public class PortalUmsMemberController {
         tokenMap.put("tokenHead", tokenHead);
         return CommonResult.success(tokenMap);
     }
+
+    @ApiOperation("获取会员信息")
+    @RequestMapping(value = "/info", method = RequestMethod.GET)
+    public CommonResult info(Principal principal) {
+        if(principal==null){
+            return CommonResult.unauthorized(null);
+        }
+        UmsMember member = memberService.getCurrentMember();
+        return CommonResult.success(member);
+    }
+
 
     @ApiOperation("获取验证码")
     @RequestMapping(value = "/getAuthCode", method = RequestMethod.GET)

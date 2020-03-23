@@ -8,6 +8,7 @@ import org.openmall.mall.ums.model.UmsMember;
 import org.openmall.mall.ums.model.UmsMemberExample;
 import org.openmall.mall.ums.model.UmsMemberLevel;
 import org.openmall.mall.ums.model.UmsMemberLevelExample;
+import org.openmall.mall.ums.service.UmsMemberCacheService;
 import org.openmall.mall.ums.service.UmsMemberService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,9 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
     protected UmsMemberMapper memberMapper;
     @Autowired
     protected UmsMemberLevelMapper memberLevelMapper;
+
+    @Autowired
+    private UmsMemberCacheService memberCacheService;
 
     @Override
     public UmsMember getByUsername(String username) {
@@ -96,6 +100,8 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
         UmsMember umsMember = memberList.get(0);
         umsMember.setPassword(passwordEncoder.encode(password));
         memberMapper.updateByPrimaryKeySelective(umsMember);
+        // delete cache
+        memberCacheService.delMember(umsMember.getId());
     }
 
 

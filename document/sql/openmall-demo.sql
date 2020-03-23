@@ -3766,7 +3766,7 @@ VALUES ('19', '12', '2020-02-07 16:28:16', '专题推荐', '1', '0', 'homeSubjec
 INSERT INTO `ums_menu`
 VALUES ('20', '12', '2020-02-07 16:28:42', '广告列表', '1', '0', 'homeAdvertise', 'sms-ad', '0');
 INSERT INTO `ums_menu`
-VALUES ('21', '0', '2020-02-07 16:29:13', '权限', '0', '0', 'ums', 'ums', '0');
+VALUES ('21', '0', '2020-02-07 16:29:13', '权限', '0', '0', 'sys', 'ums', '0');
 INSERT INTO `ums_menu`
 VALUES ('22', '21', '2020-02-07 16:29:51', '用户列表', '1', '0', 'admin', 'ums-admin', '0');
 INSERT INTO `ums_menu`
