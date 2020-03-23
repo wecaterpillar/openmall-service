@@ -1,7 +1,7 @@
 package org.openmall.mall.sys.bo;
 
 import org.openmall.mall.sys.model.UmsAdmin;
-import org.openmall.mall.sys.model.UmsPermission;
+import org.openmall.mall.sys.model.UmsResource;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,18 +15,17 @@ import java.util.stream.Collectors;
  */
 public class AdminUserDetails implements UserDetails {
     private UmsAdmin umsAdmin;
-    private List<UmsPermission> permissionList;
-    public AdminUserDetails(UmsAdmin umsAdmin,List<UmsPermission> permissionList) {
+    private List<UmsResource> resourceList;
+    public AdminUserDetails(UmsAdmin umsAdmin,List<UmsResource> resourceList) {
         this.umsAdmin = umsAdmin;
-        this.permissionList = permissionList;
+        this.resourceList = resourceList;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        //返回当前用户的权限
-        return permissionList.stream()
-                .filter(permission -> permission.getValue()!=null)
-                .map(permission ->new SimpleGrantedAuthority(permission.getValue()))
+        //返回当前用户的角色
+        return resourceList.stream()
+                .map(role ->new SimpleGrantedAuthority(role.getId()+":"+role.getName()))
                 .collect(Collectors.toList());
     }
 

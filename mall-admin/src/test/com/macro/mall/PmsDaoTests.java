@@ -5,7 +5,7 @@ import cn.hutool.json.JSONUtil;
 import org.openmall.mall.dao.PmsMemberPriceDao;
 import org.openmall.mall.dao.PmsProductDao;
 import org.openmall.mall.dto.PmsProductResult;
-import org.openmall.mall.model.PmsMemberPrice;
+import org.openmall.mall.sys.model.PmsMemberPrice;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -55,12 +55,18 @@ spring:
 
 # 自定义redis key
 redis:
+  database: mall
   key:
+    authCode: 'ums:authCode'
+    orderId: 'oms:orderId'
+    member: 'ums:member'
     prefix:
       authCode: "portal:authCode:"
       orderId: "portal:orderId:"
-    expire:
-      authCode: 90 # 验证码超期时间
+  expire:
+    authCode: 90 # 验证码超期时间
+    common: 86400 # 24小时
+
 
 # 消息队列定义
 rabbitmq:

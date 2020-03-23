@@ -27,7 +27,6 @@ import org.openmall.mall.portal.pay.util.PaypalPaymentMethod;
 import org.openmall.mall.portal.ums.dao.SmsCouponHistoryDao;
 import org.openmall.mall.portal.ums.domain.SmsCouponHistoryDetail;
 import org.openmall.mall.portal.ums.service.UmsMemberCouponService;
-import org.openmall.mall.portal.ums.service.PortalUmsMemberService;
 import org.openmall.mall.sms.mapper.SmsCouponHistoryMapper;
 import org.openmall.mall.sms.model.*;
 import org.openmall.mall.ums.mapper.UmsIntegrationConsumeSettingMapper;
@@ -77,8 +76,13 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
     private SmsCouponHistoryMapper couponHistoryMapper;
     @Autowired
     private RedisService redisService;
-    @Value("${redis.key.prefix.orderId}")
-    private String REDIS_KEY_PREFIX_ORDER_ID;
+    @Value("${redis.key.orderId}")
+    private String REDIS_KEY_ORDER_ID;
+    @Value("${redis.database}")
+    private String REDIS_DATABASE;
+    //@Value("${redis.key.prefix.orderId}")
+    //private String REDIS_KEY_PREFIX_ORDER_ID;
+
     @Autowired
     private PortalOrderDao portalOrderDao;
     @Autowired
@@ -398,8 +402,9 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
     private String generateOrderSn(OmsOrder order) {
         StringBuilder sb = new StringBuilder();
         String date = new SimpleDateFormat("yyyyMMdd").format(new Date());
-        String key = REDIS_KEY_PREFIX_ORDER_ID + date;
-        Long increment = redisService.increment(key, 1);
+        //String key = REDIS_KEY_PREFIX_ORDER_ID + date;
+        String key = REDIS_DATABASE+":"+ REDIS_KEY_ORDER_ID + date;
+        Long increment = redisService.incr(key, 1);
         sb.append(date);
         sb.append(String.format("%02d", order.getSourceType()));
         sb.append(String.format("%02d", order.getPayType()));

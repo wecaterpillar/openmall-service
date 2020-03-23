@@ -49,16 +49,15 @@ public class PortalUmsMemberServiceImpl implements PortalUmsMemberService {
     protected UmsMemberLevelMapper memberLevelMapper;
 
 
-
     @Autowired
     protected RedisService redisService;
 
     @Value("${openmall.verify-auth-code:false}")
     protected boolean needVerifyAuthCode;
 
-    @Value("${redis.key.prefix.authCode}")
+    @Value("${redis.key.authCode}")
     protected String REDIS_KEY_PREFIX_AUTH_CODE;
-    @Value("${redis.key.expire.authCode}")
+    @Value("${redis.expire.authCode}")
     protected Long AUTH_CODE_EXPIRE_SECONDS;
 
 
@@ -202,7 +201,7 @@ public class PortalUmsMemberServiceImpl implements PortalUmsMemberService {
         if(StringUtils.isEmpty(authCode)){
             return false;
         }
-        String realAuthCode = redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + telephone);
+        String realAuthCode = (String)redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + telephone);
         return authCode.equals(realAuthCode);
     }
 
