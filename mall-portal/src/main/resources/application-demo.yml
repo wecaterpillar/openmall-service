@@ -11,3 +11,10 @@ spring:
         max-idle: 8 # 连接池中的最大空闲连接
         min-idle: 0 # 连接池中的最小空闲连接
     timeout: 3000ms # 连接超时时间（毫秒）
+
+
+paypal:
+  mode: sandbox
+  client:
+    app: AcrMjTOQmSN8jPZu0Gs9qxQVupSmJ27oSz8Nm1Rv-Ozkv__dNysGd51GI4bwX2gNaLI1w485UL0vKgTm
+    secret: EFFTE0WHPFtQxtRXAyEt6wLOyr8JfDwvHlGrqEQUKoOGH7-Xp9NpMGsicLGSlL0pyb5dvCyOcaOzZCDc
