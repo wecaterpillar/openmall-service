@@ -75,7 +75,7 @@ public class OmsPortalOrderController {
 
     @ApiOperation("创建支付 URL")
     @RequestMapping(value = "/createPay",method = RequestMethod.POST)
-    public CommonResult pay(PaymentDto dto){
+    public CommonResult pay(@RequestBody PaymentDto dto){
         try {
             String url = portalOrderService.createPay(dto);
             return CommonResult.success(url);
