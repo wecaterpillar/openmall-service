@@ -7,6 +7,9 @@ import java.util.Date;
 
 /**
  * 订单
+ *
+ * TODO 订单支持多次支付
+ *
  */
 @lombok.Data
 public class OmsOrder implements Serializable {
