@@ -1,7 +1,7 @@
 package org.openmall.mall.base.model;
 
 /**
- * 渠道定义
+ * 业务渠道定义
  */
 @lombok.Data
 public class Channel {

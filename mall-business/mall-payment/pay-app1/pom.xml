@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.openmall.mall</groupId>
+        <artifactId>mall-payment</artifactId>
+        <version>1.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>pay-app1</artifactId>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <pay.version>2.13.1</pay.version>
+        <pay-starter.version>0.0.4</pay-starter.version>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-spring-boot-starter</artifactId>
+            <version>${pay-starter.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <!-- egzosn pay -->
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-java-common</artifactId>
+            <version>${pay.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-java-ali</artifactId>
+            <version>${pay.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-java-wx</artifactId>
+            <version>${pay.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-java-wx-youdian</artifactId>
+            <version>${pay.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-java-union</artifactId>
+            <version>${pay.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-java-payoneer</artifactId>
+            <version>${pay.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-java-paypal</artifactId>
+            <version>${pay.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.egzosn</groupId>
+            <artifactId>pay-java-fuiou</artifactId>
+            <version>${pay.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+
+    </dependencies>
+
+
+</project>

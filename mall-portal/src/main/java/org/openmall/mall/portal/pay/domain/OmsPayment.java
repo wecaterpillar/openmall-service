@@ -5,6 +5,10 @@ import lombok.Data;
 import java.util.Date;
 
 /**
+ *
+ * 支付记录
+ *
+ *
  * Created by qingsong on 2020-03-17
  */
 @Data
