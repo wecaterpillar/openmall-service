@@ -2,6 +2,7 @@ package org.openmall.mall.base.model;
 
 /**
  * 商户
+ *
  */
 @lombok.Data
 public class Merchant {

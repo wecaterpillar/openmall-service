@@ -1,4 +1,4 @@
-# pay-app1
+# pay-adapter
  
 基于pay-spring-boot-starter的支付实现。
 

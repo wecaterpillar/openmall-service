@@ -14,6 +14,9 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 /**
+ *
+ * 支付接口API
+ *
  */
 
 @RequestMapping("pay")

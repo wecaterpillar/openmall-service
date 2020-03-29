@@ -1,6 +1,6 @@
 package org.openmall.mall.pay.dto;
 
-import com.egzosn.pay.common.util.str.StringUtils;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -103,10 +103,10 @@ public class PayOrder {
 
 
     public PayOrder(String detailsId, String wayTrade, String subject, String body, BigDecimal price, String outTradeNo) {
-        this.subject = StringUtils.tryTrim(subject);
-        this.body = StringUtils.tryTrim(body);
+        this.subject = StringUtils.trimWhitespace(subject);
+        this.body = StringUtils.trimWhitespace(body);
         this.price = price;
-        this.outTradeNo = StringUtils.tryTrim(outTradeNo);
+        this.outTradeNo = StringUtils.trimWhitespace(outTradeNo);
         //this.transactionType = transactionType;
         this.detailsId = detailsId;
         this.wayTrade = wayTrade;
