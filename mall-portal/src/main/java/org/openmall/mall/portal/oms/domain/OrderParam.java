@@ -2,7 +2,9 @@ package org.openmall.mall.portal.oms.domain;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
+import org.openmall.mall.oms.model.OmsCartItem;
+
+import java.util.List;
 
 /**
  * 生成订单时传入的参数
@@ -10,6 +12,12 @@ import io.swagger.annotations.ApiParam;
 @ApiModel("生成订单时传入的参数")
 @lombok.Data
 public class OrderParam {
+    //结算单编号
+    private String confirmOrderNo;
+
+    //下单商品（ OmsCartItem 必须字段：商品id/SKUid/数量）
+    private List<OmsCartItem> carItems;
+
     //收货地址id
     @ApiModelProperty("收货地址id")
     private Long memberReceiveAddressId;

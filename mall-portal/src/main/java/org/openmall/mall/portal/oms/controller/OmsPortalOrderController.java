@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.openmall.mall.common.api.CommonResult;
 import org.openmall.mall.oms.dto.OmsOrderDetail;
 import org.openmall.mall.oms.dto.OmsOrderQueryParam;
+import org.openmall.mall.oms.model.OmsCartItem;
 import org.openmall.mall.oms.model.OmsOrder;
 import org.openmall.mall.oms.service.OmsOrderService;
 import org.openmall.mall.portal.oms.domain.ConfirmOrderResult;
@@ -23,12 +24,6 @@ import java.util.Map;
 /**
  * 订单管理Controller
  *
- * TODO:
- * 1. 购物车生成订单时可选择部分商品下单
- * 2. 直接选择某商品生成订单
- *
- *     // TODO 增加选择商品生成确认单
- *     // TODO 增加根据已选商品确认信息生成订单
  */
 @RestController
 @Api(tags = "OmsPortalOrderController",description = "订单管理")
@@ -43,20 +38,19 @@ public class OmsPortalOrderController {
     private OmsOrderService orderService;
 
 
-    @ApiOperation("根据购物车信息生成确认单信息")
+    @ApiOperation("根据购物车信息/所选商品生成确认单信息")
     @RequestMapping(value = "/generateConfirmOrder",method = RequestMethod.POST)
-    public CommonResult<ConfirmOrderResult> generateConfirmOrder(){
-        ConfirmOrderResult confirmOrderResult = portalOrderService.generateConfirmOrder();
+    public CommonResult<ConfirmOrderResult> generateConfirmOrder(@RequestBody OmsCartItem cartItem){
+        ConfirmOrderResult confirmOrderResult = portalOrderService.generateConfirmOrder(cartItem);
         return CommonResult.success(confirmOrderResult);
     }
-    @ApiOperation("根据购物车信息生成订单")
+
+    @ApiOperation("生成订单，支持传入所选商品列表")
     @RequestMapping(value = "/generateOrder",method = RequestMethod.POST)
     public CommonResult generateOrder(@RequestBody OrderParam orderParam){
         Map<String, Object> result = portalOrderService.generateOrder(orderParam);
         return CommonResult.success(result, "下单成功");
     }
-
-
 
     @ApiOperation("支付成功的回调")
     @RequestMapping(value = "/paySuccess",method = RequestMethod.POST)

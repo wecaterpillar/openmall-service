@@ -94,6 +94,13 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
 
     @Override
     public ConfirmOrderResult generateConfirmOrder() {
+        return generateConfirmOrder(null);
+    }
+    @Override
+    public ConfirmOrderResult generateConfirmOrder(OmsCartItem cartItem) {
+
+        // TODO 增加选择单个商品进行计算
+
         ConfirmOrderResult result = new ConfirmOrderResult();
         //获取购物车信息
         UmsMember currentMember = MemberSecurityUtil.getCurrentMember();
@@ -116,8 +123,13 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
         return result;
     }
 
+
+
     @Override
     public Map<String, Object> generateOrder(OrderParam orderParam) {
+
+        // TODO 改造支持三种下单场景： 1 选择某个商品下单  2 选中购物车中某几个商品下单 3 全部购物车下单
+
         List<OmsOrderItem> orderItemList = new ArrayList<>();
         //获取购物车及优惠信息
         UmsMember currentMember = MemberSecurityUtil.getCurrentMember();

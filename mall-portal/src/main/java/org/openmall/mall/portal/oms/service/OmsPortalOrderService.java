@@ -1,5 +1,6 @@
 package org.openmall.mall.portal.oms.service;
 
+import org.openmall.mall.oms.model.OmsCartItem;
 import org.openmall.mall.portal.oms.domain.ConfirmOrderResult;
 import org.openmall.mall.portal.oms.domain.OrderParam;
 import org.openmall.mall.portal.pay.dto.PaymentDto;
@@ -15,6 +16,11 @@ public interface OmsPortalOrderService {
      * 根据用户购物车信息生成确认单信息
      */
     ConfirmOrderResult generateConfirmOrder();
+
+    /**
+     * 根据所选商品生成确认单信息
+     */
+    ConfirmOrderResult generateConfirmOrder(OmsCartItem cartItem);
 
     /**
      * 根据提交信息生成订单

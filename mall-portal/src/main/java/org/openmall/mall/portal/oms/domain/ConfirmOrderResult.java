@@ -12,6 +12,8 @@ import java.util.List;
  */
 @lombok.Data
 public class ConfirmOrderResult {
+    //结算单编号
+    private String confirmOrderNo;
     //包含优惠信息的购物车信息
     private List<CartPromotionItem> cartPromotionItemList;
     //用户收货地址列表
