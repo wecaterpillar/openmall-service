@@ -103,7 +103,7 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
 
         //获取购物车信息
         List<CartPromotionItem> cartPromotionItemList = null;
-        if(orderParam!=null && !orderParam.getCarItems().isEmpty()){
+        if(orderParam!=null && orderParam.getCarItems()!=null && !orderParam.getCarItems().isEmpty()){
             //用户提交商品列表优先
             // TODO 需要增加用户提交carItems数据完整性检查
             cartPromotionItemList = cartItemService.listPromotion(orderParam.getCarItems());
@@ -136,7 +136,7 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
         //获取购物车及优惠信息
         UmsMember currentMember = MemberSecurityUtil.getCurrentMember();
         List<CartPromotionItem> cartPromotionItemList = null;
-        if(orderParam!=null && !orderParam.getCarItems().isEmpty()){
+        if(orderParam!=null && orderParam.getCarItems()!=null && !orderParam.getCarItems().isEmpty()){
             // 用户提交商品列表优先
             // TODO 需要增加用户提交carItems数据完整性检查
             cartPromotionItemList = cartItemService.listPromotion(orderParam.getCarItems());
