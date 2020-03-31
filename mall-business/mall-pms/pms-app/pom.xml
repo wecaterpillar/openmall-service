@@ -37,9 +37,15 @@
         </dependency>
         <dependency>
             <groupId>org.openmall.mall</groupId>
+            <artifactId>pms-sync</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openmall.mall</groupId>
             <artifactId>cms-rest</artifactId>
             <version>${project.version}</version>
         </dependency>
+
     </dependencies>
 
 </project>

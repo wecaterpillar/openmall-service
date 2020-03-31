@@ -60,6 +60,12 @@
             <artifactId>sms-rest</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.openmall.mall</groupId>
+            <artifactId>pms-sync</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>net.logstash.logback</groupId>
@@ -80,6 +86,7 @@
                 <executions>
                     <execution>
                         <id>default</id>
+                        <phase>deploy</phase>
                         <goals>
                             <goal>build</goal>
                             <goal>push</goal>

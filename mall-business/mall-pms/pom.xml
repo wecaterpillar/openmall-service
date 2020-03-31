@@ -36,6 +36,7 @@
         <module>pms-rest</module>
         <module>pms-app</module>
         <module>pms-feign</module>
+        <module>pms-sync</module>
     </modules>
 
     <dependencyManagement>
