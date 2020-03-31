@@ -114,6 +114,7 @@ secure:
       - /sso/**
       - /home/**
       - /pms/**
+      - /subscribe/**
 
 aliyun:
   oss:
