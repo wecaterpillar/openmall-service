@@ -12,9 +12,6 @@ import java.util.List;
 @ApiModel("生成订单时传入的参数")
 @lombok.Data
 public class OrderParam {
-    //结算单编号
-    private String confirmOrderNo;
-
     //下单商品（ OmsCartItem 必须字段：商品id/SKUid/数量）
     private List<OmsCartItem> carItems;
 

@@ -97,7 +97,7 @@ public class OmsPortalOrderServiceImpl implements OmsPortalOrderService {
         return generateConfirmOrder(null);
     }
     @Override
-    public ConfirmOrderResult generateConfirmOrder(OmsCartItem cartItem) {
+    public ConfirmOrderResult generateConfirmOrder(OrderParam orderParam) {
 
         // TODO 增加选择单个商品进行计算
 

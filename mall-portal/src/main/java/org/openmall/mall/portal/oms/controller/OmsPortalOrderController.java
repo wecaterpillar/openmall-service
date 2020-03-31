@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiOperation;
 import org.openmall.mall.common.api.CommonResult;
 import org.openmall.mall.oms.dto.OmsOrderDetail;
 import org.openmall.mall.oms.dto.OmsOrderQueryParam;
-import org.openmall.mall.oms.model.OmsCartItem;
 import org.openmall.mall.oms.model.OmsOrder;
 import org.openmall.mall.oms.service.OmsOrderService;
 import org.openmall.mall.portal.oms.domain.ConfirmOrderResult;
@@ -40,8 +39,8 @@ public class OmsPortalOrderController {
 
     @ApiOperation("根据购物车信息/所选商品生成确认单信息")
     @RequestMapping(value = "/generateConfirmOrder",method = RequestMethod.POST)
-    public CommonResult<ConfirmOrderResult> generateConfirmOrder(@RequestBody OmsCartItem cartItem){
-        ConfirmOrderResult confirmOrderResult = portalOrderService.generateConfirmOrder(cartItem);
+    public CommonResult<ConfirmOrderResult> generateConfirmOrder(@RequestBody OrderParam orderParam){
+        ConfirmOrderResult confirmOrderResult = portalOrderService.generateConfirmOrder(orderParam);
         return CommonResult.success(confirmOrderResult);
     }
 
