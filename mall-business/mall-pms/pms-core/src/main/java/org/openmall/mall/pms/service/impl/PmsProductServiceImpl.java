@@ -79,24 +79,32 @@ public class PmsProductServiceImpl implements PmsProductService {
     public int create(PmsProductParam productParam) {
         int count;
 
+        // 1. 商品
         //创建商品
         PmsProduct product = productParam;
         product.setId(null);
         productMapper.insertSelective(product);
-        //根据促销类型设置价格：会员价格、阶梯价格、满减价格
+
         Long productId = product.getId();
+
+        //添加商品参数,添加自定义商品规格
+        relateAndInsertList(productAttributeValueDao, productParam.getProductAttributeValueList(), productId);
+
+        // 2. SKU
+        //处理sku的编码
+        handleSkuStockCode(productParam.getSkuStockList(),productId);
+        //添加sku库存信息
+        relateAndInsertList(skuStockDao, productParam.getSkuStockList(), productId);
+
+        // 3. 根据促销类型设置价格：会员价格、阶梯价格、满减价格
         //会员价格
         relateAndInsertList(memberPriceDao, productParam.getMemberPriceList(), productId);
         //阶梯价格
         relateAndInsertList(productLadderDao, productParam.getProductLadderList(), productId);
         //满减价格
         relateAndInsertList(productFullReductionDao, productParam.getProductFullReductionList(), productId);
-        //处理sku的编码
-        handleSkuStockCode(productParam.getSkuStockList(),productId);
-        //添加sku库存信息
-        relateAndInsertList(skuStockDao, productParam.getSkuStockList(), productId);
-        //添加商品参数,添加自定义商品规格
-        relateAndInsertList(productAttributeValueDao, productParam.getProductAttributeValueList(), productId);
+
+        // 4. 其他营销设置
         //关联专题
         relateAndInsertList(subjectProductRelationDao, productParam.getSubjectProductRelationList(), productId);
         //关联优选
@@ -132,10 +140,28 @@ public class PmsProductServiceImpl implements PmsProductService {
     @Override
     public int update(Long id, PmsProductParam productParam) {
         int count;
+        // 1. 商品
         //更新商品信息
         PmsProduct product = productParam;
         product.setId(id);
         productMapper.updateByPrimaryKeySelective(product);
+
+        //修改商品参数,添加自定义商品规格
+        PmsProductAttributeValueExample productAttributeValueExample = new PmsProductAttributeValueExample();
+        productAttributeValueExample.createCriteria().andProductIdEqualTo(id);
+        productAttributeValueMapper.deleteByExample(productAttributeValueExample);
+        relateAndInsertList(productAttributeValueDao, productParam.getProductAttributeValueList(), id);
+
+        // 2. sku
+        //修改sku库存信息
+//        PmsSkuStockExample skuStockExample = new PmsSkuStockExample();
+//        skuStockExample.createCriteria().andProductIdEqualTo(id);
+//        skuStockMapper.deleteByExample(skuStockExample);
+//        handleSkuStockCode(productParam.getSkuStockList(),id);
+//        relateAndInsertList(skuStockDao, productParam.getSkuStockList(), id);
+        handleUpdateSkuStockList(id, productParam);
+
+        // 3. 营销价格
         //会员价格
         PmsMemberPriceExample pmsMemberPriceExample = new PmsMemberPriceExample();
         pmsMemberPriceExample.createCriteria().andProductIdEqualTo(id);
@@ -151,18 +177,8 @@ public class PmsProductServiceImpl implements PmsProductService {
         fullReductionExample.createCriteria().andProductIdEqualTo(id);
         productFullReductionMapper.deleteByExample(fullReductionExample);
         relateAndInsertList(productFullReductionDao, productParam.getProductFullReductionList(), id);
-        //修改sku库存信息
-//        PmsSkuStockExample skuStockExample = new PmsSkuStockExample();
-//        skuStockExample.createCriteria().andProductIdEqualTo(id);
-//        skuStockMapper.deleteByExample(skuStockExample);
-//        handleSkuStockCode(productParam.getSkuStockList(),id);
-//        relateAndInsertList(skuStockDao, productParam.getSkuStockList(), id);
-        handleUpdateSkuStockList(id, productParam);
-        //修改商品参数,添加自定义商品规格
-        PmsProductAttributeValueExample productAttributeValueExample = new PmsProductAttributeValueExample();
-        productAttributeValueExample.createCriteria().andProductIdEqualTo(id);
-        productAttributeValueMapper.deleteByExample(productAttributeValueExample);
-        relateAndInsertList(productAttributeValueDao, productParam.getProductAttributeValueList(), id);
+
+       // 4. 营销关联
         //关联专题
         CmsSubjectProductRelationExample subjectProductRelationExample = new CmsSubjectProductRelationExample();
         subjectProductRelationExample.createCriteria().andProductIdEqualTo(id);
