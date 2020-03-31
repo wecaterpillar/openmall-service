@@ -1,5 +1,7 @@
 package org.openmall.mall.base.model;
 
+import java.util.List;
+
 /**
  * 商户
  *
@@ -22,6 +24,9 @@ public class Merchant {
     private Boolean hasChannel = true;    //是否开通销售渠道
     private Boolean hasSupply = false;    //是否开通供应商
 
+    private List<Channel> channelList;  // 商户的渠道清单
+
+
     public Merchant(Long id, String code,String name, Boolean isMallOp, Boolean hasChannel, Boolean hasSupply) {
         this.id = id;
         this.code = code;
@@ -30,4 +35,5 @@ public class Merchant {
         this.hasChannel = hasChannel;
         this.hasSupply = hasSupply;
     }
+
 }

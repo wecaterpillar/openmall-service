@@ -7,7 +7,7 @@ package org.openmall.mall.base.model;
 public class Channel {
 
     private Long id;  //渠道编号
-    private Long merchantCode;  //所属商户
+    private Long merchantId;  //所属商户Id
     private Long ChannelType;  //渠道类型
     //国家
     private String countryCode;

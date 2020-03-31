@@ -6,11 +6,18 @@ import org.openmall.mall.pms.model.PmsProductCategory;
 import org.openmall.mall.portal.home.domain.HomeContentResult;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 首页内容管理Service
  */
 public interface HomeService {
+
+    /**
+     * 获取当前网站配置信息
+     * @return
+     */
+    Map<String, Object> getChannelConfig();
 
     /**
      * 获取首页内容

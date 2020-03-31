@@ -29,6 +29,11 @@
             <artifactId>sys-api</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.openmall.mall</groupId>
+            <artifactId>mall-base-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.openmall.mall</groupId>

@@ -30,6 +30,11 @@
         <!-- 电商中台服务 -->
         <dependency>
             <groupId>org.openmall.mall</groupId>
+            <artifactId>mall-base-core</artifactId>
+            <version>${mall-business.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openmall.mall</groupId>
             <artifactId>sys-core</artifactId>
             <version>${mall-business.version}</version>
         </dependency>

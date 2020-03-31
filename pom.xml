@@ -133,6 +133,12 @@
 
             <dependency>
                 <groupId>org.openmall.mall</groupId>
+                <artifactId>mall-base-core</artifactId>
+                <version>${mall-business.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmall.mall</groupId>
                 <artifactId>mall-base-admin</artifactId>
                 <version>${mall-business.version}</version>
             </dependency>

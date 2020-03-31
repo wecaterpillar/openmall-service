@@ -1,12 +1,16 @@
 package org.openmall.mall.portal.home.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import org.openmall.mall.base.service.MerchantService;
+import org.openmall.mall.cms.mapper.CmsSubjectMapper;
 import org.openmall.mall.cms.model.CmsSubject;
 import org.openmall.mall.cms.model.CmsSubjectExample;
-import org.openmall.mall.cms.mapper.CmsSubjectMapper;
 import org.openmall.mall.pms.mapper.PmsProductCategoryMapper;
 import org.openmall.mall.pms.mapper.PmsProductMapper;
-import org.openmall.mall.pms.model.*;
+import org.openmall.mall.pms.model.PmsProduct;
+import org.openmall.mall.pms.model.PmsProductCategory;
+import org.openmall.mall.pms.model.PmsProductCategoryExample;
+import org.openmall.mall.pms.model.PmsProductExample;
 import org.openmall.mall.portal.home.dao.HomeDao;
 import org.openmall.mall.portal.home.domain.FlashPromotionProduct;
 import org.openmall.mall.portal.home.domain.HomeContentResult;
@@ -23,6 +27,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 首页内容管理Service实现类
@@ -44,15 +49,24 @@ public class HomeServiceImpl implements HomeService {
     @Autowired
     private CmsSubjectMapper subjectMapper;
 
+    @Autowired
+    private MerchantService merchantService;
+
+
+    public Map<String, Object> getChannelConfig(){
+        Map<String, Object> mapConfig = merchantService.getDefaultEshopConfig();
+        return mapConfig;
+    }
+
     @Override
     public HomeContentResult content() {
         HomeContentResult result = new HomeContentResult();
         //获取首页广告
         result.setAdvertiseList(getHomeAdvertiseList());
         //获取推荐品牌
-        result.setBrandList(homeDao.getRecommendBrandList(0,4));
+        //result.setBrandList(homeDao.getRecommendBrandList(0,4));
         //获取秒杀信息
-        result.setHomeFlashPromotion(getHomeFlashPromotion());
+        //result.setHomeFlashPromotion(getHomeFlashPromotion());
         //获取新品推荐
         result.setNewProductList(homeDao.getNewProductList(0,4));
         //获取人气推荐
