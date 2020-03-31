@@ -26,6 +26,9 @@ import java.util.Map;
  * TODO:
  * 1. 购物车生成订单时可选择部分商品下单
  * 2. 直接选择某商品生成订单
+ *
+ *     // TODO 增加选择商品生成确认单
+ *     // TODO 增加根据已选商品确认信息生成订单
  */
 @RestController
 @Api(tags = "OmsPortalOrderController",description = "订单管理")
@@ -52,6 +55,9 @@ public class OmsPortalOrderController {
         Map<String, Object> result = portalOrderService.generateOrder(orderParam);
         return CommonResult.success(result, "下单成功");
     }
+
+
+
     @ApiOperation("支付成功的回调")
     @RequestMapping(value = "/paySuccess",method = RequestMethod.POST)
     public CommonResult paySuccess(@RequestParam Long orderId){
