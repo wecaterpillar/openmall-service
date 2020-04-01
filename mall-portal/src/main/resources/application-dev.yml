@@ -43,6 +43,17 @@ logging:
     org.openmall.mall.mapper: debug
     org.openmall.mall.portal.dao: debug
 
+justauth:
+  enabled: true
+  type:
+    QQ:
+      client-id: 10**********6
+      client-secret: 1f7d08**********5b7**********29e
+      redirect-uri: http://oauth.ginzaxiaoma.com/oauth/qq/callback
+    github:
+      client-id: 915e919723b57d47b9f9
+      client-secret: 8851acad24b7c2eb0db84112e473f9e3c122f094
+      redirect-uri: http://oauth.ginzaxiaoma.com/oauth/github/callback
 
 paypal:
   mode: sandbox
