@@ -22,6 +22,9 @@ public class OmsOrderItem implements Serializable {
     @ApiModelProperty(value = "商品id")
     private Long productId;
 
+    @ApiModelProperty(value = "商品SN")
+    private String productSn;
+
     @ApiModelProperty(value = "商品sku编号")
     private Long productSkuId;
 
@@ -44,10 +47,6 @@ public class OmsOrderItem implements Serializable {
 
     @ApiModelProperty(value = "商品品牌")
     private String productBrand;
-
-    @ApiModelProperty(value = "商品SN")
-    private String productSn;
-
 
     @ApiModelProperty(value = "商品分类id")
     private Long productCategoryId;

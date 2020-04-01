@@ -9,12 +9,6 @@ import java.util.List;
 @lombok.Data
 public class Merchant {
 
-    public static Merchant defaultMerchant = new Merchant(1L, "1000","mall", true, true, false);
-
-    public static Merchant getDefaultMerchant() {
-        return defaultMerchant;
-    }
-
     private Long id;
     private String code;
     private String name;
@@ -24,7 +18,7 @@ public class Merchant {
     private Boolean hasChannel = true;    //是否开通销售渠道
     private Boolean hasSupply = false;    //是否开通供应商
 
-    private List<Channel> channelList;  // 商户的渠道清单
+    private List<Channel> channeles;  // 商户的渠道清单
 
 
     public Merchant(Long id, String code,String name, Boolean isMallOp, Boolean hasChannel, Boolean hasSupply) {

@@ -4,13 +4,19 @@ import org.openmall.mall.base.model.Channel;
 import org.openmall.mall.base.model.ChannelType;
 import org.openmall.mall.base.model.Merchant;
 import org.openmall.mall.base.service.MerchantService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
+@EnableConfigurationProperties(DefaultMerchant.class)
 public class MerchantServiceImpl implements MerchantService {
+
+    @Autowired
+    private  DefaultMerchant defaultMerchant;
     /**
      * 获取平台默认商户
      *
@@ -18,7 +24,7 @@ public class MerchantServiceImpl implements MerchantService {
      */
     @Override
     public Merchant getDefaultMerchat() {
-        return Merchant.getDefaultMerchant();
+        return this.defaultMerchant;
     }
 
     /**
@@ -29,7 +35,6 @@ public class MerchantServiceImpl implements MerchantService {
     @Override
     public Map<String, Object> getDefaultEshopConfig() {
         Map<String, Object> mapConfig = new HashMap<>();
-        // TODO 增加默认配置到配置文件中
         Merchant merchant = getDefaultMerchat();
         Channel channel = getDefaultEshopChannel(merchant);
         mapConfig.put("merchant", merchant);
@@ -38,16 +43,24 @@ public class MerchantServiceImpl implements MerchantService {
     }
 
     private Channel getDefaultEshopChannel(Merchant merchant){
-        Channel channel = new Channel();
-        // TODO 设置默认值
-        channel.setMerchantId(merchant.getId());
-        channel.setChannelType(ChannelType.ESHOP.getId());
-        channel.setId(merchant.getId()*10000+channel.getChannelType()*1000+1);
-        channel.setCurCode("JPY");
-        channel.setLanguage("en");
-        channel.setLanguages("en,ja,zh_TW");
-
-
+        Channel channel = null;
+        if(merchant!=null && merchant.getChanneles()!=null && !merchant.getChanneles().isEmpty()){
+            for(Channel c1: merchant.getChanneles()){
+                if(ChannelType.ESHOP.getId() == c1.getType() && c1.isEnable()){
+                    channel = c1;
+                    break;
+                }
+            }
+        }
+        if(channel==null){
+            channel = new Channel();
+            channel.setMerchantId(merchant.getId());
+            channel.setType(ChannelType.ESHOP.getId());
+            channel.setId(merchant.getId()*10000+channel.getType()*1000+1);
+            channel.setCurCode("JPY");
+            channel.setLanguage("en");
+            channel.setLanguages("en,ja,zh_TW");
+        }
         return channel;
     }
 }

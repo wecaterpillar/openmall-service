@@ -8,7 +8,10 @@ public class Channel {
 
     private Long id;  //渠道编号
     private Long merchantId;  //所属商户Id
-    private Long ChannelType;  //渠道类型
+    private Long type;  //渠道类型
+    private String name;
+    private boolean enable;
+
     //国家
     private String countryCode;
     private String countryName;
