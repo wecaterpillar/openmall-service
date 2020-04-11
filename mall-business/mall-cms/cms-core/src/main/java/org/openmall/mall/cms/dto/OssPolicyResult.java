@@ -5,7 +5,9 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * 获取OSS上传文件授权返回结果
  */
+@lombok.Data
 public class OssPolicyResult {
+
     @ApiModelProperty("访问身份验证中用到用户标识")
     private String accessKeyId;
     @ApiModelProperty("用户表单上传的策略,经过base64编码过的字符串")

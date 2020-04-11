@@ -45,6 +45,10 @@ justauth:
       client-id: 915e919723b57d47b9f9
       client-secret: 8851acad24b7c2eb0db84112e473f9e3c122f094
       redirect-uri: http://oauth.ginzaxiaoma.com/oauth/github/callback
+    facebook:
+      client-id: 209144957080122
+      client-secret: fb83dccabe58024c3b5730da1eef9884
+      redirect-uri: http://oauth.ginzaxiaoma.com/oauth/facebook/callback
   cache:
     type: redis
 

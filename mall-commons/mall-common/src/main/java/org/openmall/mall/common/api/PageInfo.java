@@ -9,7 +9,7 @@ import java.util.List;
 public class PageInfo<T> extends Page<T> implements IPage<T> {
 
     public PageInfo(){
-
+        super(1,10);
     }
     public PageInfo(long current, long size){
         super(current,size);
