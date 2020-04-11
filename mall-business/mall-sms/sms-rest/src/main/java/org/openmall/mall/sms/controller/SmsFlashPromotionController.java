@@ -2,6 +2,7 @@ package org.openmall.mall.sms.controller;
 
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.sms.model.SmsFlashPromotion;
 import org.openmall.mall.sms.service.SmsFlashPromotionService;
 import io.swagger.annotations.Api;
@@ -81,6 +82,6 @@ public class SmsFlashPromotionController {
                           @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                           @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<SmsFlashPromotion> flashPromotionList = flashPromotionService.list(keyword, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(flashPromotionList));
+        return CommonResult.success(CommonPage.restPage(new PageInfo(pageNum, pageSize), flashPromotionList));
     }
 }

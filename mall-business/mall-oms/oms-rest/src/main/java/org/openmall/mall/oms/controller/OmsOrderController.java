@@ -2,6 +2,7 @@ package org.openmall.mall.oms.controller;
 
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.oms.dto.*;
 import org.openmall.mall.oms.model.OmsOrder;
 import org.openmall.mall.oms.service.OmsOrderService;
@@ -30,7 +31,7 @@ public class OmsOrderController {
                                                    @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                    @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<OmsOrder> orderList = orderService.list(queryParam, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(orderList));
+        return CommonResult.success(CommonPage.restPage(new PageInfo(pageNum, pageSize), orderList));
     }
 
     @ApiOperation("批量发货")

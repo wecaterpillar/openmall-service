@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.sys.model.UmsMenu;
 import org.openmall.mall.sys.model.UmsPermission;
 import org.openmall.mall.sys.model.UmsResource;
@@ -93,7 +94,7 @@ public class UmsRoleController {
                                                   @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<UmsRole> roleList = roleService.list(keyword, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(roleList));
+        return CommonResult.success(CommonPage.restPage(new PageInfo(pageNum, pageSize),roleList));
     }
 
     @ApiOperation("修改角色状态")

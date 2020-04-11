@@ -1,15 +1,17 @@
 package org.openmall.mall.sys.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.sys.dto.UmsMenuNode;
 import org.openmall.mall.sys.model.UmsMenu;
 import org.openmall.mall.sys.service.UmsMenuService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 /**
@@ -76,7 +78,7 @@ public class UmsMenuController {
                                                   @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<UmsMenu> menuList = menuService.list(parentId, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(menuList));
+        return CommonResult.success(CommonPage.restPage(new PageInfo(pageNum, pageSize),menuList));
     }
 
     @ApiOperation("树形结构返回所有菜单列表")

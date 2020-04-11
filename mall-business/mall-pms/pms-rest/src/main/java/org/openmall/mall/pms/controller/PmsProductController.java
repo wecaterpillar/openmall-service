@@ -2,6 +2,7 @@ package org.openmall.mall.pms.controller;
 
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.pms.dto.PmsProductParam;
 import org.openmall.mall.pms.dto.PmsProductQueryParam;
 import org.openmall.mall.pms.dto.PmsProductResult;
@@ -70,7 +71,7 @@ public class PmsProductController {
                                                         @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<PmsProduct> productList = productService.list(productQueryParam, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(productList));
+        return CommonResult.success(CommonPage.restPage(new PageInfo(pageNum, pageSize), productList));
     }
 
     @ApiOperation("根据商品名称或货号模糊查询")

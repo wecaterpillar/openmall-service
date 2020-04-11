@@ -4,9 +4,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.pms.dto.PmsProductCategoryWithChildrenItem;
 import org.openmall.mall.pms.model.PmsProductAttribute;
-import org.openmall.mall.pms.model.PmsProductAttributeValue;
 import org.openmall.mall.pms.model.PmsProductCategory;
 import org.openmall.mall.portal.pms.service.PortalPmsProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class PortalPmsProductCategoryController {
                                                                 @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                                 @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<PmsProductCategory> productCategoryList = productCategoryService.getList(parentId, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(productCategoryList));
+        return CommonResult.success(CommonPage.restPage(new PageInfo(pageNum, pageSize), productCategoryList));
     }
 
     @ApiOperation("查询所有一级分类及子分类")

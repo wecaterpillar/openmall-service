@@ -2,6 +2,7 @@ package org.openmall.mall.sms.controller;
 
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.sms.model.SmsHomeRecommendSubject;
 import org.openmall.mall.sms.service.SmsHomeRecommendSubjectService;
 import io.swagger.annotations.Api;
@@ -74,6 +75,6 @@ public class SmsHomeRecommendSubjectController {
                                                                   @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                                   @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<SmsHomeRecommendSubject> homeBrandList = recommendSubjectService.list(subjectName, recommendStatus, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(homeBrandList));
+        return CommonResult.success(CommonPage.restPage(new PageInfo(pageNum, pageSize), homeBrandList));
     }
 }

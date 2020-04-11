@@ -2,6 +2,7 @@ package org.openmall.mall.pms.controller;
 
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.pms.dto.PmsProductAttributeCategoryItem;
 import org.openmall.mall.pms.model.PmsProductAttributeCategory;
 import org.openmall.mall.pms.service.PmsProductAttributeCategoryService;
@@ -72,7 +73,7 @@ public class PmsProductAttributeCategoryController {
     @ResponseBody
     public CommonResult<CommonPage<PmsProductAttributeCategory>> getList(@RequestParam(defaultValue = "5") Integer pageSize, @RequestParam(defaultValue = "1") Integer pageNum) {
         List<PmsProductAttributeCategory> productAttributeCategoryList = productAttributeCategoryService.getList(pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(productAttributeCategoryList));
+        return CommonResult.success(CommonPage.restPage(new PageInfo(pageNum, pageSize), productAttributeCategoryList));
     }
 
     @ApiOperation("获取所有商品属性分类及其下属性")

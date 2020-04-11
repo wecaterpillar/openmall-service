@@ -1,21 +1,19 @@
 package org.openmall.mall.cms.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
+import org.openmall.mall.cms.model.CmsSubject;
+import org.openmall.mall.cms.service.CmsSubjectService;
 import org.openmall.mall.common.annotation.SysLog;
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
-import org.openmall.mall.cms.model.CmsSubject;
-import org.openmall.mall.cms.service.CmsSubjectService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.validator.ValidatorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,7 +47,7 @@ public class CmsSubjectController {
                                                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                                         @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize) {
         List<CmsSubject> subjectList = subjectService.list(keyword, pageNum, pageSize);
-        return CommonResult.success(CommonPage.restPage(subjectList));
+        return CommonResult.success(CommonPage.restPage(new PageInfo(pageNum, pageSize), subjectList));
     }
 
     @SysLog(MODULE = "cms", REMARK = "根据条件查询所有专题表列表")

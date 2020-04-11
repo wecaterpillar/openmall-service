@@ -2,6 +2,7 @@ package org.openmall.mall.sms.controller;
 
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.sms.dto.SmsFlashPromotionProduct;
 import org.openmall.mall.sms.model.SmsFlashPromotionProductRelation;
 import org.openmall.mall.sms.service.SmsFlashPromotionProductRelationService;
@@ -72,6 +73,6 @@ public class SmsFlashPromotionProductRelationController {
                                                                    @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                                    @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<SmsFlashPromotionProduct> flashPromotionProductList = relationService.list(flashPromotionId, flashPromotionSessionId, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(flashPromotionProductList));
+        return CommonResult.success(CommonPage.restPage(new PageInfo(pageNum, pageSize), flashPromotionProductList));
     }
 }

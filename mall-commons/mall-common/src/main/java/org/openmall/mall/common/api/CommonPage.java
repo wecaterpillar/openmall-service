@@ -26,9 +26,9 @@ public class CommonPage<T> {
      *
      * @deprecated replace by restPage(Page<T> pageInfo, List<T> list)
      */
-    public static <T> CommonPage<T> restPage(List<T> list) {
-        return restPage(null, list);
-    }
+//    public static <T> CommonPage<T> restPage(List<T> list) {
+//        return restPage(null, list);
+//    }
 
     /**
      * 转换PageInfo
