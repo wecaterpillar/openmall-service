@@ -2,6 +2,8 @@ package org.openmall.mall.search.service;
 
 import org.openmall.mall.search.domain.EsProduct;
 import org.openmall.mall.search.domain.EsProductRelatedInfo;
+import org.openmall.mall.search.dto.AggVO;
+import org.openmall.mall.search.dto.QueryVO;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -49,4 +51,18 @@ public interface EsProductService {
      * 获取搜索词相关品牌、分类、属性
      */
     EsProductRelatedInfo searchRelatedInfo(String keyword);
+
+    /**
+     * 商品搜索
+     * @param query
+     * @return
+     */
+    Page<EsProduct> search(QueryVO query, int page, int size);
+
+    /**
+     * 商品聚合分析
+     * @param query
+     * @return
+     */
+    AggVO agg(QueryVO query);
 }
