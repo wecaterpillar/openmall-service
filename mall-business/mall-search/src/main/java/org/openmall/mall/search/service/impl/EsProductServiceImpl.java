@@ -59,8 +59,10 @@ public class EsProductServiceImpl implements EsProductService {
 
     @Autowired
     private EsProductDao productDao;
+
     @Autowired
     private EsProductRepository productRepository;
+
     @Autowired
     private ElasticsearchTemplate elasticsearchTemplate;
 
@@ -188,16 +190,21 @@ public class EsProductServiceImpl implements EsProductService {
             filterFunctionBuilders.add(new FunctionScoreQueryBuilder.FilterFunctionBuilder(QueryBuilders.matchQuery("keywords", keyword),
                     ScoreFunctionBuilders.weightFactorFunction(2)));
             filterFunctionBuilders.add(new FunctionScoreQueryBuilder.FilterFunctionBuilder(QueryBuilders.matchQuery("brandId", brandId),
-                    ScoreFunctionBuilders.weightFactorFunction(10)));
+                    ScoreFunctionBuilders.weightFactorFunction(5)));
             filterFunctionBuilders.add(new FunctionScoreQueryBuilder.FilterFunctionBuilder(QueryBuilders.matchQuery("productCategoryId", productCategoryId),
-                    ScoreFunctionBuilders.weightFactorFunction(6)));
+                    ScoreFunctionBuilders.weightFactorFunction(3)));
             FunctionScoreQueryBuilder.FilterFunctionBuilder[] builders = new FunctionScoreQueryBuilder.FilterFunctionBuilder[filterFunctionBuilders.size()];
             filterFunctionBuilders.toArray(builders);
             FunctionScoreQueryBuilder functionScoreQueryBuilder = QueryBuilders.functionScoreQuery(builders)
                     .scoreMode(FunctionScoreQuery.ScoreMode.SUM)
                     .setMinScore(2);
+            //用于过滤掉相同的商品
+            BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
+            boolQueryBuilder.mustNot(QueryBuilders.termQuery("id",id));
+            //构建查询条件
             NativeSearchQueryBuilder builder = new NativeSearchQueryBuilder();
             builder.withQuery(functionScoreQueryBuilder);
+            builder.withFilter(boolQueryBuilder);
             builder.withPageable(pageable);
             NativeSearchQuery searchQuery = builder.build();
             LOGGER.info("DSL:{}", searchQuery.getQuery().toString());
