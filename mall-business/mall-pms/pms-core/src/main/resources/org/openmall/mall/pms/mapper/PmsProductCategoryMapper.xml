@@ -217,9 +217,6 @@
       <if test="description != null">
         #{description,jdbcType=LONGVARCHAR},
       </if>
-      <if test="parentTreeId != null">
-        #{parentTreeId,jdbcType=VARCHAR},
-      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="org.openmall.mall.pms.model.PmsProductCategoryExample" resultType="java.lang.Long">
