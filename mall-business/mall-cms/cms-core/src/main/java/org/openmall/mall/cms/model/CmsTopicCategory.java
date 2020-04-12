@@ -10,16 +10,19 @@ import java.io.Serializable;
 public class CmsTopicCategory implements Serializable {
     private Long id;
 
+    @ApiModelProperty(value = "分类名称")
     private String name;
 
     @ApiModelProperty(value = "分类图标")
     private String icon;
 
-    @ApiModelProperty(value = "专题数量")
+    @ApiModelProperty(value = "数量")
     private Integer subjectCount;
 
+    @ApiModelProperty(value = "显示状态")
     private Integer showStatus;
 
+    @ApiModelProperty(value = "排序")
     private Integer sort;
 
     private static final long serialVersionUID = 1L;

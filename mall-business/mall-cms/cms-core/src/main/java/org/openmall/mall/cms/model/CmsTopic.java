@@ -11,14 +11,18 @@ import java.util.Date;
 public class CmsTopic implements Serializable {
     private Long id;
 
+    @ApiModelProperty(value = "所属分类")
     private Long categoryId;
 
+    @ApiModelProperty(value = "标题")
     private String name;
 
     private Date createTime;
 
+    @ApiModelProperty(value = "开始时间")
     private Date startTime;
 
+    @ApiModelProperty(value = "结束时间")
     private Date endTime;
 
     @ApiModelProperty(value = "参与人数")
