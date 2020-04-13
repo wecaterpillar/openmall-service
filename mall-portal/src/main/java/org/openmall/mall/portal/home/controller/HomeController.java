@@ -1,5 +1,8 @@
 package org.openmall.mall.portal.home.controller;
 
+import cn.hutool.core.io.resource.ResourceUtil;
+import cn.hutool.json.JSON;
+import cn.hutool.json.JSONUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.openmall.mall.cms.model.CmsHelp;
@@ -42,16 +45,30 @@ public class HomeController {
 
     private Map<String,Object> loadWebsiteConfig(){
         Map<String,Object> websiteConfig = new HashMap<>();
-        websiteConfig.putAll(homeService.getChannelConfig());
-        // TODO 增加首页所需要其他配置
-        List<HomeLayerContent> layers = new ArrayList<>();
-        layers.add(new HomeLayerContent(1, "now-trending", 1,2,"7"));
-        layers.add(new HomeLayerContent(2, "just-in", 11,12,""));
-        layers.add(new HomeLayerContent(3, "featured", 1,4,"1"));
-        layers.add(new HomeLayerContent(4, "editor-picks", 1,4,"6"));
-        layers.add(new HomeLayerContent(5, "auth", 4,2,"11,12"));
-        layers.add(new HomeLayerContent(6, "blog", 2,3,"2"));
+
+        //  读取配置文件
+        JSON jsonObj = JSONUtil.parse(ResourceUtil.readUtf8Str("classpath:config/webconfig.json"));
+
+        // layers
+        List<HomeLayerContent> layers = null;
+        try {
+            layers = JSONUtil.toList(JSONUtil.parseArray(jsonObj.getByPath("layers")), HomeLayerContent.class);
+        }catch (Exception e){
+        }
+        if(layers==null){
+            layers = new ArrayList<>();
+            layers.add(new HomeLayerContent(1, "now-trending", 1,2,"7"));
+            layers.add(new HomeLayerContent(2, "just-in", 11,12,""));
+            layers.add(new HomeLayerContent(3, "featured", 1,4,"1"));
+            layers.add(new HomeLayerContent(4, "editor-picks", 1,4,"6"));
+            layers.add(new HomeLayerContent(5, "auth", 4,2,"11,12"));
+            layers.add(new HomeLayerContent(6, "blog", 2,3,"2"));
+        }
         websiteConfig.put("layers", layers);
+        // props
+        websiteConfig.put("props", jsonObj.getByPath("props"));
+
+        websiteConfig.putAll(homeService.getChannelConfig());
         return websiteConfig;
     }
 
