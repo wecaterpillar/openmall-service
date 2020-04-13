@@ -7,8 +7,7 @@ import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
 import org.openmall.mall.search.domain.EsProduct;
 import org.openmall.mall.search.domain.EsProductRelatedInfo;
-import org.openmall.mall.search.dto.AggVO;
-import org.openmall.mall.search.dto.QueryVO;
+import org.openmall.mall.search.dto.QueryProduct;
 import org.openmall.mall.search.service.EsProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -81,6 +80,15 @@ public class EsProductController {
         return CommonResult.success(CommonPage.restPage(esProductPage));
     }
 
+    @ApiOperation(value = "综合搜索、筛选、排序")
+    @PostMapping("/search")
+    public CommonResult<CommonPage<EsProduct>> search(@RequestBody QueryProduct query,
+                                                      @RequestParam(defaultValue = "1") int page,
+                                                      @RequestParam(defaultValue = "10") int size) {
+        Page<EsProduct> pages = esProductService.search(query, page, size);
+        return  CommonResult.success(CommonPage.restPage(pages));
+    }
+
     @ApiOperation(value = "根据商品id推荐商品")
     @RequestMapping(value = "/recommend/{id}", method = RequestMethod.GET)
     public CommonResult<CommonPage<EsProduct>> recommend(@PathVariable Long id,
@@ -97,30 +105,10 @@ public class EsProductController {
         return CommonResult.success(productRelatedInfo);
     }
 
-    /**
-     * @Title: 聚合条件查询
-     * @Param product
-     * @Return: 返回类似京东侧边栏查询条件数据
-     * @Description: 输入关键词或增加筛选条件逐步聚合出更精准的侧边栏筛选条件，如：有哪些分类、品牌、和规格参数可选
-     */
-    @ApiOperation(value = "聚合条件查询")
-    @PostMapping("/agg")
-    public CommonResult<AggVO> agg(@RequestBody QueryVO query) {
-        return CommonResult.success(esProductService.agg(query));
-    }
-
-
-    /**
-     * @Title: 模拟京东商品条件筛选查询
-     * @Return: 返回商品查询的分页列表
-     * @Description: 点击查询条件确定后-查询符合条件的商品。后续可增加排序规则
-     */
-    @ApiOperation(value = "条件筛选查询")
-    @PostMapping("/search")
-    public CommonResult<CommonPage<EsProduct>> search(@RequestBody QueryVO query,
-                                @RequestParam(defaultValue = "1") int page,
-                                @RequestParam(defaultValue = "10") int size) {
-        Page<EsProduct> pages = esProductService.search(query, page, size);
-        return  CommonResult.success(CommonPage.restPage(pages));
+    @ApiOperation(value = "聚合条件查询, 获取搜索的相关品牌、分类及筛选属性")
+    @PostMapping("/search/agg")
+    public CommonResult<EsProductRelatedInfo> agg(@RequestBody QueryProduct query) {
+        EsProductRelatedInfo productRelatedInfo = esProductService.searchRelatedInfo(query);
+        return CommonResult.success(productRelatedInfo);
     }
 }

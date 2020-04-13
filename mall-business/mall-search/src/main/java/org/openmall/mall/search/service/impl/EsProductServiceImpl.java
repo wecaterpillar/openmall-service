@@ -24,8 +24,7 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.openmall.mall.search.dao.EsProductDao;
 import org.openmall.mall.search.domain.EsProduct;
 import org.openmall.mall.search.domain.EsProductRelatedInfo;
-import org.openmall.mall.search.dto.AggVO;
-import org.openmall.mall.search.dto.QueryVO;
+import org.openmall.mall.search.dto.QueryProduct;
 import org.openmall.mall.search.repository.EsProductRepository;
 import org.openmall.mall.search.service.EsProductService;
 import org.slf4j.Logger;
@@ -289,18 +288,18 @@ public class EsProductServiceImpl implements EsProductService {
 
     // 商品分页查询
     @Override
-    public Page<EsProduct> search(QueryVO query, int page, int size) {
+    public Page<EsProduct> search(QueryProduct query, int page, int size) {
         Pageable pageable = PageRequest.of(page-1, size);
         return productRepository.search(this.addFilters(query), pageable);
     }
 
     // 过滤条件
-    private BoolQueryBuilder addFilters(QueryVO query) {
+    private BoolQueryBuilder addFilters(QueryProduct query) {
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        List<AggVO.AttrGroup> attrGroups = query.getAttrs();
+        List<EsProductRelatedInfo.ProductAttr> attrGroups = query.getProductAttrs();
         if (attrGroups != null) {
             // 多属性过滤查询，如（内存、颜色、屏幕尺寸、版本等等）
-            for (AggVO.AttrGroup attrGroup : attrGroups) {
+            for (EsProductRelatedInfo.ProductAttr attrGroup : attrGroups) {
                 BoolQueryBuilder attrBoolQuery = QueryBuilders.boolQuery();
                 // 匹配商品规格参数名
                 attrBoolQuery.filter(QueryBuilders.matchQuery(EsProduct.FieldName.ATTRS_NAME, attrGroup.getAttrName()));
@@ -319,9 +318,9 @@ public class EsProductServiceImpl implements EsProductService {
             // 品牌查询
             boolQueryBuilder.filter(QueryBuilders.termsQuery(EsProduct.FieldName.BRAND, query.getBrands()));
         }
-        if (query.getCategory() != null) {
+        if (query.getProductCategoryId() != null) {
             // 分类查询
-            boolQueryBuilder.filter(QueryBuilders.matchQuery(EsProduct.FieldName.CATEGORY, query.getCategory()).operator(Operator.AND));
+            boolQueryBuilder.filter(QueryBuilders.matchQuery(EsProduct.FieldName.CATEGORY_ID, query.getProductCategoryId()).operator(Operator.AND));
         }
         if (!StringUtils.isEmpty(query.getName())) {
             // 商品名称查询（这里暂时没做分词处理）
@@ -354,7 +353,8 @@ public class EsProductServiceImpl implements EsProductService {
 
     // 筛选条件聚合查询接口
     @Override
-    public AggVO agg(QueryVO query) {
+    public EsProductRelatedInfo searchRelatedInfo(QueryProduct query) {
+        //TODO 需要重构
         Pageable pageable = PageRequest.of(0, 10);
         //检索条件
         BoolQueryBuilder boolQueryBuilder = this.addFilters(query);
@@ -385,7 +385,7 @@ public class EsProductServiceImpl implements EsProductService {
                 .withPageable(pageable) // 分页
                 .build();
         AggregatedPage<EsProduct> search = (AggregatedPage)productRepository.search(searchQuery);
-        AggVO aggVO = new AggVO();
+        EsProductRelatedInfo aggVO = new EsProductRelatedInfo();
         // 符合条件的商品总数量
         aggVO.setTotalNum(search.getTotalElements());
 
@@ -393,14 +393,15 @@ public class EsProductServiceImpl implements EsProductService {
         Terms brandAgg = (Terms)search.getAggregation(BRAND_AGG);
         for (Terms.Bucket bucket : brandAgg.getBuckets()) {
             String brandName = bucket.getKeyAsString();
-            aggVO.getBrands().add(brandName);
+            aggVO.getBrandNames().add(brandName);
         }
 
         // 分类聚合结果
         Terms categoryAgg = (Terms)search.getAggregation(CATEGORY_AGG);
         for (Terms.Bucket bucket : categoryAgg.getBuckets()) {
             long categoryId = bucket.getKeyAsNumber().longValue();
-            aggVO.getCategories().add(categoryId);
+            //TODO id->name
+            aggVO.getProductCategoryNames().add(""+categoryId);
         }
 
         // 规格参数聚合结果
@@ -409,14 +410,14 @@ public class EsProductServiceImpl implements EsProductService {
         Terms attrNameAgg = (Terms)aggregationMap.get(ATTR_NAME_AGG);
         for (Terms.Bucket bucket : attrNameAgg.getBuckets()) {
             String attrName = bucket.getKeyAsString();
-            AggVO.AttrGroup attrGroup = new AggVO.AttrGroup();
+            EsProductRelatedInfo.ProductAttr attrGroup = new EsProductRelatedInfo.ProductAttr();
             attrGroup.setAttrName(attrName);
             Terms attrValueAgg = (Terms)bucket.getAggregations().asMap().get(ATTR_VALUE_AGG);
             for (Terms.Bucket subBucket : attrValueAgg.getBuckets()) {
                 String attrValue = subBucket.getKeyAsString();
                 attrGroup.getAttrValues().add(attrValue);
             }
-            aggVO.getAttrs().add(attrGroup);
+            aggVO.getProductAttrs().add(attrGroup);
         }
         search.getAggregation(CATEGORY_AGG);
         return aggVO;

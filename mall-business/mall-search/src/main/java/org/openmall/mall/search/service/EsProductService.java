@@ -2,8 +2,7 @@ package org.openmall.mall.search.service;
 
 import org.openmall.mall.search.domain.EsProduct;
 import org.openmall.mall.search.domain.EsProductRelatedInfo;
-import org.openmall.mall.search.dto.AggVO;
-import org.openmall.mall.search.dto.QueryVO;
+import org.openmall.mall.search.dto.QueryProduct;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -57,12 +56,12 @@ public interface EsProductService {
      * @param query
      * @return
      */
-    Page<EsProduct> search(QueryVO query, int page, int size);
+    Page<EsProduct> search(QueryProduct query, int page, int size);
 
     /**
      * 商品聚合分析
      * @param query
      * @return
      */
-    AggVO agg(QueryVO query);
+    EsProductRelatedInfo searchRelatedInfo(QueryProduct query);
 }

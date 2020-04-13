@@ -17,8 +17,9 @@ public class EsProductAttributeValue implements Serializable {
 
     //属性参数：0->规格；1->参数
     private Integer type;
+
     //属性名称
-    @Field(type=FieldType.Keyword)
+    @Field(type = FieldType.Keyword)
     private String name;
     //属性值
     @Field(type = FieldType.Keyword)

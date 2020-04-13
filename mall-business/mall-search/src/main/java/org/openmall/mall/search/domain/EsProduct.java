@@ -56,17 +56,18 @@ public class EsProduct implements Serializable {
     private Integer promotionType;
     private Integer sort;
 
-    @Field(type =FieldType.Nested)
+    @Field(type = FieldType.Nested)
     private List<EsProductAttributeValue> attrValueList;
 
 
     public interface FieldName {
         String ID = "id";
-        String NAME = "name";
-        String SUBTITLE = "subTitle";
-        String KEYWORDS = "keywords";
-        String CATEGORY = "productCategoryName";
-        String BRAND = "brandName";
+        String NAME = "name.keyword";
+        String SUBTITLE = "subTitle.keyword";
+        String KEYWORDS = "keywords.keyword";
+        String CATEGORY_ID = "productCategoryId";
+        String CATEGORY = "productCategoryName.keyword";
+        String BRAND = "brandName.keyword";
         String PRICE = "price";
         String ATTRS = "attrValueList";
         String ATTRS_NAME = "attrValueList.name";
