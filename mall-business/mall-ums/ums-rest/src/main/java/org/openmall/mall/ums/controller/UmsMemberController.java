@@ -48,6 +48,19 @@ public class UmsMemberController {
         return CommonResult.failed();
     }
 
+    @SysLog(MODULE = "ums", REMARK = "根据条件查询所有会员表列表")
+    @ApiOperation("查看会员")
+    @GetMapping(value = "/getMemberDetail/{id}")
+    @PreAuthorize("hasAuthority('ums:member:read')")
+    public Object getMemberDetail(@ApiParam("会员表id") @PathVariable(value = "id") Integer id) {
+        try {
+            return CommonResult.success(memberService.getById(id));
+        } catch (Exception e) {
+            log.error("根据条件查询所有会员表列表：%s", e.getMessage(), e);
+        }
+        return CommonResult.failed();
+    }
+
     @SysLog(MODULE = "ums", REMARK = "保存会员表")
     @ApiOperation("保存会员表")
     @PostMapping(value = "/create")
@@ -79,6 +92,21 @@ public class UmsMemberController {
             return CommonResult.failed();
         }
         return CommonResult.failed();
+    }
+
+    @SysLog(MODULE = "ums", REMARK = "更新会员表")
+    @ApiOperation("更新会员表")
+    @PostMapping(value = "/updateStatus")
+    //  @PreAuthorize("hasAuthority('ums:member:update')")
+    @Transactional
+    public Object updateUmsMemberStatus(@ApiParam("会员表id") @RequestParam Long id,@RequestParam Integer status) {
+        try {
+            memberService.updateStatusById(id,status);
+            return CommonResult.success();
+        } catch (Exception e) {
+            log.error("更新会员表：%s", e.getMessage(), e);
+            return CommonResult.failed();
+        }
     }
 
 

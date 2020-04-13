@@ -113,6 +113,14 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
         memberMapper.updateByPrimaryKeySelective(record);
     }
 
+    @Override
+    public void updateStatusById(Long id,Integer status){
+        UmsMember record=new UmsMember();
+        record.setId(id);
+        record.setStatus(status);
+        memberMapper.updateByPrimaryKeySelective(record);
+    }
+
 
     public List<UmsMember> listAll(){
         return memberMapper.selectByExample(null);
