@@ -39,6 +39,10 @@ public interface UmsMemberService extends IBaseService<UmsMember> {
      */
     void updateIntegration(Long id,Integer integration);
 
+    /**
+     * 根据会员id修改状态
+     */
+    void updateStatusById(Long id,Integer status);
 
     List<UmsMember> listAll();
 
