@@ -2,6 +2,7 @@ package org.openmall.mall.pms.controller;
 
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.pms.dto.PmsProductCategoryParam;
 import org.openmall.mall.pms.dto.PmsProductCategoryWithChildrenItem;
 import org.openmall.mall.pms.model.PmsProductCategory;
@@ -65,7 +66,7 @@ public class PmsProductCategoryController {
                                                                 @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                                 @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<PmsProductCategory> productCategoryList = productCategoryService.getList(parentId, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(productCategoryList));
+        return CommonResult.success(CommonPage.restPage(new PageInfo(pageNum, pageSize), productCategoryList));
     }
 
     @ApiOperation("根据id获取商品分类")

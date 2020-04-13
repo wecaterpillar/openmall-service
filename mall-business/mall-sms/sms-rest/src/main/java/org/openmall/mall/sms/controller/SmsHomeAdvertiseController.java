@@ -2,6 +2,7 @@ package org.openmall.mall.sms.controller;
 
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.sms.model.SmsHomeAdvertise;
 import org.openmall.mall.sms.service.SmsHomeAdvertiseService;
 import io.swagger.annotations.Api;
@@ -79,6 +80,6 @@ public class SmsHomeAdvertiseController {
                                                            @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                            @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<SmsHomeAdvertise> advertiseList = advertiseService.list(name, type, endTime, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(advertiseList));
+        return CommonResult.success(CommonPage.restPage(new PageInfo(pageNum, pageSize), advertiseList));
     }
 }

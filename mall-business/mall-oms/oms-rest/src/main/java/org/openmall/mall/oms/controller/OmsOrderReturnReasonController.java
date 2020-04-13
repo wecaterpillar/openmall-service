@@ -2,6 +2,7 @@ package org.openmall.mall.oms.controller;
 
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.oms.model.OmsOrderReturnReason;
 import org.openmall.mall.oms.service.OmsOrderReturnReasonService;
 import io.swagger.annotations.Api;
@@ -61,7 +62,7 @@ public class OmsOrderReturnReasonController {
     public CommonResult<CommonPage<OmsOrderReturnReason>> list(@RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                                @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<OmsOrderReturnReason> reasonList = orderReturnReasonService.list(pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(reasonList));
+        return CommonResult.success(CommonPage.restPage(new PageInfo(pageNum, pageSize), reasonList));
     }
 
     @ApiOperation("获取单个退货原因详情信息")

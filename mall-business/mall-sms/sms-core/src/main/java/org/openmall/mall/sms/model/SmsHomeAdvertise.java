@@ -15,7 +15,7 @@ public class SmsHomeAdvertise implements Serializable {
 
     private String name;
 
-    @ApiModelProperty(value = "轮播位置：0->PC首页轮播；1->app首页轮播")
+    @ApiModelProperty(value = "轮播位置：0->PC首页轮播；1->app首页轮播, 11-20 为广告位编号")
     private Integer type;
 
     private String pic;

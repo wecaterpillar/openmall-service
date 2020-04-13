@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.pms.dto.PmsProductQueryParam;
 import org.openmall.mall.pms.dto.PmsProductResult;
 import org.openmall.mall.pms.model.PmsProduct;
@@ -41,7 +42,7 @@ public class PortalPmsProductController {
                                                         @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<PmsProduct> productList = productService.list(productQueryParam, sortField, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(productList));
+        return CommonResult.success(CommonPage.restPage(new PageInfo(pageNum, pageSize), productList));
     }
 
     @ApiOperation("根据商品名称或货号模糊查询")

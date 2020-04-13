@@ -2,6 +2,7 @@ package org.openmall.mall.oms.controller;
 
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.oms.dto.OmsOrderReturnApplyResult;
 import org.openmall.mall.oms.dto.OmsReturnApplyQueryParam;
 import org.openmall.mall.oms.dto.OmsUpdateStatusParam;
@@ -32,7 +33,7 @@ public class OmsOrderReturnApplyController {
                                                               @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                               @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<OmsOrderReturnApply> returnApplyList = returnApplyService.list(queryParam, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(returnApplyList));
+        return CommonResult.success(CommonPage.restPage(new PageInfo(pageNum, pageSize), returnApplyList));
     }
 
     @ApiOperation("批量删除申请")

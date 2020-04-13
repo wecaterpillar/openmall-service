@@ -1,11 +1,11 @@
 package org.openmall.mall.portal.home.domain;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.openmall.mall.cms.model.CmsSubject;
 import org.openmall.mall.pms.model.PmsBrand;
 import org.openmall.mall.pms.model.PmsProduct;
 import org.openmall.mall.sms.model.SmsHomeAdvertise;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
@@ -15,10 +15,13 @@ import java.util.List;
 @Getter
 @Setter
 public class HomeContentResult {
+
     //轮播广告
     private List<SmsHomeAdvertise> advertiseList;
-    //推荐品牌
-    private List<PmsBrand> brandList;
+
+    //楼层内容-广告/专题
+    private List<HomeLayerContent> layerContents;
+
     //当前秒杀场次
     private HomeFlashPromotion homeFlashPromotion;
     //新品推荐
@@ -27,4 +30,6 @@ public class HomeContentResult {
     private List<PmsProduct> hotProductList;
     //推荐专题
     private List<CmsSubject> subjectList;
+    //推荐品牌
+    private List<PmsBrand> brandList;
 }

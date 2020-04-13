@@ -2,6 +2,7 @@ package org.openmall.mall.pms.controller;
 
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.pms.dto.PmsProductAttributeParam;
 import org.openmall.mall.pms.dto.ProductAttrInfo;
 import org.openmall.mall.pms.model.PmsProductAttribute;
@@ -36,7 +37,7 @@ public class PmsProductAttributeController {
                                                                  @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                                  @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<PmsProductAttribute> productAttributeList = productAttributeService.getList(cid, type, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(productAttributeList));
+        return CommonResult.success(CommonPage.restPage(new PageInfo(pageNum, pageSize), productAttributeList));
     }
 
     @ApiOperation("添加商品属性信息")

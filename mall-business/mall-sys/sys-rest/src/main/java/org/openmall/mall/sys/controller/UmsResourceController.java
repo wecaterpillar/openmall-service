@@ -2,6 +2,7 @@ package org.openmall.mall.sys.controller;
 
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.sys.model.UmsResource;
 import org.openmall.mall.security.component.DynamicSecurityMetadataSource;
 import org.openmall.mall.sys.service.UmsResourceService;
@@ -84,7 +85,7 @@ public class UmsResourceController {
                                                       @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                       @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<UmsResource> resourceList = resourceService.list(categoryId,nameKeyword, urlKeyword, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(resourceList));
+        return CommonResult.success(CommonPage.restPage(new PageInfo(pageNum, pageSize), resourceList));
     }
 
     @ApiOperation("查询所有后台资源")

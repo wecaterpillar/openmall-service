@@ -1,14 +1,14 @@
 package org.openmall.mall.sms.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.sms.dto.SmsCouponParam;
 import org.openmall.mall.sms.model.SmsCoupon;
 import org.openmall.mall.sms.service.SmsCouponService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -60,7 +60,7 @@ public class SmsCouponController {
             @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<SmsCoupon> couponList = couponService.list(name,type,pageSize,pageNum);
-        return CommonResult.success(CommonPage.restPage(couponList));
+        return CommonResult.success(CommonPage.restPage(new PageInfo(pageNum, pageSize), couponList));
     }
 
     @ApiOperation("获取单个优惠券的详细信息")

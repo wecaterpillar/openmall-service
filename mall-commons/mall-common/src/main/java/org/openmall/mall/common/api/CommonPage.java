@@ -1,6 +1,7 @@
 package org.openmall.mall.common.api;
 
 //import com.github.pagehelper.PageInfo;
+
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -16,17 +17,59 @@ public class CommonPage<T> {
     private Long total;
     private List<T> list;
 
+    public static <T> CommonPage<T> restPage(PageInfo<T> pageInfo) {
+        return restPage(pageInfo, null);
+    }
+
     /**
      * 将PageHelper分页后的list转为分页信息
+     *
+     * @deprecated replace by restPage(Page<T> pageInfo, List<T> list)
      */
-    public static <T> CommonPage<T> restPage(List<T> list) {
+//    public static <T> CommonPage<T> restPage(List<T> list) {
+//        return restPage(null, list);
+//    }
+
+    /**
+     * 转换PageInfo
+     */
+    public static <T> CommonPage<T> restPage(PageInfo<T> pageInfo, List<T> list) {
         CommonPage<T> result = new CommonPage<T>();
-        PageInfo<T> pageInfo = new PageInfo<T>(list);
-        result.setTotalPage((int)pageInfo.getPages());
+        if (pageInfo == null) {
+            pageInfo = new PageInfo<>();
+        }
+        if (list != null && !list.isEmpty()) {
+            result.setList(list);
+            pageInfo.setRecords(list);
+        } else {
+            result.setList(pageInfo.getList());
+        }
+
+        if (!pageInfo.getList().isEmpty() &&
+                pageInfo.getTotal() == 0) {
+            try {
+                com.github.pagehelper.Page<Object> ghPage = com.github.pagehelper.PageHelper.getLocalPage();
+                if (ghPage != null) {
+                    pageInfo.setCurrent(ghPage.getPageNum());
+                    pageInfo.setSize(ghPage.getPageSize());
+                    pageInfo.setTotal(ghPage.getTotal());
+                    pageInfo.setPages(ghPage.getPages());
+                }
+            } catch (Exception e) {
+            }
+        }
         result.setPageNum(pageInfo.getPageNum());
         result.setPageSize(pageInfo.getPageSize());
+        result.setTotalPage((int) pageInfo.getPages());
         result.setTotal(pageInfo.getTotal());
-        result.setList(pageInfo.getList());
+        if (result.getTotal() == 0) {
+            if(pageInfo.getRecords().size()<pageInfo.getPageSize()){
+                result.setTotalPage(pageInfo.getPageNum());
+            }else {
+                result.setTotalPage(pageInfo.getPageNum()+1);
+            }
+            result.setTotal((long)pageInfo.getPageSize()*result.getTotalPage());
+        }
         return result;
     }
 

@@ -2,6 +2,7 @@ package org.openmall.mall.sms.controller;
 
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.sms.model.SmsCouponHistory;
 import org.openmall.mall.sms.service.SmsCouponHistoryService;
 import io.swagger.annotations.Api;
@@ -34,6 +35,6 @@ public class SmsCouponHistoryController {
                                                            @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                                                            @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
         List<SmsCouponHistory> historyList = historyService.list(couponId, useStatus, orderSn, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(historyList));
+        return CommonResult.success(CommonPage.restPage(new PageInfo(pageNum, pageSize), historyList));
     }
 }

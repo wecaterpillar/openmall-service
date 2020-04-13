@@ -2,6 +2,7 @@ package org.openmall.mall.pms.controller;
 
 import org.openmall.mall.common.api.CommonPage;
 import org.openmall.mall.common.api.CommonResult;
+import org.openmall.mall.common.api.PageInfo;
 import org.openmall.mall.pms.dto.PmsBrandParam;
 import org.openmall.mall.pms.model.PmsBrand;
 import org.openmall.mall.pms.service.PmsBrandService;
@@ -87,7 +88,7 @@ public class PmsBrandController {
                                                       @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                                       @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
         List<PmsBrand> brandList = brandService.listBrand(keyword, pageNum, pageSize);
-        return CommonResult.success(CommonPage.restPage(brandList));
+        return CommonResult.success(CommonPage.restPage(new PageInfo(pageNum, pageSize), brandList));
     }
 
     @ApiOperation(value = "根据编号查询品牌信息")
