@@ -81,11 +81,9 @@ public class EsProductController {
     }
 
     @ApiOperation(value = "综合搜索、筛选、排序")
-    @PostMapping("/search")
-    public CommonResult<CommonPage<EsProduct>> search(@RequestBody QueryProduct query,
-                                                      @RequestParam(defaultValue = "1") int page,
-                                                      @RequestParam(defaultValue = "10") int size) {
-        Page<EsProduct> pages = esProductService.search(query, page, size);
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public CommonResult<CommonPage<EsProduct>> search(@RequestBody QueryProduct query) {
+        Page<EsProduct> pages = esProductService.search(query);
         return  CommonResult.success(CommonPage.restPage(pages));
     }
 
@@ -106,7 +104,7 @@ public class EsProductController {
     }
 
     @ApiOperation(value = "聚合条件查询, 获取搜索的相关品牌、分类及筛选属性")
-    @PostMapping("/search/agg")
+    @RequestMapping(value = "/search/relate", method = RequestMethod.POST)
     public CommonResult<EsProductRelatedInfo> agg(@RequestBody QueryProduct query) {
         EsProductRelatedInfo productRelatedInfo = esProductService.searchRelatedInfo(query);
         return CommonResult.success(productRelatedInfo);

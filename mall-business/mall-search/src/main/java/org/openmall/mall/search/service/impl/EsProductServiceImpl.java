@@ -19,6 +19,7 @@ import org.elasticsearch.search.aggregations.bucket.terms.LongTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
+import org.elasticsearch.search.sort.SortBuilder;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 import org.openmall.mall.search.dao.EsProductDao;
@@ -242,114 +243,6 @@ public class EsProductServiceImpl implements EsProductService {
         });
     }
 
-    /**
-     * 将返回结果转换为对象
-     */
-    private EsProductRelatedInfo convertProductRelatedInfo(SearchResponse response) {
-        EsProductRelatedInfo productRelatedInfo = new EsProductRelatedInfo();
-        Map<String, Aggregation> aggregationMap = response.getAggregations().getAsMap();
-        //设置品牌
-        Aggregation brandNames = aggregationMap.get("brandNames");
-        List<String> brandNameList = new ArrayList<>();
-        for(int i = 0; i<((Terms) brandNames).getBuckets().size(); i++){
-            brandNameList.add(((Terms) brandNames).getBuckets().get(i).getKeyAsString());
-        }
-        productRelatedInfo.setBrandNames(brandNameList);
-        //设置分类
-        Aggregation productCategoryNames = aggregationMap.get("productCategoryNames");
-        List<String> productCategoryNameList = new ArrayList<>();
-        for(int i=0;i<((Terms) productCategoryNames).getBuckets().size();i++){
-            productCategoryNameList.add(((Terms) productCategoryNames).getBuckets().get(i).getKeyAsString());
-        }
-        productRelatedInfo.setProductCategoryNames(productCategoryNameList);
-        //设置参数
-        Aggregation productAttrs = aggregationMap.get("allAttrValues");
-        List<LongTerms.Bucket> attrIds = ((LongTerms) ((InternalFilter) ((InternalNested) productAttrs).getProperty("productAttrs")).getProperty("attrIds")).getBuckets();
-        List<EsProductRelatedInfo.ProductAttr> attrList = new ArrayList<>();
-        for (Terms.Bucket attrId : attrIds) {
-            EsProductRelatedInfo.ProductAttr attr = new EsProductRelatedInfo.ProductAttr();
-            attr.setAttrId((Long) attrId.getKey());
-            List<String> attrValueList = new ArrayList<>();
-            List<StringTerms.Bucket> attrValues = ((StringTerms) attrId.getAggregations().get("attrValues")).getBuckets();
-            List<StringTerms.Bucket> attrNames = ((StringTerms) attrId.getAggregations().get("attrNames")).getBuckets();
-            for (Terms.Bucket attrValue : attrValues) {
-                attrValueList.add(attrValue.getKeyAsString());
-            }
-            attr.setAttrValues(attrValueList);
-            if(!CollectionUtils.isEmpty(attrNames)){
-                String attrName = attrNames.get(0).getKeyAsString();
-                attr.setAttrName(attrName);
-            }
-            attrList.add(attr);
-        }
-        productRelatedInfo.setProductAttrs(attrList);
-        return productRelatedInfo;
-    }
-
-    // 商品分页查询
-    @Override
-    public Page<EsProduct> search(QueryProduct query, int page, int size) {
-        Pageable pageable = PageRequest.of(page-1, size);
-        return productRepository.search(this.addFilters(query), pageable);
-    }
-
-    // 过滤条件
-    private BoolQueryBuilder addFilters(QueryProduct query) {
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        List<EsProductRelatedInfo.ProductAttr> attrGroups = query.getProductAttrs();
-        if (attrGroups != null) {
-            // 多属性过滤查询，如（内存、颜色、屏幕尺寸、版本等等）
-            for (EsProductRelatedInfo.ProductAttr attrGroup : attrGroups) {
-                BoolQueryBuilder attrBoolQuery = QueryBuilders.boolQuery();
-                // 匹配商品规格参数名
-                attrBoolQuery.filter(QueryBuilders.matchQuery(EsProduct.FieldName.ATTRS_NAME, attrGroup.getAttrName()));
-                // 匹配商品规格参数值，这里多值匹配用【termsQuery】注意区分【termQuery】
-                attrBoolQuery.filter(QueryBuilders.termsQuery(EsProduct.FieldName.ATTRS_VALUE, attrGroup.getAttrValues()));
-                // 使用NestedQuery查询（嵌套对象的过滤查询）
-                NestedQueryBuilder nestedQueryBuilder = QueryBuilders.nestedQuery(EsProduct.FieldName.ATTRS, attrBoolQuery, ScoreMode.None);
-                boolQueryBuilder.filter(nestedQueryBuilder);
-            }
-        }
-        if (query.getId() != null) {
-            // 商品Id查询
-            boolQueryBuilder.filter(QueryBuilders.matchQuery(EsProduct.FieldName.ID, query.getId()).operator(Operator.AND));
-        }
-        if (!query.getBrands().isEmpty()) {
-            // 品牌查询
-            boolQueryBuilder.filter(QueryBuilders.termsQuery(EsProduct.FieldName.BRAND, query.getBrands()));
-        }
-        if (query.getProductCategoryId() != null) {
-            // 分类查询
-            boolQueryBuilder.filter(QueryBuilders.matchQuery(EsProduct.FieldName.CATEGORY_ID, query.getProductCategoryId()).operator(Operator.AND));
-        }
-        if (!StringUtils.isEmpty(query.getName())) {
-            // 商品名称查询（这里暂时没做分词处理）
-            boolQueryBuilder.filter(QueryBuilders.matchQuery(EsProduct.FieldName.NAME, query.getName()).operator(Operator.AND));
-        }
-        String keyword = query.getKeyword();
-        if(!StringUtils.isEmpty(keyword)){
-            List<FunctionScoreQueryBuilder.FilterFunctionBuilder> filterFunctionBuilders = new ArrayList<>();
-            filterFunctionBuilders.add(new FunctionScoreQueryBuilder.FilterFunctionBuilder(QueryBuilders.matchQuery(EsProduct.FieldName.NAME, keyword),
-                    ScoreFunctionBuilders.weightFactorFunction(10)));
-            filterFunctionBuilders.add(new FunctionScoreQueryBuilder.FilterFunctionBuilder(QueryBuilders.matchQuery(EsProduct.FieldName.SUBTITLE, keyword),
-                    ScoreFunctionBuilders.weightFactorFunction(5)));
-            filterFunctionBuilders.add(new FunctionScoreQueryBuilder.FilterFunctionBuilder(QueryBuilders.matchQuery(EsProduct.FieldName.KEYWORDS, keyword),
-                    ScoreFunctionBuilders.weightFactorFunction(2)));
-            filterFunctionBuilders.add(new FunctionScoreQueryBuilder.FilterFunctionBuilder(QueryBuilders.matchQuery(EsProduct.FieldName.BRAND, keyword),
-                    ScoreFunctionBuilders.weightFactorFunction(2)));
-            filterFunctionBuilders.add(new FunctionScoreQueryBuilder.FilterFunctionBuilder(QueryBuilders.matchQuery(EsProduct.FieldName.CATEGORY, keyword),
-                    ScoreFunctionBuilders.weightFactorFunction(3)));
-            FunctionScoreQueryBuilder.FilterFunctionBuilder[] builders = new FunctionScoreQueryBuilder.FilterFunctionBuilder[filterFunctionBuilders.size()];
-            filterFunctionBuilders.toArray(builders);
-            FunctionScoreQueryBuilder functionScoreQueryBuilder = QueryBuilders.functionScoreQuery(builders)
-                    .scoreMode(FunctionScoreQuery.ScoreMode.SUM)
-                    .setMinScore(2);
-            boolQueryBuilder.filter(functionScoreQueryBuilder);
-        }
-        // TODO price between
-        return boolQueryBuilder;
-    }
-
 
     // 筛选条件聚合查询接口
     @Override
@@ -358,17 +251,19 @@ public class EsProductServiceImpl implements EsProductService {
         Pageable pageable = PageRequest.of(0, 10);
         //检索条件
         BoolQueryBuilder boolQueryBuilder = this.addFilters(query);
-        final String BRAND_AGG = "brand_agg";
-        final String CATEGORY_AGG = "category_agg";
-        final String ATTR_AGG = "attr_agg";
+
+        //聚合条件
+        final String BRAND_AGG = "brandNames";
+        final String CATEGORY_AGG = "productCategoryNames";
+        final String ATTR_AGG = "allAttrValues";
         final String ATTR_NAME_AGG = ATTR_AGG + "_name";
         final String ATTR_VALUE_AGG = ATTR_AGG+"_value";
-        //聚合条件
 
         // 品牌聚合（取命中最多的前500个品牌）
-        TermsAggregationBuilder brandAggBuilder = AggregationBuilders.terms(BRAND_AGG).field(EsProduct.FieldName.BRAND).size(500);
+        TermsAggregationBuilder brandAggBuilder = AggregationBuilders.terms(BRAND_AGG).field(EsProduct.FieldName.BRAND_NAME).size(500);
         // 分类聚合（取命中最多的前20个）
         TermsAggregationBuilder categoryAggBuilder = AggregationBuilders.terms(CATEGORY_AGG).field(EsProduct.FieldName.CATEGORY).size(20);
+
         // 内置对象-规格聚合
         NestedAggregationBuilder attrAggBuilder = AggregationBuilders.nested(ATTR_AGG, EsProduct.FieldName.ATTRS);
         // 先聚合规格名称
@@ -422,4 +317,174 @@ public class EsProductServiceImpl implements EsProductService {
         search.getAggregation(CATEGORY_AGG);
         return aggVO;
     }
+    /**
+     * 将返回结果转换为对象
+     */
+    private EsProductRelatedInfo convertProductRelatedInfo(SearchResponse response) {
+        EsProductRelatedInfo productRelatedInfo = new EsProductRelatedInfo();
+        Map<String, Aggregation> aggregationMap = response.getAggregations().getAsMap();
+        //设置品牌
+        Aggregation brandNames = aggregationMap.get("brandNames");
+        List<String> brandNameList = new ArrayList<>();
+        for(int i = 0; i<((Terms) brandNames).getBuckets().size(); i++){
+            brandNameList.add(((Terms) brandNames).getBuckets().get(i).getKeyAsString());
+        }
+        productRelatedInfo.setBrandNames(brandNameList);
+        //设置分类
+        Aggregation productCategoryNames = aggregationMap.get("productCategoryNames");
+        List<String> productCategoryNameList = new ArrayList<>();
+        for(int i=0;i<((Terms) productCategoryNames).getBuckets().size();i++){
+            productCategoryNameList.add(((Terms) productCategoryNames).getBuckets().get(i).getKeyAsString());
+        }
+        productRelatedInfo.setProductCategoryNames(productCategoryNameList);
+        //设置参数
+        Aggregation productAttrs = aggregationMap.get("allAttrValues");
+        List<LongTerms.Bucket> attrIds = ((LongTerms) ((InternalFilter) ((InternalNested) productAttrs).getProperty("productAttrs")).getProperty("attrIds")).getBuckets();
+        List<EsProductRelatedInfo.ProductAttr> attrList = new ArrayList<>();
+        for (Terms.Bucket attrId : attrIds) {
+            EsProductRelatedInfo.ProductAttr attr = new EsProductRelatedInfo.ProductAttr();
+            attr.setAttrId((Long) attrId.getKey());
+            List<String> attrValueList = new ArrayList<>();
+            List<StringTerms.Bucket> attrValues = ((StringTerms) attrId.getAggregations().get("attrValues")).getBuckets();
+            List<StringTerms.Bucket> attrNames = ((StringTerms) attrId.getAggregations().get("attrNames")).getBuckets();
+            for (Terms.Bucket attrValue : attrValues) {
+                attrValueList.add(attrValue.getKeyAsString());
+            }
+            attr.setAttrValues(attrValueList);
+            if(!CollectionUtils.isEmpty(attrNames)){
+                String attrName = attrNames.get(0).getKeyAsString();
+                attr.setAttrName(attrName);
+            }
+            attrList.add(attr);
+        }
+        productRelatedInfo.setProductAttrs(attrList);
+        return productRelatedInfo;
+    }
+
+    /**
+     * 商品分页查询
+     * @param query
+     * @return
+     */
+    @Override
+    public Page<EsProduct> search(QueryProduct query) {
+
+        NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
+        //分页
+        Pageable pageable = PageRequest.of(query.getPage()-1, query.getSize());
+        nativeSearchQueryBuilder.withPageable(pageable);
+        //过滤
+        BoolQueryBuilder boolQueryBuilder = this.addFilters(query);
+        nativeSearchQueryBuilder.withQuery(boolQueryBuilder);
+        //排序
+        nativeSearchQueryBuilder.withSort(addSort(query.getSort()));
+
+        NativeSearchQuery searchQuery = nativeSearchQueryBuilder.build();
+        LOGGER.info("DSL:{}", searchQuery.getQuery().toString());
+        return productRepository.search(searchQuery);
+    }
+
+
+    /**
+     * 过滤条件
+     * @param query
+     * @return
+     */
+    private BoolQueryBuilder addFilters(QueryProduct query) {
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+
+        List<EsProductRelatedInfo.ProductAttr> attrGroups = query.getProductAttrs();
+        if (attrGroups != null) {
+            // 多属性过滤查询，如（内存、颜色、屏幕尺寸、版本等等）
+            for (EsProductRelatedInfo.ProductAttr attrGroup : attrGroups) {
+                BoolQueryBuilder attrBoolQuery = QueryBuilders.boolQuery();
+                // 匹配商品规格参数名
+                attrBoolQuery.filter(QueryBuilders.matchQuery(EsProduct.FieldName.ATTRS_NAME, attrGroup.getAttrName()));
+                // 匹配商品规格参数值，这里多值匹配用【termsQuery】注意区分【termQuery】
+                attrBoolQuery.filter(QueryBuilders.termsQuery(EsProduct.FieldName.ATTRS_VALUE, attrGroup.getAttrValues()));
+                // 使用NestedQuery查询（嵌套对象的过滤查询）
+                NestedQueryBuilder nestedQueryBuilder = QueryBuilders.nestedQuery(EsProduct.FieldName.ATTRS, attrBoolQuery, ScoreMode.None);
+                boolQueryBuilder.filter(nestedQueryBuilder);
+            }
+        }
+        if (query.getId() != null) {
+            // 商品Id查询
+            boolQueryBuilder.filter(QueryBuilders.matchQuery(EsProduct.FieldName.ID, query.getId()).operator(Operator.AND));
+        }
+        if (query.getProductCategoryId() != null) {
+            // 分类查询
+            boolQueryBuilder.filter(QueryBuilders.matchQuery(EsProduct.FieldName.CATEGORY_ID, query.getProductCategoryId()).operator(Operator.AND));
+        }
+        if (query.getBrandId() != null) {
+            // 品牌ID查询
+            boolQueryBuilder.must(QueryBuilders.termQuery(EsProduct.FieldName.BRAND_ID, query.getBrandId()));
+        }
+        if (!query.getBrandNames().isEmpty()) {
+            // 品牌查询
+            boolQueryBuilder.filter(QueryBuilders.termsQuery(EsProduct.FieldName.BRAND_NAME, query.getBrandNames()));
+        }
+        if (!StringUtils.isEmpty(query.getName())) {
+            // 商品名称查询（这里暂时没做分词处理）
+            boolQueryBuilder.filter(QueryBuilders.matchQuery(EsProduct.FieldName.NAME, query.getName()).operator(Operator.AND));
+        }
+
+        String keyword = query.getKeyword();
+        if(StringUtils.isEmpty(keyword)){
+            boolQueryBuilder.filter(QueryBuilders.matchAllQuery());
+        }else{
+            List<FunctionScoreQueryBuilder.FilterFunctionBuilder> filterFunctionBuilders = new ArrayList<>();
+            filterFunctionBuilders.add(new FunctionScoreQueryBuilder.FilterFunctionBuilder(QueryBuilders.matchQuery(EsProduct.FieldName.NAME, keyword),
+                    ScoreFunctionBuilders.weightFactorFunction(10)));
+            filterFunctionBuilders.add(new FunctionScoreQueryBuilder.FilterFunctionBuilder(QueryBuilders.matchQuery(EsProduct.FieldName.SUBTITLE, keyword),
+                    ScoreFunctionBuilders.weightFactorFunction(5)));
+            filterFunctionBuilders.add(new FunctionScoreQueryBuilder.FilterFunctionBuilder(QueryBuilders.matchQuery(EsProduct.FieldName.KEYWORDS, keyword),
+                    ScoreFunctionBuilders.weightFactorFunction(2)));
+            filterFunctionBuilders.add(new FunctionScoreQueryBuilder.FilterFunctionBuilder(QueryBuilders.matchQuery(EsProduct.FieldName.BRAND_NAME, keyword),
+                    ScoreFunctionBuilders.weightFactorFunction(2)));
+            filterFunctionBuilders.add(new FunctionScoreQueryBuilder.FilterFunctionBuilder(QueryBuilders.matchQuery(EsProduct.FieldName.CATEGORY, keyword),
+                    ScoreFunctionBuilders.weightFactorFunction(3)));
+            FunctionScoreQueryBuilder.FilterFunctionBuilder[] builders = new FunctionScoreQueryBuilder.FilterFunctionBuilder[filterFunctionBuilders.size()];
+            filterFunctionBuilders.toArray(builders);
+            FunctionScoreQueryBuilder functionScoreQueryBuilder = QueryBuilders.functionScoreQuery(builders)
+                    .scoreMode(FunctionScoreQuery.ScoreMode.SUM)
+                    .setMinScore(2);
+            boolQueryBuilder.filter(functionScoreQueryBuilder);
+        }
+        // TODO price between
+        return boolQueryBuilder;
+    }
+
+    private SortBuilder addSort(QueryProduct query){
+        int sort = query.getSort();
+        return addSort(sort);
+    }
+
+    /**
+     * 排序
+     * @param sort
+     * @return
+     */
+    private SortBuilder addSort(int sort){
+        SortBuilder builder = null;
+        //排序
+        if(sort==1){
+            //按新品从新到旧
+            builder = SortBuilders.fieldSort("id").order(SortOrder.DESC);
+        }else if(sort==2){
+            //按销量从高到低
+            builder = SortBuilders.fieldSort("sale").order(SortOrder.DESC);
+        }else if(sort==3){
+            //按价格从低到高
+            builder = SortBuilders.fieldSort("price").order(SortOrder.ASC);
+        }else if(sort==4){
+            //按价格从高到低
+            builder = SortBuilders.fieldSort("price").order(SortOrder.DESC);
+        }else{
+            //按相关度
+            builder = SortBuilders.scoreSort().order(SortOrder.DESC);
+        }
+        return builder;
+    }
+
+
 }

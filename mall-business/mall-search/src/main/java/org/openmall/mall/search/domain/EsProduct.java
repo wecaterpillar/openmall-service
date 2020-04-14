@@ -65,9 +65,11 @@ public class EsProduct implements Serializable {
         String NAME = "name.keyword";
         String SUBTITLE = "subTitle.keyword";
         String KEYWORDS = "keywords.keyword";
+
         String CATEGORY_ID = "productCategoryId";
         String CATEGORY = "productCategoryName.keyword";
-        String BRAND = "brandName.keyword";
+        String BRAND_ID = "brandId";
+        String BRAND_NAME = "brandName.keyword";
         String PRICE = "price";
         String ATTRS = "attrValueList";
         String ATTRS_NAME = "attrValueList.name";
