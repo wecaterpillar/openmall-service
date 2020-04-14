@@ -6,6 +6,7 @@ import org.openmall.mall.cms.model.CmsTopic;
 import org.openmall.mall.pms.model.PmsProduct;
 import org.openmall.mall.pms.model.PmsProductCategory;
 import org.openmall.mall.portal.home.domain.HomeContentResult;
+import org.openmall.mall.portal.home.domain.NavProductCategory;
 
 import java.util.List;
 import java.util.Map;
@@ -39,10 +40,15 @@ public interface HomeService {
     List<PmsProductCategory> getProductCateList(Long parentId);
 
     /**
+     * 获取首页导航商品分类
+     */
+    List<NavProductCategory> getNavProductCateList(Map<String,Object> websiteConfig);
+
+    /**
      * 根据专题分类分页获取专题
      * @param cateId 专题分类id
      */
-    List<CmsSubject> getSubjectList(Long cateId, Integer pageSize, Integer pageNum);
+    List<CmsSubject> getSubjectList(Long cateId);
 
     /**
      * 根据分类获取话题列表

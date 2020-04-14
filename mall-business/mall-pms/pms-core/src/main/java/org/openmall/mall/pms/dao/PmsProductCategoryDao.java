@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface PmsProductCategoryDao {
     List<PmsProductCategoryWithChildrenItem> listWithChildren();
+    List<PmsProductCategoryWithChildrenItem>  navListWithChildren();
 }

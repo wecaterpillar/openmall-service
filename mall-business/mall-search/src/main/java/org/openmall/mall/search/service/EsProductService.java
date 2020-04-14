@@ -56,7 +56,7 @@ public interface EsProductService {
      * @param query
      * @return
      */
-    Page<EsProduct> search(QueryProduct query, int page, int size);
+    Page<EsProduct> search(QueryProduct query);
 
     /**
      * 商品聚合分析

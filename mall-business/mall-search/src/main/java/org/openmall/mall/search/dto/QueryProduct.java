@@ -14,21 +14,22 @@ public class QueryProduct {
      * 关键词
      */
     private String keyword;
-    /**
-     * 价格区间
-     */
-    private BigDecimal minPrice;
-    private BigDecimal maxPrice;
 
-    private Long brandId;
+    /**
+     * 分类ID
+     */
     private Long productCategoryId;
 
+    /**
+     * 品牌ID
+     */
+    private Long brandId;
     /*
      * @Name: 品牌名称
      * @Example: ["小米", "华为"]
      * @Description:
      */
-    private List<String> brands = Lists.newArrayList();
+    private List<String> brandNames = Lists.newArrayList();
 
     /*
      * @Name: 商品名称
@@ -54,7 +55,20 @@ public class QueryProduct {
     private List<EsProductRelatedInfo.ProductAttr> productAttrs = Lists.newArrayList();
 
     /**
+     * 价格区间
+     */
+    private BigDecimal minPrice;
+    private BigDecimal maxPrice;
+
+    /**
      * 排序字段:0->按相关度；1->按新品；2->按销量；3->价格从低到高；4->价格从高到低
      */
     private Integer sort;
+
+
+    /**
+     * 分页数据
+     */
+    private Integer page = 1;
+    private Integer size = 10;
 }

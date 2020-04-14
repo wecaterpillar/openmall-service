@@ -13,6 +13,7 @@ import org.openmall.mall.pms.model.PmsProduct;
 import org.openmall.mall.pms.model.PmsProductCategory;
 import org.openmall.mall.portal.home.domain.HomeContentResult;
 import org.openmall.mall.portal.home.domain.HomeLayerContent;
+import org.openmall.mall.portal.home.domain.NavProductCategory;
 import org.openmall.mall.portal.home.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -81,6 +82,15 @@ public class HomeController {
         return CommonResult.success(contentResult);
     }
 
+    @ApiOperation("获取导航栏商品分类")
+    @RequestMapping(value = "/navProductCateList", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<List<NavProductCategory>> getNavProductCateList() {
+        Map<String,Object> websiteConfig = loadWebsiteConfig();
+        List<NavProductCategory> productCategoryList = homeService.getNavProductCateList(websiteConfig);
+        return CommonResult.success(productCategoryList);
+    }
+
     @ApiOperation("分页获取推荐商品")
     @RequestMapping(value = "/recommendProductList", method = RequestMethod.GET)
     @ResponseBody
@@ -98,13 +108,13 @@ public class HomeController {
         return CommonResult.success(productCategoryList);
     }
 
+
+
     @ApiOperation("根据分类获取专题")
     @RequestMapping(value = "/subjectList", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<List<CmsSubject>> getSubjectList(@RequestParam(required = false) Long cateId,
-                                                         @RequestParam(value = "pageSize", defaultValue = "4") Integer pageSize,
-                                                         @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        List<CmsSubject> subjectList = homeService.getSubjectList(cateId,pageSize,pageNum);
+    public CommonResult<List<CmsSubject>> getSubjectList(@RequestParam(required = false) Long cateId) {
+        List<CmsSubject> subjectList = homeService.getSubjectList(cateId);
         return CommonResult.success(subjectList);
     }
 

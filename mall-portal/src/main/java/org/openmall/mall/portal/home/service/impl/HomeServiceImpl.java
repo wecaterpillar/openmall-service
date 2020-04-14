@@ -7,18 +7,15 @@ import org.openmall.mall.cms.mapper.CmsHelpMapper;
 import org.openmall.mall.cms.mapper.CmsSubjectMapper;
 import org.openmall.mall.cms.mapper.CmsTopicMapper;
 import org.openmall.mall.cms.model.*;
+import org.openmall.mall.pms.dao.PmsProductCategoryDao;
+import org.openmall.mall.pms.dto.PmsProductCategoryWithChildrenItem;
 import org.openmall.mall.pms.mapper.PmsProductCategoryMapper;
 import org.openmall.mall.pms.mapper.PmsProductMapper;
-import org.openmall.mall.pms.model.PmsProduct;
-import org.openmall.mall.pms.model.PmsProductCategory;
-import org.openmall.mall.pms.model.PmsProductCategoryExample;
-import org.openmall.mall.pms.model.PmsProductExample;
+import org.openmall.mall.pms.model.*;
 import org.openmall.mall.portal.home.dao.HomeDao;
-import org.openmall.mall.portal.home.domain.FlashPromotionProduct;
-import org.openmall.mall.portal.home.domain.HomeContentResult;
-import org.openmall.mall.portal.home.domain.HomeFlashPromotion;
-import org.openmall.mall.portal.home.domain.HomeLayerContent;
+import org.openmall.mall.portal.home.domain.*;
 import org.openmall.mall.portal.home.service.HomeService;
+import org.openmall.mall.portal.pms.service.PortalPmsProductAttributeService;
 import org.openmall.mall.portal.util.DateUtil;
 import org.openmall.mall.sms.mapper.SmsFlashPromotionMapper;
 import org.openmall.mall.sms.mapper.SmsFlashPromotionSessionMapper;
@@ -28,10 +25,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 
 /**
  * 首页内容管理Service实现类
@@ -50,6 +45,8 @@ public class HomeServiceImpl implements HomeService {
     private PmsProductMapper productMapper;
     @Autowired
     private PmsProductCategoryMapper productCategoryMapper;
+    @Autowired
+    PmsProductCategoryDao productCategoryDao;
 
     @Autowired
     private CmsSubjectMapper subjectMapper;
@@ -60,6 +57,9 @@ public class HomeServiceImpl implements HomeService {
 
     @Autowired
     private MerchantService merchantService;
+
+    @Autowired
+    private PortalPmsProductAttributeService productAttributeService;
 
 
     public Map<String, Object> getChannelConfig(){
@@ -104,7 +104,7 @@ public class HomeServiceImpl implements HomeService {
             //楼层类型，1-专题分类，2-话题分类，3-帮助分类，4-广告位，10-秒杀活动，11-新品推荐，12-人气推荐，13-品牌推荐，14-专题推荐，15-优选专区
             if(type==1){
                 //1-专题分类
-                List listData = this.getSubjectList(Long.valueOf(layer.getRefIds()), layer.getCount(), 1);
+                List listData = this.getSubjectList(Long.valueOf(layer.getRefIds()));
                 layer.setData(listData);
             }else if(type==2){
                 //2-话题分类
@@ -151,8 +151,63 @@ public class HomeServiceImpl implements HomeService {
     }
 
     @Override
-    public List<PmsProductCategory> getProductCateList(Long parentId) {
+    public List<NavProductCategory> getNavProductCateList(Map<String,Object> websiteConfig) {
+        return loadNavProductCateList(websiteConfig);
+    }
+
+    private List<NavProductCategory> loadNavProductCateList(Map<String,Object> websiteConfig){
+        List<NavProductCategory> navProductCategoryList = new ArrayList<>();
+        List<PmsProductCategoryWithChildrenItem> categoryList =  productCategoryDao.navListWithChildren();
+        for(PmsProductCategory category: categoryList){
+            navProductCategoryList.add(new NavProductCategory(category));
+        }
+
         // TODO 增加首页导航大类展开所需要的内容，包含所关联的专题
+        for(NavProductCategory category: navProductCategoryList){
+            // 关联专题
+            // subjects （keywords contain "sub-cate-{subjectCategoryId}")
+            if(category.getKeywords()!=null && category.getKeywords().contains("sub-cate-")){
+                long subjectCategoryId = 0;
+                String temp = category.getKeywords().substring(category.getKeywords().indexOf("sub-cate-")+9);
+                if(temp!=null){
+                    for(int i=0; i<temp.length() && i<3; i++){
+                        if(temp.charAt(i)>=48 && temp.charAt(i)<=57){
+                            subjectCategoryId = 10*subjectCategoryId + (Integer.valueOf(temp.charAt(i))-48);
+                        }else{
+                            break;
+                        }
+                    }
+                }
+                if(subjectCategoryId>0){
+                    List<CmsSubject> subjects = this.getSubjectList(subjectCategoryId);
+                    if(subjects!=null && !subjects.isEmpty()){
+                        category.setSubjectList(subjects);
+                    }
+                }
+            }
+            // 关联tags
+            // tags (attribute_name=tags)
+            List<PmsProductAttribute> attrs = productAttributeService.getList(category.getId());
+            for(PmsProductAttribute attr: attrs){
+                if("tags".equalsIgnoreCase(attr.getName())){
+                    String[] inputList = attr.getInputList().split(",");
+                    category.setTagList(Arrays.asList(inputList));
+                    break;
+                }
+                // TODO test only
+                String[] inputList = attr.getInputList().split(",");
+                if(inputList!=null && inputList.length>0){
+                    category.setTagList(Arrays.asList(inputList));
+                    break;
+                }
+            }
+        }
+
+        return navProductCategoryList;
+    }
+
+    @Override
+    public List<PmsProductCategory> getProductCateList(Long parentId) {
         PmsProductCategoryExample example = new PmsProductCategoryExample();
         example.createCriteria()
                 .andShowStatusEqualTo(1)
@@ -162,8 +217,7 @@ public class HomeServiceImpl implements HomeService {
     }
 
     @Override
-    public List<CmsSubject> getSubjectList(Long cateId, Integer pageSize, Integer pageNum) {
-        PageHelper.startPage(pageNum,pageSize);
+    public List<CmsSubject> getSubjectList(Long cateId) {
         CmsSubjectExample example = new CmsSubjectExample();
         CmsSubjectExample.Criteria criteria = example.createCriteria();
         criteria.andShowStatusEqualTo(1);
