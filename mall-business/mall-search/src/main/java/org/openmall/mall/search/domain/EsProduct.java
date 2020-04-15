@@ -72,7 +72,7 @@ public class EsProduct implements Serializable {
         String BRAND_NAME = "brandName.keyword";
         String PRICE = "price";
         String ATTRS = "attrValueList";
-        String ATTRS_NAME = "attrValueList.name";
-        String ATTRS_VALUE = "attrValueList.value";
+        String ATTRS_NAME = "attrValueList.attrName";
+        String ATTRS_VALUE = "attrValueList.attrValues";
     }
 }

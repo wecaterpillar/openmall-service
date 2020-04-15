@@ -57,6 +57,7 @@ import java.util.Map;
 public class EsProductServiceImpl implements EsProductService {
     private static final Logger LOGGER = LoggerFactory.getLogger(EsProductServiceImpl.class);
 
+
     @Autowired
     private EsProductDao productDao;
 
