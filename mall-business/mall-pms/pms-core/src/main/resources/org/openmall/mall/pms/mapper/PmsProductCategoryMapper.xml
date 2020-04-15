@@ -226,7 +226,7 @@
     </if>
   </select>
   <select id="listAttributes" parameterType="java.lang.Long" resultType="org.openmall.mall.pms.model.PmsProductAttribute">
-    select a.`name`, a.id
+    select a.`name`, a.id, a.input_type, a.input_list
     FROM pms_product_attribute a join pms_product_category_attribute_relation r
     on a.id=r.product_attribute_id
     where r.product_category_id=#{id,jdbcType=BIGINT}

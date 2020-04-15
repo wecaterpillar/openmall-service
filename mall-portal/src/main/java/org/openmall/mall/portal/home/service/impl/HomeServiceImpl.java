@@ -187,18 +187,24 @@ public class HomeServiceImpl implements HomeService {
             }
             // 关联tags
             // tags (attribute_name=tags)
-            List<PmsProductAttribute> attrs = productAttributeService.getList(category.getId());
+            // TODO productCategory -> productCategoryAttributeRelation -> ProductAttribute
+
+            List<PmsProductAttribute> attrs = productCategoryMapper.listAttributes(category.getId());
             for(PmsProductAttribute attr: attrs){
-                if("tags".equalsIgnoreCase(attr.getName())){
-                    String[] inputList = attr.getInputList().split(",");
-                    category.setTagList(Arrays.asList(inputList));
+                if("tags".equalsIgnoreCase(attr.getName()) ){
+                    if(attr.getInputType()==1 && attr.getInputList()!=null){
+                        String[] inputList = attr.getInputList().split(",");
+                        category.setTagList(Arrays.asList(inputList));
+                    }
                     break;
                 }
                 // TODO test only
-                String[] inputList = attr.getInputList().split(",");
-                if(inputList!=null && inputList.length>0){
-                    category.setTagList(Arrays.asList(inputList));
-                    break;
+                if(attr.getInputType()==1 && attr.getInputList()!=null){
+                    String[] inputList = attr.getInputList().split(",");
+                    if(inputList!=null && inputList.length>0){
+                        category.setTagList(Arrays.asList(inputList));
+                        break;
+                    }
                 }
             }
         }
